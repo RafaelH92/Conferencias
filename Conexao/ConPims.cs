@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*************************************
+ * Desenvolvido por Rafael H. Souza. *
+ * Data: 11/05/2020                  *
+ * Atualizado em: 11/05/2020		 *    
+ * Utilizando Dapper                 *
+ * Conexão obsoleta                  *
+ *************************************/
+
+
+/*using System;
 using System.Data;
 using System.Data.OracleClient;
 
@@ -10,12 +19,12 @@ namespace CONFERENCIAS
 
 		static string pathDataBase = "Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP";
 
-		static OracleConnection Conn = null;
+		//static OracleConnection Conn = null;
 
-		public static OracleConnection getConnection()
+		public static IDbConnection getConnection()
 		{
 
-			Conn = new OracleConnection(pathDataBase);
+			IDbConnection Conn = new OracleConnection(pathDataBase);
 
 			try
 			{
@@ -31,27 +40,28 @@ namespace CONFERENCIAS
 		}
 
 
-		public DataTable getDataTable(string strSQL)
-		{
+		//public DataTable getDataTable(string strSQL)
+		//{
 
-			DataTable dt = new DataTable();
+		//	DataTable dt = new DataTable();
 
-			using (OracleConnection conn = ConPims.getConnection())
-			{
+		//	using (OracleConnection conn = ConPims.getConnection())
+		//	{
 
-				OracleDataAdapter da = new OracleDataAdapter(strSQL, conn);
+		//		OracleDataAdapter da = new OracleDataAdapter(strSQL, conn);
 
-				da.Fill(dt);
+		//		da.Fill(dt);
 
-				return dt;
+		//		return dt;
 
-			}
+		//	}
 
 
-		}
+		//}
 
 	}
 
 
 
 }
+*/

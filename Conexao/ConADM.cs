@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*************************************
+ * Desenvolvido por Rafael H. Souza. *
+ * Data: 11/05/2020                  *
+ * Atualizado em: 11/05/2020		 *    
+ * Utilizando Dapper                 *
+ * Conexão obsoleta                  *
+ *************************************/
+
+
+/*using System;
 using System.Data;
 using System.Data.OracleClient;
 
@@ -55,3 +64,5 @@ namespace CONFERENCIAS
 
 
 }
+
+*/

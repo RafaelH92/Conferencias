@@ -36,6 +36,9 @@
     <ApplicationIcon>gas-station_icon-icons.com_60837.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -61,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Conexao\ConADM.cs" />
     <Compile Include="Conexao\ConPims.cs" />
+    <Compile Include="Entidades\ConfAbast.cs" />
+    <Compile Include="Entidades\ParamPrestador.cs" />
     <Compile Include="View\Principal.cs">
       <SubType>Form</SubType>
     </Compile>
