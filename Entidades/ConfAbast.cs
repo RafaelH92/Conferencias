@@ -10,7 +10,8 @@ namespace CONFERENCIAS.Entidades
     {
         public DateTime MOVIMENTO { get; set; }
         public string COMBUSTIVEL { get; set; }
-        public double QUANTIDADE { get; set; }
+        public double QUANTIDADE_ADM { get; set; }
+        public double QUANTIDADE_PIMS { get; set; }
 
     }
 }
