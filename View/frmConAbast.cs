@@ -17,27 +17,20 @@ using MetroFramework.Forms;
 using CONFERENCIAS.Entidades;
 using Dapper;
 using System.Data.OracleClient;
+using CONFERENCIAS.View;
 
 
 namespace CONFERENCIAS
 {
-	public partial class frmPrincipal : MetroForm
+	public partial class frmConAbast : Form
 	{
-		public frmPrincipal()
+		frmMenu frmMenu;
+		public frmConAbast(frmMenu form)
 		{
-			InitializeComponent();			
+			this.frmMenu = form;
 
-			string userName = System.Environment.UserName;  // Atribui o usuário corrente a variável
+			InitializeComponent();
 
-			lbNome.Text = "Bem Vindo " + userName + "!";
-
-			if (userName == "ferrarini")
-			{
-				MessageBox.Show("ATENÇÃO! USUÁRIO GAY DETECTADO!");
-				lbNome.ForeColor = Color.HotPink;
-				lbNome.Font = new Font(lbNome.Font, FontStyle.Bold);
-				lbNome.Text = "Bem Vindo Diego!";
-			}
 		}	
 		
 
@@ -184,7 +177,7 @@ namespace CONFERENCIAS
 						{
 							valor = null;
 							dgvConsulta.Rows[contador - 1].Cells[5].Value = "OK!";
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.LightGreen;
+							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
 						}
 						else if (diferenca < 0)
 						{
@@ -206,7 +199,7 @@ namespace CONFERENCIAS
 					dgvConsulta.ClearSelection();
 
 					lbDeveloped.Visible = true;
-					lbNome.Visible = true;
+					//lbNome.Visible = true;
 					lbRaf.Visible = true;
 					lLemail.Visible = true;
 
