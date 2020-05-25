@@ -47,5 +47,17 @@ namespace CONFERENCIAS.View
 
             frm.Show();
         }
+
+        private void btnLub_Click(object sender, EventArgs e)
+        {
+            pnlBody.Controls.Clear();
+            pnlAtivo.Top = btnLub.Top;
+
+            frmConLub frm = new frmConLub(this);
+            frm.TopLevel = false;
+            pnlBody.Controls.Add(frm);
+
+            frm.Show();
+        }
     }
 }

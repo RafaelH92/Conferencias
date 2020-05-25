@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.btnIconsistencias = new System.Windows.Forms.Button();
+            this.btnIStatusIntegracao = new System.Windows.Forms.Button();
             this.pnlAtivo = new System.Windows.Forms.Panel();
             this.btnLub = new System.Windows.Forms.Button();
             this.btnComb = new System.Windows.Forms.Button();
@@ -58,7 +58,7 @@
             this.pnlSidebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlSidebar.BackColor = System.Drawing.Color.Black;
-            this.pnlSidebar.Controls.Add(this.btnIconsistencias);
+            this.pnlSidebar.Controls.Add(this.btnIStatusIntegracao);
             this.pnlSidebar.Controls.Add(this.pnlAtivo);
             this.pnlSidebar.Controls.Add(this.btnLub);
             this.pnlSidebar.Controls.Add(this.btnComb);
@@ -67,28 +67,29 @@
             this.pnlSidebar.Size = new System.Drawing.Size(270, 567);
             this.pnlSidebar.TabIndex = 6;
             // 
-            // btnIconsistencias
+            // btnIStatusIntegracao
             // 
-            this.btnIconsistencias.BackColor = System.Drawing.Color.Black;
-            this.btnIconsistencias.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnIconsistencias.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnIconsistencias.FlatAppearance.BorderSize = 0;
-            this.btnIconsistencias.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnIconsistencias.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnIconsistencias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIconsistencias.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIconsistencias.ForeColor = System.Drawing.Color.White;
-            this.btnIconsistencias.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIconsistencias.Location = new System.Drawing.Point(11, 441);
-            this.btnIconsistencias.Name = "btnIconsistencias";
-            this.btnIconsistencias.Size = new System.Drawing.Size(255, 55);
-            this.btnIconsistencias.TabIndex = 2;
-            this.btnIconsistencias.Text = "&TesteàDefinir";
-            this.btnIconsistencias.UseVisualStyleBackColor = false;
+            this.btnIStatusIntegracao.BackColor = System.Drawing.Color.Black;
+            this.btnIStatusIntegracao.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnIStatusIntegracao.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnIStatusIntegracao.FlatAppearance.BorderSize = 0;
+            this.btnIStatusIntegracao.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnIStatusIntegracao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnIStatusIntegracao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIStatusIntegracao.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIStatusIntegracao.ForeColor = System.Drawing.Color.White;
+            this.btnIStatusIntegracao.Image = ((System.Drawing.Image)(resources.GetObject("btnIStatusIntegracao.Image")));
+            this.btnIStatusIntegracao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnIStatusIntegracao.Location = new System.Drawing.Point(11, 441);
+            this.btnIStatusIntegracao.Name = "btnIStatusIntegracao";
+            this.btnIStatusIntegracao.Size = new System.Drawing.Size(255, 55);
+            this.btnIStatusIntegracao.TabIndex = 2;
+            this.btnIStatusIntegracao.Text = "&Status da Integração";
+            this.btnIStatusIntegracao.UseVisualStyleBackColor = false;
             // 
             // pnlAtivo
             // 
-            this.pnlAtivo.BackColor = System.Drawing.Color.Green;
+            this.pnlAtivo.BackColor = System.Drawing.Color.SeaGreen;
             this.pnlAtivo.Location = new System.Drawing.Point(3, 201);
             this.pnlAtivo.Name = "pnlAtivo";
             this.pnlAtivo.Size = new System.Drawing.Size(10, 55);
@@ -113,6 +114,7 @@
             this.btnLub.TabIndex = 0;
             this.btnLub.Text = "&Lubrificantes";
             this.btnLub.UseVisualStyleBackColor = false;
+            this.btnLub.Click += new System.EventHandler(this.btnLub_Click);
             // 
             // btnComb
             // 
@@ -191,7 +193,7 @@
 
         private System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.Panel pnlSidebar;
-        private System.Windows.Forms.Button btnIconsistencias;
+        private System.Windows.Forms.Button btnIStatusIntegracao;
         private System.Windows.Forms.Panel pnlAtivo;
         private System.Windows.Forms.Button btnLub;
         private System.Windows.Forms.Button btnComb;

@@ -22,10 +22,10 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS
 {
-	public partial class frmConAbast : Form
+	public partial class frmConLub : Form
 	{
 		frmMenu frmMenu;
-		public frmConAbast(frmMenu form)
+		public frmConLub(frmMenu form)
 		{
 			this.frmMenu = form;
 
@@ -165,7 +165,7 @@ namespace CONFERENCIAS
 
 					dgvConsulta.Columns.Clear();
 
-					dgvConsulta.DataSource = ConfAbast();
+					dgvConsulta.DataSource = ConfLub();
 
 					dgvConsulta.Columns.Add("diferença", "DIFERENÇA");
 					//dgvConsulta.Columns["diferença"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
@@ -224,26 +224,11 @@ namespace CONFERENCIAS
 			
 		}
 
-		public string ParamPrestador() // Método que retorna os prestadores que não são integrados.
+
+		public List<ConfLub> ConfLub() // Método que retorna a conferência dos abastecimentos 
 		{
 
-			var qyParam = "SELECT REPLACE(COL005C, ';', ',') COL005C FROM PIMS_INTEG.INT_PIMS_001P WHERE COL002C = 'CONSUMIVEIS' AND COL003C = 'NAO_INTEGRA_PRESTADOR'";
-
-			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
-			{
-				var param = conn.Query<ParamPrestador>(qyParam).ToList();
-
-				string teste = param[0].COL005C.ToString();
-
-				return teste;
-			}
-			
-		}
-
-		public List<ConfAbast> ConfAbast() // Método que retorna a conferência dos abastecimentos 
-		{
-
-			string qyCons = "SELECT MOVIMENTO, COMBUSTIVEL, SUM(QUANTIDADE_ADM)QUANTIDADE_ADM, SUM(QUANTIDADE_PIMS)QUANTIDADE_PIMS FROM ( SELECT TRUNC(A.DDATAMOVIM) MOVIMENTO,CASE WHEN C.CCODIPRODU = 312500018 THEN 'DIESEL B S500' WHEN C.CCODIPRODU = 312500025 THEN 'ETANOL' WHEN C.CCODIPRODU = 170300018 THEN 'DIESEL2' WHEN C.CCODIPRODU = 170600010 THEN 'DIESEL B S10' WHEN C.CCODIPRODU = 312500060 THEN 'DIESEL B S10' END COMBUSTIVEL, (B.NQTDEITMOV) QUANTIDADE_ADM, 0 QUANTIDADE_PIMS FROM PADRAO2T.ADMMOVIM A, PADRAO2T.ADMITMOV B, PADRAO2T.ADMPRODU C, PADRAO2T.ADMOPERA D WHERE A.NCODIGOEMPRE = 2 AND (A.NNUMEALMOX = 35) AND TRUNC(A.DDATAMOVIM) >= :DataIni AND TRUNC(A.DDATAMOVIM) <= :DataFim AND A.NNUMEOPERA IN (106, 1896, 3472, 4379) AND A.NCODIGOEMPRE = B.NCODIGOEMPRE AND A.NCODIMOVIM = B.NCODIMOVIM AND B.NNUMEPRODU = C.NNUMEPRODU AND C.CCODIPRODU = " + CodAbast() + " AND A.NNUMEOPERA = D.NNUMEOPERA AND D.CTIPOOPERA = 'S' AND A.CDESCMOVIM IN ('CONSUMO GERAL DA FROTA', 'CONSUMO DA FROTA TERCEIRIZADA', 'DESTILARIA / CONSUMO | PIMS MI 32M') AND C.CCODIPRODU = " + CodAbast() + " UNION ALL SELECT D.DT_OPERACAO MOVIMENTO, CASE WHEN D.CD_MATERIAL = 312500018 THEN 'DIESEL B S500' WHEN D.CD_MATERIAL = 312500025 THEN 'ETANOL' WHEN D.CD_MATERIAL = 312500060 THEN 'DIESEL B S10' END COMBUSTIVEL, 0 QUANTIDADE_ADM, (D.QT_ABASTEC) QUANTIDADE_PIMS FROM PIMSCS.APT_ABAST_DE@ADM_PIMS D, PIMSCS.APT_ABAST_HE@ADM_PIMS H, PIMSCS.EQUIPTOS@ADM_PIMS     E, PIMSCS.MODELOS@ADM_PIMS      M WHERE D.NO_BOLETIM = H.NO_BOLETIM AND D.CD_EQUIPTO = E.CD_EQUIPTO AND E.CD_MODELO = M.CD_MODELO AND D.DT_OPERACAO >= :DataIni AND D.DT_OPERACAO <= :DataFim AND H.CD_PONTO IN (2, 3, 11, 12) AND E.CD_TRANSP NOT IN (" + ParamPrestador() + ") AND D.CD_MATERIAL = " + CodAbast() + " )GROUP BY MOVIMENTO, COMBUSTIVEL ORDER BY MOVIMENTO";
+			string qyCons = "SELECT MOVIMENTO, MATERIAL, SUM (QUANTIDADE_ADM) QUANTIDADE_ADM, SUM (QUANTIDADE_PIMS) QUANTIDADE_PIMS FROM ( SELECT TRUNC(B.DDATAMOVIM) MOVIMENTO, TRIM(A.CDESCPRODU) MATERIAL, (C.NQTDEITMOV) QUANTIDADE_ADM, 0 QUANTIDADE_PIMS FROM PADRAO2T.ADMPRODU A, PADRAO2T.ADMMOVIM B, PADRAO2T.ADMITMOV C, PADRAO2T.ADMOPERA D, PADRAO2T.ADMALMOX WHERE B.NCODIGOEMPRE = 2 AND B.NNUMEOPERA IN (106, 1896, 3472, 4379) AND TRUNC(B.DDATAMOVIM) >= :DataIni AND TRUNC(B.DDATAMOVIM) <= :DataFim AND D.NNUMEOPERA = B.NNUMEOPERA AND ((A.CCODIPRODU BETWEEN 312100000 AND 312199999) OR (A.CCODIPRODU IN (310344230, 310354590, 310357030, 310357120, 310921070, 313500070, 310921010, 313500060, 313500080))) AND B.NCCCPCPIMS IS NOT NULL AND PADRAO2T.C.NCODIGOEMPRE = PADRAO2T.B.NCODIGOEMPRE AND PADRAO2T.C.NCODIMOVIM = PADRAO2T.B.NCODIMOVIM AND ADMALMOX.NCODIGOEMPRE = B.NCODIGOEMPRE AND ADMALMOX.NNUMEALMOX = B.NNUMEALMOX AND C.NNUMEALMOX = 35 AND C.NQTDEITMOV <> 0 AND C.NNUMEPRODU = A.NNUMEPRODU AND D.CTIPOOPERA = 'S' UNION ALL  SELECT HE.DT_OPERACAO MOVIMENTO, M.DE_MATERIAL MATERIAL, 0 QUANTIDADE_ADM, (DE.QT_LUBRIF) QUANTIDATE_PIMS FROM PIMSCS.APT_LUBR_HE@ADM_PIMS HE, PIMSCS.APT_LUBR_DE@ADM_PIMS DE, PIMSCS.MATERIAIS@ADM_PIMS M WHERE HE.NO_BOLETIM = DE.NO_BOLETIM AND DE.CD_MATERIAL = M.CD_MATERIAL AND DT_OPERACAO >= :DataIni AND DT_OPERACAO <= :DataFim AND ((DE.CD_MATERIAL BETWEEN 312100000 AND 312199999) OR (DE.CD_MATERIAL IN (310344230, 310354590, 310357030, 310357120, 310921070, 313500070, 310921010, 313500060, 313500080))) AND HE.CD_PONTO != 10) GROUP BY  MOVIMENTO, MATERIAL ORDER BY  MOVIMENTO, MATERIAL";
 
 			// Atribui os parâmentros dinâmicos
 
@@ -256,42 +241,19 @@ namespace CONFERENCIAS
 
 			using (IDbConnection conn = new OracleConnection("Password=consbook01;User ID=CONSULTOR;Data Source=NOVA"))
 			{
-				var abastPims = conn.Query<ConfAbast>(qyCons, param).ToList();
+				var abastPims = conn.Query<ConfLub>(qyCons, param).ToList();
 
 				return abastPims;
 			}
 		}
 
-		public string CodAbast()
-		{
-			string codAbast = null;
-
-			if (rbDiesel500.Checked)
-			{
-				codAbast = "312500018";
-
-			}
-			else if (rbDiesel10.Checked)
-			{
-				codAbast = "312500060";
-
-			}
-			else if (rbEtanol.Checked)
-			{
-				codAbast = "312500025";
-
-			}
-
-			return codAbast;
-		}
-
 		public bool VerificaDataIntegração() // Verifica se a data inicial é menor que a data de integração
 		{
 
-			DateTime dataLimite = DateTime.Parse("13/02/2019"); 
-			
+			DateTime dataLimite = DateTime.Parse("13/02/2019");
+
 			DateTime dataIni = DateTime.ParseExact(txtInicio.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
-			
+
 			if (dataIni < dataLimite)
 			{
 				return true;
