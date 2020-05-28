@@ -1,7 +1,7 @@
 ﻿/*************************************
  * Desenvolvido por Rafael H. Souza. *
  * Data: 27/04/2020                  *
- * Atualzado em: 22/05/2020          *
+ * Atualzado em: 28/05/2020          *
  *************************************/
 
 using System;
@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using CONFERENCIAS.View;
 
 namespace CONFERENCIAS.View
 {
@@ -58,6 +59,19 @@ namespace CONFERENCIAS.View
             pnlBody.Controls.Add(frm);
 
             frm.Show();
+        }
+
+        private void btnIStatusIntegracao_Click(object sender, EventArgs e)
+        {
+            pnlBody.Controls.Clear();
+            pnlAtivo.Top = btnIStatusIntegracao.Top;
+
+            frmStatusInteg frm = new frmStatusInteg(this);
+            frm.TopLevel = false;
+            pnlBody.Controls.Add(frm);
+
+            frm.Show();
+
         }
     }
 }

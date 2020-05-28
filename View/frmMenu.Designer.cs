@@ -86,6 +86,7 @@
             this.btnIStatusIntegracao.TabIndex = 2;
             this.btnIStatusIntegracao.Text = "&Status da Integração";
             this.btnIStatusIntegracao.UseVisualStyleBackColor = false;
+            this.btnIStatusIntegracao.Click += new System.EventHandler(this.btnIStatusIntegracao_Click);
             // 
             // pnlAtivo
             // 
@@ -177,9 +178,11 @@
             this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlSidebar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmMenu";
             this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Text = "Menu de Conferências";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlSidebar.ResumeLayout(false);
