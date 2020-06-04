@@ -47,6 +47,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.Gb1 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnVoltar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.Gb1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -284,6 +285,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Combustível:";
             // 
+            // btnVoltar
+            // 
+            this.btnVoltar.BackColor = System.Drawing.Color.Black;
+            this.btnVoltar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVoltar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnVoltar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoltar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVoltar.Image = ((System.Drawing.Image)(resources.GetObject("btnVoltar.Image")));
+            this.btnVoltar.Location = new System.Drawing.Point(2, 2);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(71, 37);
+            this.btnVoltar.TabIndex = 20;
+            this.btnVoltar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVoltar.UseVisualStyleBackColor = false;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
+            // 
             // frmConAbast
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,6 +310,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1079, 802);
+            this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Gb1);
             this.Controls.Add(this.lLemail);
@@ -328,6 +348,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox Gb1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnVoltar;
     }
 }
 

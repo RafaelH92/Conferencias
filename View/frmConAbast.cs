@@ -323,7 +323,17 @@ namespace CONFERENCIAS
 			dgvConsulta.ClearSelection();
 		}
 
+		private void btnVoltar_Click(object sender, EventArgs e)
+		{
+			frmMenu.pnlBody.Controls.Clear();
+			frmMenuInteg frm = new frmMenuInteg(frmMenu);
+			frm.TopLevel = false;
+			frmMenu.pnlBody.Controls.Add(frm);
 
+			frm.Show();
+
+			frmMenu.lbTitulo.Visible = false;
+		}
 	}
 
 }

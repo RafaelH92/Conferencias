@@ -29,59 +29,70 @@ namespace CONFERENCIAS.View
             DateTime dataatual = DateTime.Today;
 
             if(dtVencLicenca < dataatual)
-            {
-                
+            {               
                 Environment.Exit(0);
             }
 
             string userName = System.Environment.UserName;  // Atribui o usuário corrente a variável
 
-            lbNome.Text = "Bem vindo "  + userName + " ao sistema de conferências!";
+            lbNome.Text = userName;
 
             if (userName == "ferrarini")
             {
                 MessageBox.Show("ATENÇÃO! USUÁRIO GAY DETECTADO!");
                 lbNome.ForeColor = Color.HotPink;
                 lbNome.Font = new Font(lbNome.Font, FontStyle.Bold);
-                lbNome.Text = "Bem vindo Diego ao sistema de conferências!";
+                lbNome.Text = userName;
             }
         }
 
         void btnAbastec_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
-            pnlAtivo.Top = btnComb.Top;
+            pnlAtivo.Top = btnInteg.Top;
 
-            frmConAbast frm = new frmConAbast(this);
+            frmMenuInteg frm = new frmMenuInteg(this);
             frm.TopLevel = false;
             pnlBody.Controls.Add(frm);
 
             frm.Show();
+
+            //lbTitulo.Text = "SELECIONE UM TIPO DE CONFERENCIA ABAIXO:";
+            //lbTitulo.Visible = true;
+            lbTitulo.Visible = false;
         }
 
         private void btnLub_Click(object sender, EventArgs e)
         {
-            pnlBody.Controls.Clear();
-            pnlAtivo.Top = btnLub.Top;
+            //pnlBody.Controls.Clear();
+            //pnlAtivo.Top = btnLub.Top;
 
-            frmConLub frm = new frmConLub(this);
-            frm.TopLevel = false;
-            pnlBody.Controls.Add(frm);
+            //frmConLub frm = new frmConLub(this);
+            //frm.TopLevel = false;
+            //pnlBody.Controls.Add(frm);
 
-            frm.Show();
+            //frm.Show();
         }
 
         private void btnIStatusIntegracao_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
-            pnlAtivo.Top = btnIStatusIntegracao.Top;
+            pnlAtivo.Top = btnInconsistencia.Top;
 
-            frmStatusInteg frm = new frmStatusInteg(this);
+            frmInconsistencia frm = new frmInconsistencia(this);
             frm.TopLevel = false;
             pnlBody.Controls.Add(frm);
 
             frm.Show();
 
+            lbTitulo.Text = "VERIFICAÇÃO DE INCONSISTÊNCIAS";
+            lbTitulo.Visible = true;
         }
+
+        private void btnLogoff_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
     }
 }
