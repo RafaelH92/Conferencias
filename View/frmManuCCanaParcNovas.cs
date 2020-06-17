@@ -22,10 +22,10 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS
 {
-	public partial class frmInconsistencia : Form
+	public partial class frmManuCCanaParcNovas : Form
 	{
 		frmMenu frmMenu;
-		public frmInconsistencia(frmMenu form)
+		public frmManuCCanaParcNovas(frmMenu form)
 		{
 			this.frmMenu = form;
 
@@ -39,13 +39,9 @@ namespace CONFERENCIAS
 		{
 			try
 			{
-				if (txtInicio.Text == "__/__/____" || txtFim.Text == "__/__/____")
+				if (txtInicio.Text == "__/__/____" || txtFim.Text == "__/__/____" || txtVerif.Text == "__/__/____")
 				{
 					MessageBox.Show("PREENCHA CORRETAMENTE OS CAMPOS!");
-				}
-				else if (txtFrota.Text == string.Empty)
-				{
-					MessageBox.Show("INFORME O EQUIPAMENTO!");
 				}
 				else if (VerificaDataMenor() == true)
 				{
@@ -53,7 +49,6 @@ namespace CONFERENCIAS
 				}
 				else
 				{
-
 				
 					//-------------------------------------------------------------------
 
@@ -61,37 +56,20 @@ namespace CONFERENCIAS
 
 					dgvConsulta.Columns.Clear();
 
-					dgvConsulta.DataSource = inconsistncias();
+					dgvConsulta.DataSource = ManuCCanaParcNovas();
 
-					dgvConsulta.Columns.Add("descontinuidade", "DESCONTINUIDADE");
+					//dgvConsulta.Columns.Add("descontinuidade", "DESCONTINUIDADE");
 					//dgvConsulta.Columns["diferença"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-					dgvConsulta.Columns.Add("status", "STATUS");
+					//dgvConsulta.Columns.Add("status", "STATUS");
 					//dgvConsulta.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
 
 					//Laço que faz a diferença da km inicial e km final, e adiciona na Grid
 
-					for (int contador = 1; contador < dgvConsulta.Rows.Count; contador++)
+					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador+=2)
 					{
-						Int32 diferenca = Convert.ToInt32(dgvConsulta.Rows[contador - 1].Cells[7].Value) - Convert.ToInt32(dgvConsulta.Rows[contador].Cells[6].Value);
-
-						string valor = Convert.ToString(diferenca);
-						valor = valor.Insert(valor.Length - 1, ",");
-
-						if (valor == ",0")
-						{
-							valor = null;
-							dgvConsulta.Rows[contador - 1].Cells[9].Value = "OK!";
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
-						}
-						else if (valor != ",0")
-						{
-							dgvConsulta.Rows[contador - 1].Cells[9].Value = "VERIFIQUE!";
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.IndianRed;
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.White;
-						}
-
-						dgvConsulta.Rows[contador - 1].Cells[8].Value = valor;
+						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
+						dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
 
 					}
 
@@ -116,26 +94,27 @@ namespace CONFERENCIAS
 		}
 
 
-		public List<Inconsistncia> inconsistncias() // Método que retorna a conferência dos abastecimentos 
+		public List<ManuCCanaParcNovas> ManuCCanaParcNovas() // Método que retorna a conferência dos erros 
 		{
 
-			string qyIncon = "SELECT A.NO_BOLETIM AS BOLETIM, A.DT_OPERACAO AS DATA, A.CD_FUNC AS COD_FUNC, F.DE_FUNC AS FUNCIONARIO, A.CD_EQUIPTO AS COD_EQUIPAMENTO, M.DE_MODELO AS MODELO, B.QT_HK_INICIO AS INICIO, B.QT_HK_FINAL AS FIM FROM PIMSCS.APT_MEC_HE A, PIMSCS.APT_MEC_DE B, PIMSCS.FUNCIONARS F, PIMSCS.MODELOS    M, PIMSCS.EQUIPTOS   E WHERE A.NO_BOLETIM = B.NO_BOLETIM AND A.CD_FUNC = F.CD_FUNC AND E.CD_MODELO = M.CD_MODELO AND E.CD_EQUIPTO = A.CD_EQUIPTO AND A.CD_EQUIPTO = :Frota AND B.FG_TP_APTO = 'M' AND A.DT_OPERACAO >= :DataIni AND A.DT_OPERACAO <= :DataFim ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO";
+			string qyManu = "SELECT DISTINCT PIMSCS.APT_MANU.NO_BOLETIM  BOLETIM,                 PIMSCS.APT_MANU.DT_OPERACAO DATA,                 PIMSCS.APT_MANU.CD_FUNC     COD_FUNC,                 G.DE_FUNC                   FUNCIONARIO,                 PIMSCS.APT_MANU.CD_CCUSTO   COD_CCUSTO,                 C.DE_CCUSTO                 CCUSTOS,                 PIMSCS.APT_MANU.CD_UPNIVEL1 COD_PARCERIA,                 PIMSCS.UPNIVEL1.DA_UPNIVEL1 PARCERIA,                 PIMSCS.APT_MANU.CD_UPNIVEL3 TALHAO,                 PIMSCS.APT_MANU.CD_OPERACAO COD_OPERACAO,                 O.DE_OPERACAO               OPERACAO    FROM PIMSCS.APT_MANU,        PIMSCS.SAFRUPNIV3,        PIMSCS.FUNCIONARS G,        PIMSCS.UPNIVEL1,        PIMSCS.CCUSTOS    C,        PIMSCS.OPERACOES  O   WHERE PIMSCS.APT_MANU.CD_UPNIVEL1 = PIMSCS.SAFRUPNIV3.CD_UPNIVEL1    AND PIMSCS.APT_MANU.CD_UPNIVEL2 = PIMSCS.SAFRUPNIV3.CD_UPNIVEL2    AND PIMSCS.APT_MANU.CD_UPNIVEL3 = PIMSCS.SAFRUPNIV3.CD_UPNIVEL3    AND PIMSCS.APT_MANU.CD_SAFRA = PIMSCS.SAFRUPNIV3.CD_SAFRA    AND PIMSCS.APT_MANU.CD_FUNC = G.CD_FUNC    AND PIMSCS.APT_MANU.CD_CCUSTO = C.CD_CCUSTO    AND PIMSCS.APT_MANU.CD_OPERACAO = O.CD_OPERACAO    AND PIMSCS.UPNIVEL1.CD_UPNIVEL1 = PIMSCS.APT_MANU.CD_UPNIVEL1    AND PIMSCS.SAFRUPNIV3.FG_OCORREN IN ('R', 'P', 'N', 'S')    AND PIMSCS.APT_MANU.DT_OPERACAO >= :DataIni    AND PIMSCS.APT_MANU.DT_OPERACAO <= :DataFim    AND PIMSCS.SAFRUPNIV3.DT_OCORREN >= :DataVeri    AND PIMSCS.APT_MANU.CD_CCUSTO IN (190104, 190105, 190106)  ORDER BY PIMSCS.APT_MANU.NO_BOLETIM, PIMSCS.APT_MANU.DT_OPERACAO, PIMSCS.APT_MANU.CD_UPNIVEL1, PIMSCS.APT_MANU.CD_UPNIVEL3";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Frota", txtFrota.Text);
+			param.Add(":DataVeri",txtVerif.Text);
+
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var incon = conn.Query<Inconsistncia>(qyIncon, param).ToList();
+				var erroManu = conn.Query<ManuCCanaParcNovas>(qyManu, param).ToList();
 
-				return incon;
+				return erroManu;
 			}
 		}
 
@@ -160,20 +139,21 @@ namespace CONFERENCIAS
 
 		private void dgvConsulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
-			
+			//dgvConsulta.ClearSelection();
 		}
 
 		private void btnVoltar_Click(object sender, EventArgs e)
 		{
 			frmMenu.pnlBody.Controls.Clear();
-			frmMenuInteg frm = new frmMenuInteg(frmMenu);
+
+			frmManuais frm = new frmManuais(frmMenu);
 			frm.TopLevel = false;
 			frmMenu.pnlBody.Controls.Add(frm);
 
+			frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS MANUAIS"; 
+
 			frm.Show();
 		}
-
-
 	}
 
 }

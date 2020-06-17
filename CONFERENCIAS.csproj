@@ -64,16 +64,85 @@
   <ItemGroup>
     <Compile Include="Conexao\ConADM.cs" />
     <Compile Include="Conexao\ConPims.cs" />
+    <Compile Include="Entidades\ManuVeriBoletim.cs" />
     <Compile Include="Entidades\Inconsistencia.cs" />
+    <Compile Include="Entidades\ManuCCAdmParDiv.cs" />
+    <Compile Include="Entidades\ManuCCPlantioParcColh.cs" />
+    <Compile Include="Entidades\ManuCCanaParcNovas.cs" />
+    <Compile Include="Entidades\ManuParDiversas.cs" />
+    <Compile Include="Entidades\ManuSfPosterior.cs" />
+    <Compile Include="Entidades\Safra.cs" />
+    <Compile Include="Entidades\ManuFuncSede.cs" />
+    <Compile Include="Entidades\ManuDuplicados.cs" />
     <Compile Include="Entidades\StatusInteg.cs" />
     <Compile Include="Entidades\ConfLub.cs" />
     <Compile Include="Entidades\ConfAbast.cs" />
     <Compile Include="Entidades\ParamPrestador.cs" />
+    <Compile Include="View\frmManuVeriBoletim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuVeriBoletim.Designer.cs">
+      <DependentUpon>frmManuVeriBoletim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuCCAdmParDiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuCCAdmParDiv.Designer.cs">
+      <DependentUpon>frmManuCCAdmParDiv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuCCPlantioParcColh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuCCPlantioParcColh.Designer.cs">
+      <DependentUpon>frmManuCCPlantioParcColh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuCCanaParcNovas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuCCanaParcNovas.Designer.cs">
+      <DependentUpon>frmManuCCanaParcNovas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuParDiversas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuParDiversas.Designer.cs">
+      <DependentUpon>frmManuParDiversas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuSfPosterior.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuSfPosterior.Designer.cs">
+      <DependentUpon>frmManuSfPosterior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuFuncSede.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuFuncSede.Designer.cs">
+      <DependentUpon>frmManuFuncSede.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuDuplicado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuDuplicado.Designer.cs">
+      <DependentUpon>frmManuDuplicado.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmInconsistencia.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\frmInconsistencia.Designer.cs">
       <DependentUpon>frmInconsistencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmManuais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmManuais.Designer.cs">
+      <DependentUpon>frmManuais.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMenuErros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMenuErros.Designer.cs">
+      <DependentUpon>frmMenuErros.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmMenuInteg.cs">
       <SubType>Form</SubType>
@@ -117,8 +186,38 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\frmManuVeriBoletim.resx">
+      <DependentUpon>frmManuVeriBoletim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuCCAdmParDiv.resx">
+      <DependentUpon>frmManuCCAdmParDiv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuCCPlantioParcColh.resx">
+      <DependentUpon>frmManuCCPlantioParcColh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuCCanaParcNovas.resx">
+      <DependentUpon>frmManuCCanaParcNovas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuParDiversas.resx">
+      <DependentUpon>frmManuParDiversas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuSfPosterior.resx">
+      <DependentUpon>frmManuSfPosterior.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuFuncSede.resx">
+      <DependentUpon>frmManuFuncSede.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuDuplicado.resx">
+      <DependentUpon>frmManuDuplicado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmInconsistencia.resx">
       <DependentUpon>frmInconsistencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmManuais.resx">
+      <DependentUpon>frmManuais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMenuErros.resx">
+      <DependentUpon>frmMenuErros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmMenuInteg.resx">
       <DependentUpon>frmMenuInteg.cs</DependentUpon>
@@ -154,7 +253,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="gas-station_icon-icons.com_60837.ico" />
-    <None Include="Resources\icons8-remover-usuário-masculino-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

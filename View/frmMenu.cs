@@ -39,14 +39,32 @@ namespace CONFERENCIAS.View
 
             if (userName == "ferrarini")
             {
-                MessageBox.Show("ATENÇÃO! USUÁRIO GAY DETECTADO!");
+                
                 lbNome.ForeColor = Color.HotPink;
                 lbNome.Font = new Font(lbNome.Font, FontStyle.Bold);
                 lbNome.Text = userName;
             }
         }
 
-        void btnAbastec_Click(object sender, EventArgs e)
+        private void btnLogoff_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void btnErros_Click(object sender, EventArgs e)
+        {
+            pnlBody.Controls.Clear();
+            pnlAtivo.Top = btnErros.Top;
+
+            frmMenuErros frm = new frmMenuErros(this);
+            frm.TopLevel = false;
+            pnlBody.Controls.Add(frm);
+
+            lbTitulo.Visible = false;
+            frm.Show();
+        }
+
+        private void btnInteg_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
             pnlAtivo.Top = btnInteg.Top;
@@ -62,19 +80,7 @@ namespace CONFERENCIAS.View
             lbTitulo.Visible = false;
         }
 
-        private void btnLub_Click(object sender, EventArgs e)
-        {
-            //pnlBody.Controls.Clear();
-            //pnlAtivo.Top = btnLub.Top;
-
-            //frmConLub frm = new frmConLub(this);
-            //frm.TopLevel = false;
-            //pnlBody.Controls.Add(frm);
-
-            //frm.Show();
-        }
-
-        private void btnIStatusIntegracao_Click(object sender, EventArgs e)
+        private void btnInconsistencia_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
             pnlAtivo.Top = btnInconsistencia.Top;
@@ -88,11 +94,6 @@ namespace CONFERENCIAS.View
             lbTitulo.Text = "VERIFICAÇÃO DE INCONSISTÊNCIAS";
             lbTitulo.Visible = true;
         }
-
-        private void btnLogoff_Click(object sender, EventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
     }
+    
 }

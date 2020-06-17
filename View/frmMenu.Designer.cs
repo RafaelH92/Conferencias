@@ -89,7 +89,7 @@
             this.btnInconsistencia.TabIndex = 2;
             this.btnInconsistencia.Text = "&Inconsistências";
             this.btnInconsistencia.UseVisualStyleBackColor = false;
-            this.btnInconsistencia.Click += new System.EventHandler(this.btnIStatusIntegracao_Click);
+            this.btnInconsistencia.Click += new System.EventHandler(this.btnInconsistencia_Click);
             // 
             // pnlAtivo
             // 
@@ -118,7 +118,7 @@
             this.btnErros.TabIndex = 0;
             this.btnErros.Text = "&Erros Apontamentos";
             this.btnErros.UseVisualStyleBackColor = false;
-            this.btnErros.Click += new System.EventHandler(this.btnLub_Click);
+            this.btnErros.Click += new System.EventHandler(this.btnErros_Click);
             // 
             // btnInteg
             // 
@@ -139,7 +139,7 @@
             this.btnInteg.TabIndex = 0;
             this.btnInteg.Text = "&Integração - PIMS/ADM";
             this.btnInteg.UseVisualStyleBackColor = false;
-            this.btnInteg.Click += new System.EventHandler(this.btnAbastec_Click);
+            this.btnInteg.Click += new System.EventHandler(this.btnInteg_Click);
             // 
             // panel1
             // 
@@ -177,7 +177,7 @@
             this.lbNome.AutoSize = true;
             this.lbNome.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNome.ForeColor = System.Drawing.Color.LightGray;
-            this.lbNome.Location = new System.Drawing.Point(64, 19);
+            this.lbNome.Location = new System.Drawing.Point(64, 11);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(69, 23);
             this.lbNome.TabIndex = 0;
@@ -196,10 +196,13 @@
             // 
             // lbTitulo
             // 
+            this.lbTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbTitulo.AutoSize = true;
             this.lbTitulo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitulo.ForeColor = System.Drawing.Color.LightGray;
-            this.lbTitulo.Location = new System.Drawing.Point(383, 11);
+            this.lbTitulo.Location = new System.Drawing.Point(392, 11);
             this.lbTitulo.Name = "lbTitulo";
             this.lbTitulo.Size = new System.Drawing.Size(58, 19);
             this.lbTitulo.TabIndex = 4;

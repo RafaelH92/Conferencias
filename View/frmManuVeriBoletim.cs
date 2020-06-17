@@ -22,10 +22,10 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS
 {
-	public partial class frmInconsistencia : Form
+	public partial class frmManuVeriBoletim : Form
 	{
 		frmMenu frmMenu;
-		public frmInconsistencia(frmMenu form)
+		public frmManuVeriBoletim(frmMenu form)
 		{
 			this.frmMenu = form;
 
@@ -43,10 +43,6 @@ namespace CONFERENCIAS
 				{
 					MessageBox.Show("PREENCHA CORRETAMENTE OS CAMPOS!");
 				}
-				else if (txtFrota.Text == string.Empty)
-				{
-					MessageBox.Show("INFORME O EQUIPAMENTO!");
-				}
 				else if (VerificaDataMenor() == true)
 				{
 					MessageBox.Show("DATA INICIAL NÃO PODE SER MAIOR QUE A DATA FINAL!");
@@ -61,9 +57,9 @@ namespace CONFERENCIAS
 
 					dgvConsulta.Columns.Clear();
 
-					dgvConsulta.DataSource = inconsistncias();
+					dgvConsulta.DataSource = manuVeriBoletim();
 
-					dgvConsulta.Columns.Add("descontinuidade", "DESCONTINUIDADE");
+					//dgvConsulta.Columns.Add("descontinuidade", "DESCONTINUIDADE");
 					//dgvConsulta.Columns["diferença"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 					dgvConsulta.Columns.Add("status", "STATUS");
 					//dgvConsulta.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
@@ -73,25 +69,24 @@ namespace CONFERENCIAS
 
 					for (int contador = 1; contador < dgvConsulta.Rows.Count; contador++)
 					{
-						Int32 diferenca = Convert.ToInt32(dgvConsulta.Rows[contador - 1].Cells[7].Value) - Convert.ToInt32(dgvConsulta.Rows[contador].Cells[6].Value);
+						Int32 diferenca = Convert.ToInt32(dgvConsulta.Rows[contador].Cells[0].Value) - Convert.ToInt32(dgvConsulta.Rows[contador - 1].Cells[0].Value);
 
 						string valor = Convert.ToString(diferenca);
-						valor = valor.Insert(valor.Length - 1, ",");
 
-						if (valor == ",0")
+
+						if (valor == "1")
 						{
-							valor = null;
-							dgvConsulta.Rows[contador - 1].Cells[9].Value = "OK!";
+							dgvConsulta.Rows[contador - 1].Cells[3].Value = "OK!";
 							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
 						}
-						else if (valor != ",0")
+						else if (valor != "1")
 						{
-							dgvConsulta.Rows[contador - 1].Cells[9].Value = "VERIFIQUE!";
+							dgvConsulta.Rows[contador - 1].Cells[3].Value = "VERIFIQUE!";
 							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.IndianRed;
 							dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.White;
 						}
 
-						dgvConsulta.Rows[contador - 1].Cells[8].Value = valor;
+
 
 					}
 
@@ -116,24 +111,23 @@ namespace CONFERENCIAS
 		}
 
 
-		public List<Inconsistncia> inconsistncias() // Método que retorna a conferência dos abastecimentos 
+		public List<ManuVeriBoletim> manuVeriBoletim() // Método que retorna a conferência dos abastecimentos 
 		{
 
-			string qyIncon = "SELECT A.NO_BOLETIM AS BOLETIM, A.DT_OPERACAO AS DATA, A.CD_FUNC AS COD_FUNC, F.DE_FUNC AS FUNCIONARIO, A.CD_EQUIPTO AS COD_EQUIPAMENTO, M.DE_MODELO AS MODELO, B.QT_HK_INICIO AS INICIO, B.QT_HK_FINAL AS FIM FROM PIMSCS.APT_MEC_HE A, PIMSCS.APT_MEC_DE B, PIMSCS.FUNCIONARS F, PIMSCS.MODELOS    M, PIMSCS.EQUIPTOS   E WHERE A.NO_BOLETIM = B.NO_BOLETIM AND A.CD_FUNC = F.CD_FUNC AND E.CD_MODELO = M.CD_MODELO AND E.CD_EQUIPTO = A.CD_EQUIPTO AND A.CD_EQUIPTO = :Frota AND B.FG_TP_APTO = 'M' AND A.DT_OPERACAO >= :DataIni AND A.DT_OPERACAO <= :DataFim ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO";
+			string qyManu = "SELECT DISTINCT NO_BOLETIM BOLETIM, DT_OPERACAO DATA, CD_USR_DML USUARIO   FROM PIMSCS.APT_MANU  WHERE DT_OPERACAO >=  :DataIni  AND  DT_OPERACAO <= :DataFim ORDER BY DT_OPERACAO";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Frota", txtFrota.Text);
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var incon = conn.Query<Inconsistncia>(qyIncon, param).ToList();
+				var incon = conn.Query<ManuVeriBoletim>(qyManu, param).ToList();
 
 				return incon;
 			}
@@ -173,7 +167,18 @@ namespace CONFERENCIAS
 			frm.Show();
 		}
 
+		private void btnVoltar_Click_1(object sender, EventArgs e)
+		{
+			frmMenu.pnlBody.Controls.Clear();
 
+			frmManuais frm = new frmManuais(frmMenu);
+			frm.TopLevel = false;
+			frmMenu.pnlBody.Controls.Add(frm);
+
+			frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS MANUAIS";
+
+			frm.Show();
+		}
 	}
 
 }

@@ -1,6 +1,6 @@
 ﻿namespace CONFERENCIAS
 {
-    partial class frmInconsistencia
+    partial class frmManuCCAdmParDiv
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInconsistencia));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManuCCAdmParDiv));
             this.dgvConsulta = new System.Windows.Forms.DataGridView();
             this.lbDeveloped = new System.Windows.Forms.Label();
             this.lbRaf = new System.Windows.Forms.Label();
@@ -42,21 +42,18 @@
             this.txtFim = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.Gb1 = new System.Windows.Forms.GroupBox();
-            this.txtFrota = new System.Windows.Forms.MaskedTextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnVerificar = new System.Windows.Forms.Button();
+            this.btnVoltar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.Gb1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvConsulta
             // 
             this.dgvConsulta.AllowUserToAddRows = false;
             this.dgvConsulta.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.ForestGreen;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SeaGreen;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.dgvConsulta.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -85,7 +82,8 @@
             this.dgvConsulta.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvConsulta.EnableHeadersVisualStyles = false;
             this.dgvConsulta.GridColor = System.Drawing.Color.Black;
-            this.dgvConsulta.Location = new System.Drawing.Point(26, 135);
+            this.dgvConsulta.Location = new System.Drawing.Point(12, 126);
+            this.dgvConsulta.MultiSelect = false;
             this.dgvConsulta.Name = "dgvConsulta";
             this.dgvConsulta.ReadOnly = true;
             this.dgvConsulta.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -99,7 +97,7 @@
             this.dgvConsulta.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvConsulta.RowHeadersVisible = false;
             this.dgvConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvConsulta.Size = new System.Drawing.Size(1094, 516);
+            this.dgvConsulta.Size = new System.Drawing.Size(1097, 516);
             this.dgvConsulta.TabIndex = 4;
             this.dgvConsulta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConsulta_CellContentClick);
             // 
@@ -108,7 +106,7 @@
             this.lbDeveloped.AutoSize = true;
             this.lbDeveloped.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDeveloped.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbDeveloped.Location = new System.Drawing.Point(454, 671);
+            this.lbDeveloped.Location = new System.Drawing.Point(463, 671);
             this.lbDeveloped.Name = "lbDeveloped";
             this.lbDeveloped.Size = new System.Drawing.Size(90, 16);
             this.lbDeveloped.TabIndex = 12;
@@ -120,7 +118,7 @@
             this.lbRaf.AutoSize = true;
             this.lbRaf.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRaf.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbRaf.Location = new System.Drawing.Point(540, 671);
+            this.lbRaf.Location = new System.Drawing.Point(549, 671);
             this.lbRaf.Name = "lbRaf";
             this.lbRaf.Size = new System.Drawing.Size(90, 15);
             this.lbRaf.TabIndex = 13;
@@ -133,7 +131,7 @@
             this.lLemail.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lLemail.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.lLemail.LinkColor = System.Drawing.Color.DimGray;
-            this.lLemail.Location = new System.Drawing.Point(481, 687);
+            this.lLemail.Location = new System.Drawing.Point(490, 687);
             this.lLemail.Name = "lLemail";
             this.lLemail.Size = new System.Drawing.Size(119, 15);
             this.lLemail.TabIndex = 14;
@@ -145,7 +143,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(68, 30);
+            this.label1.Location = new System.Drawing.Point(93, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 25);
             this.label1.TabIndex = 2;
@@ -158,7 +156,7 @@
             this.txtInicio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtInicio.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInicio.ForeColor = System.Drawing.Color.White;
-            this.txtInicio.Location = new System.Drawing.Point(157, 32);
+            this.txtInicio.Location = new System.Drawing.Point(182, 32);
             this.txtInicio.Mask = "00/00/0000";
             this.txtInicio.Name = "txtInicio";
             this.txtInicio.Size = new System.Drawing.Size(127, 23);
@@ -172,7 +170,7 @@
             this.txtFim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFim.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFim.ForeColor = System.Drawing.Color.White;
-            this.txtFim.Location = new System.Drawing.Point(157, 58);
+            this.txtFim.Location = new System.Drawing.Point(182, 58);
             this.txtFim.Mask = "00/00/0000";
             this.txtFim.Name = "txtFim";
             this.txtFim.Size = new System.Drawing.Size(127, 23);
@@ -184,7 +182,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(68, 58);
+            this.label4.Location = new System.Drawing.Point(93, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 25);
             this.label4.TabIndex = 5;
@@ -200,54 +198,14 @@
             this.Gb1.Controls.Add(this.label4);
             this.Gb1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Gb1.ForeColor = System.Drawing.Color.White;
-            this.Gb1.Location = new System.Drawing.Point(26, 20);
+            this.Gb1.Location = new System.Drawing.Point(160, 20);
             this.Gb1.Margin = new System.Windows.Forms.Padding(2);
             this.Gb1.Name = "Gb1";
             this.Gb1.Padding = new System.Windows.Forms.Padding(2);
-            this.Gb1.Size = new System.Drawing.Size(374, 100);
+            this.Gb1.Size = new System.Drawing.Size(393, 100);
             this.Gb1.TabIndex = 18;
             this.Gb1.TabStop = false;
             this.Gb1.Text = "Periodo:";
-            // 
-            // txtFrota
-            // 
-            this.txtFrota.BackColor = System.Drawing.Color.Black;
-            this.txtFrota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFrota.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFrota.ForeColor = System.Drawing.Color.White;
-            this.txtFrota.Location = new System.Drawing.Point(120, 43);
-            this.txtFrota.Name = "txtFrota";
-            this.txtFrota.Size = new System.Drawing.Size(109, 23);
-            this.txtFrota.TabIndex = 6;
-            this.txtFrota.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFrota.ValidatingType = typeof(System.DateTime);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Black;
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtFrota);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(404, 20);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(269, 100);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Frota:";
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(14, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 25);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Equipamento:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnVerificar
             // 
@@ -259,9 +217,9 @@
             this.btnVerificar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVerificar.ForeColor = System.Drawing.Color.White;
             this.btnVerificar.Image = ((System.Drawing.Image)(resources.GetObject("btnVerificar.Image")));
-            this.btnVerificar.Location = new System.Drawing.Point(690, 24);
+            this.btnVerificar.Location = new System.Drawing.Point(588, 24);
             this.btnVerificar.Name = "btnVerificar";
-            this.btnVerificar.Size = new System.Drawing.Size(234, 96);
+            this.btnVerificar.Size = new System.Drawing.Size(254, 96);
             this.btnVerificar.TabIndex = 6;
             this.btnVerificar.Text = "&Verificar!";
             this.btnVerificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -269,14 +227,32 @@
             this.btnVerificar.UseVisualStyleBackColor = false;
             this.btnVerificar.Click += new System.EventHandler(this.btnExecutar_Click);
             // 
-            // frmInconsistencia
+            // btnVoltar
+            // 
+            this.btnVoltar.BackColor = System.Drawing.Color.Black;
+            this.btnVoltar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVoltar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnVoltar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoltar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVoltar.Image = ((System.Drawing.Image)(resources.GetObject("btnVoltar.Image")));
+            this.btnVoltar.Location = new System.Drawing.Point(12, 24);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(71, 37);
+            this.btnVoltar.TabIndex = 22;
+            this.btnVoltar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVoltar.UseVisualStyleBackColor = false;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
+            // 
+            // frmManuCCAdmParDiv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1113, 802);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1110, 802);
+            this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.Gb1);
             this.Controls.Add(this.lLemail);
             this.Controls.Add(this.lbRaf);
@@ -286,13 +262,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "frmInconsistencia";
+            this.Name = "frmManuCCAdmParDiv";
             this.Text = "Conferências Combustíveis";
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).EndInit();
             this.Gb1.ResumeLayout(false);
             this.Gb1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,9 +283,7 @@
         private System.Windows.Forms.MaskedTextBox txtFim;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox Gb1;
-        private System.Windows.Forms.MaskedTextBox txtFrota;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnVoltar;
     }
 }
 
