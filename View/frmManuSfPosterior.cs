@@ -177,7 +177,6 @@ namespace CONFERENCIAS
 			frm.Show();
 		}
 
-
 	}
 
 }

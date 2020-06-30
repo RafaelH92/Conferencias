@@ -53,7 +53,7 @@
             this.btnMecanizada.TabIndex = 3;
             this.btnMecanizada.Text = "&Atividades Mecanizadas";
             this.btnMecanizada.UseVisualStyleBackColor = false;
-            this.btnMecanizada.Click += new System.EventHandler(this.btnLub_Click);
+            this.btnMecanizada.Click += new System.EventHandler(this.btnMecanizada_Click);
             // 
             // btnManual
             // 
@@ -74,7 +74,7 @@
             this.btnManual.TabIndex = 4;
             this.btnManual.Text = "&Atividades Manuais";
             this.btnManual.UseVisualStyleBackColor = false;
-            this.btnManual.Click += new System.EventHandler(this.btnComb_Click);
+            this.btnManual.Click += new System.EventHandler(this.btnManual_Click);
             // 
             // label1
             // 

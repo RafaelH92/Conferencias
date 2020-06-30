@@ -30,7 +30,7 @@ namespace CONFERENCIAS.View
             InitializeComponent();
         }
 
-        private void btnComb_Click(object sender, EventArgs e)
+        private void btnManual_Click(object sender, EventArgs e)
         {
             frmMenu.pnlBody.Controls.Clear();
 
@@ -42,35 +42,19 @@ namespace CONFERENCIAS.View
 
             frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS MANUAIS";
             frmMenu.lbTitulo.Visible = true;
-
         }
 
-        private void btnLub_Click(object sender, EventArgs e)
-        {
-            //frmMenu.pnlBody.Controls.Clear();
-
-            //frmConLub frm = new frmConLub(frmMenu);
-            //frm.TopLevel = false;
-            //frmMenu.pnlBody.Controls.Add(frm);
-
-            //frm.Show();
-
-            //frmMenu.lbTitulo.Text = "INTEGRAÇÃO PRODUTOS";
-            //frmMenu.lbTitulo.Visible = true;
-
-        }
-
-        private void btnIStatusIntegracao_Click(object sender, EventArgs e)
+        private void btnMecanizada_Click(object sender, EventArgs e)
         {
             frmMenu.pnlBody.Controls.Clear();
 
-            frmStatusInteg frm = new frmStatusInteg (frmMenu);
+            frmMecanizadas frm = new frmMecanizadas(frmMenu);
             frm.TopLevel = false;
             frmMenu.pnlBody.Controls.Add(frm);
 
             frm.Show();
 
-            frmMenu.lbTitulo.Text = "STATUS DA INTEGRAÇÃO";
+            frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS MECANIZADOS";
             frmMenu.lbTitulo.Visible = true;
         }
     }

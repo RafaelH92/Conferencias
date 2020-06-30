@@ -44,12 +44,12 @@
             this.Gb1 = new System.Windows.Forms.GroupBox();
             this.btnVerificar = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbSafra = new System.Windows.Forms.GroupBox();
             this.cbSafra = new MetroFramework.Controls.MetroComboBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.Gb1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbSafra.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvConsulta
@@ -87,7 +87,7 @@
             this.dgvConsulta.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvConsulta.EnableHeadersVisualStyles = false;
             this.dgvConsulta.GridColor = System.Drawing.Color.Black;
-            this.dgvConsulta.Location = new System.Drawing.Point(12, 136);
+            this.dgvConsulta.Location = new System.Drawing.Point(12, 126);
             this.dgvConsulta.MultiSelect = false;
             this.dgvConsulta.Name = "dgvConsulta";
             this.dgvConsulta.ReadOnly = true;
@@ -102,7 +102,7 @@
             this.dgvConsulta.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvConsulta.RowHeadersVisible = false;
             this.dgvConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvConsulta.Size = new System.Drawing.Size(1121, 516);
+            this.dgvConsulta.Size = new System.Drawing.Size(1086, 516);
             this.dgvConsulta.TabIndex = 4;
             this.dgvConsulta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConsulta_CellContentClick);
             // 
@@ -250,21 +250,21 @@
             this.btnVoltar.UseVisualStyleBackColor = false;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
-            // groupBox1
+            // gbSafra
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Black;
-            this.groupBox1.Controls.Add(this.cbSafra);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(511, 20);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(267, 100);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Safra:";
+            this.gbSafra.BackColor = System.Drawing.Color.Black;
+            this.gbSafra.Controls.Add(this.cbSafra);
+            this.gbSafra.Controls.Add(this.label2);
+            this.gbSafra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbSafra.ForeColor = System.Drawing.Color.White;
+            this.gbSafra.Location = new System.Drawing.Point(511, 20);
+            this.gbSafra.Margin = new System.Windows.Forms.Padding(2);
+            this.gbSafra.Name = "gbSafra";
+            this.gbSafra.Padding = new System.Windows.Forms.Padding(2);
+            this.gbSafra.Size = new System.Drawing.Size(267, 100);
+            this.gbSafra.TabIndex = 19;
+            this.gbSafra.TabStop = false;
+            this.gbSafra.Text = "Safra:";
             // 
             // cbSafra
             // 
@@ -296,7 +296,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1110, 802);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbSafra);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.Gb1);
             this.Controls.Add(this.lLemail);
@@ -312,7 +312,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).EndInit();
             this.Gb1.ResumeLayout(false);
             this.Gb1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.gbSafra.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,7 +330,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox Gb1;
         private System.Windows.Forms.Button btnVoltar;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbSafra;
         private System.Windows.Forms.Label label2;
         private MetroFramework.Controls.MetroComboBox cbSafra;
     }

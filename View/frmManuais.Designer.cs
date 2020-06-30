@@ -51,9 +51,9 @@
             this.btnManuDupl.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManuDupl.ForeColor = System.Drawing.Color.White;
             this.btnManuDupl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnManuDupl.Location = new System.Drawing.Point(86, 77);
+            this.btnManuDupl.Location = new System.Drawing.Point(87, 79);
             this.btnManuDupl.Name = "btnManuDupl";
-            this.btnManuDupl.Size = new System.Drawing.Size(665, 43);
+            this.btnManuDupl.Size = new System.Drawing.Size(665, 37);
             this.btnManuDupl.TabIndex = 4;
             this.btnManuDupl.Text = "&I - Apontamentos Duplicados";
             this.btnManuDupl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -72,9 +72,9 @@
             this.btnFuncSede.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFuncSede.ForeColor = System.Drawing.Color.White;
             this.btnFuncSede.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFuncSede.Location = new System.Drawing.Point(86, 135);
+            this.btnFuncSede.Location = new System.Drawing.Point(87, 122);
             this.btnFuncSede.Name = "btnFuncSede";
-            this.btnFuncSede.Size = new System.Drawing.Size(665, 43);
+            this.btnFuncSede.Size = new System.Drawing.Size(665, 37);
             this.btnFuncSede.TabIndex = 7;
             this.btnFuncSede.Text = "&II - Apontamentos com Funcionários da Sede";
             this.btnFuncSede.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -93,9 +93,9 @@
             this.btnSafra.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSafra.ForeColor = System.Drawing.Color.White;
             this.btnSafra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSafra.Location = new System.Drawing.Point(86, 193);
+            this.btnSafra.Location = new System.Drawing.Point(87, 165);
             this.btnSafra.Name = "btnSafra";
-            this.btnSafra.Size = new System.Drawing.Size(665, 43);
+            this.btnSafra.Size = new System.Drawing.Size(665, 37);
             this.btnSafra.TabIndex = 8;
             this.btnSafra.Text = "&III - Apontamentos com Safra Diferente da Atual";
             this.btnSafra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -114,9 +114,9 @@
             this.btnCCParcDiv.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCCParcDiv.ForeColor = System.Drawing.Color.White;
             this.btnCCParcDiv.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCCParcDiv.Location = new System.Drawing.Point(86, 261);
+            this.btnCCParcDiv.Location = new System.Drawing.Point(87, 208);
             this.btnCCParcDiv.Name = "btnCCParcDiv";
-            this.btnCCParcDiv.Size = new System.Drawing.Size(665, 43);
+            this.btnCCParcDiv.Size = new System.Drawing.Size(665, 37);
             this.btnCCParcDiv.TabIndex = 9;
             this.btnCCParcDiv.Text = "&IV - Apontamentos com Centro de Custo da Cana e Parcerias Diversas ";
             this.btnCCParcDiv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -135,9 +135,9 @@
             this.btnCCAdm.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCCAdm.ForeColor = System.Drawing.Color.White;
             this.btnCCAdm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCCAdm.Location = new System.Drawing.Point(86, 322);
+            this.btnCCAdm.Location = new System.Drawing.Point(87, 251);
             this.btnCCAdm.Name = "btnCCAdm";
-            this.btnCCAdm.Size = new System.Drawing.Size(665, 43);
+            this.btnCCAdm.Size = new System.Drawing.Size(665, 37);
             this.btnCCAdm.TabIndex = 10;
             this.btnCCAdm.Text = "&V - Apontamentos com Centro de Custo Administrativo e Parceria Diferente de Dive" +
     "rsas ";
@@ -157,9 +157,9 @@
             this.btnCCColhNov.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCCColhNov.ForeColor = System.Drawing.Color.White;
             this.btnCCColhNov.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCCColhNov.Location = new System.Drawing.Point(86, 388);
+            this.btnCCColhNov.Location = new System.Drawing.Point(87, 294);
             this.btnCCColhNov.Name = "btnCCColhNov";
-            this.btnCCColhNov.Size = new System.Drawing.Size(665, 43);
+            this.btnCCColhNov.Size = new System.Drawing.Size(665, 37);
             this.btnCCColhNov.TabIndex = 11;
             this.btnCCColhNov.Text = "&VI - Apontamentos com Centro de Custo de Colheita/Manejo para Parcerias Novas (P" +
     "lantio)";
@@ -179,9 +179,9 @@
             this.btnCCPlanColh.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCCPlanColh.ForeColor = System.Drawing.Color.White;
             this.btnCCPlanColh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCCPlanColh.Location = new System.Drawing.Point(86, 445);
+            this.btnCCPlanColh.Location = new System.Drawing.Point(87, 337);
             this.btnCCPlanColh.Name = "btnCCPlanColh";
-            this.btnCCPlanColh.Size = new System.Drawing.Size(665, 43);
+            this.btnCCPlanColh.Size = new System.Drawing.Size(665, 37);
             this.btnCCPlanColh.TabIndex = 12;
             this.btnCCPlanColh.Text = "&VII - Apontamentos com Centro de Custo de Plantio para Parcerias de Colheita";
             this.btnCCPlanColh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -200,9 +200,9 @@
             this.btnVeriManu.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVeriManu.ForeColor = System.Drawing.Color.White;
             this.btnVeriManu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVeriManu.Location = new System.Drawing.Point(86, 510);
+            this.btnVeriManu.Location = new System.Drawing.Point(87, 380);
             this.btnVeriManu.Name = "btnVeriManu";
-            this.btnVeriManu.Size = new System.Drawing.Size(665, 43);
+            this.btnVeriManu.Size = new System.Drawing.Size(665, 37);
             this.btnVeriManu.TabIndex = 13;
             this.btnVeriManu.Text = "&VIII - Verificação da Sequência dos Boletins";
             this.btnVeriManu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>gas-station_icon-icons.com_60837.ico</ApplicationIcon>
+    <ApplicationIcon>check_ok_accept_apply_1582.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -64,6 +64,19 @@
   <ItemGroup>
     <Compile Include="Conexao\ConADM.cs" />
     <Compile Include="Conexao\ConPims.cs" />
+    <Compile Include="Entidades\MecHoraOp.cs" />
+    <Compile Include="Entidades\MecImpXEquip.cs" />
+    <Compile Include="Entidades\MecEquipXImp.cs" />
+    <Compile Include="Entidades\MecCCPlantioParcColh.cs" />
+    <Compile Include="Entidades\MecCCanaParcNovas.cs" />
+    <Compile Include="Entidades\MecSfPosterior.cs" />
+    <Compile Include="Entidades\MecCCAdmDifParDiv.cs" />
+    <Compile Include="Entidades\MecCCEntreposto.cs" />
+    <Compile Include="Entidades\MecCCCanaParDiv.cs" />
+    <Compile Include="Entidades\MecFunc110100.cs" />
+    <Compile Include="Entidades\MecELADiversas.cs" />
+    <Compile Include="Entidades\MecTZero.cs" />
+    <Compile Include="Entidades\MecOpImplemento.cs" />
     <Compile Include="Entidades\ManuVeriBoletim.cs" />
     <Compile Include="Entidades\Inconsistencia.cs" />
     <Compile Include="Entidades\ManuCCAdmParDiv.cs" />
@@ -78,6 +91,90 @@
     <Compile Include="Entidades\ConfLub.cs" />
     <Compile Include="Entidades\ConfAbast.cs" />
     <Compile Include="Entidades\ParamPrestador.cs" />
+    <Compile Include="View\frmMecCCPlantioParcColh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecCCPlantioParcColh.Designer.cs">
+      <DependentUpon>frmMecCCPlantioParcColh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecCCanaParcNovas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecCCanaParcNovas.Designer.cs">
+      <DependentUpon>frmMecCCanaParcNovas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecCCAdmDifParDiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecCCAdmDifParDiv.Designer.cs">
+      <DependentUpon>frmMecCCAdmDifParDiv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecCCEntreposto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecCCEntreposto.Designer.cs">
+      <DependentUpon>frmMecCCEntreposto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecHoraOp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecHoraOp.Designer.cs">
+      <DependentUpon>frmMecHoraOp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecImpXEquip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecImpXEquip.Designer.cs">
+      <DependentUpon>frmMecImpXEquip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecEquipXImp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecEquipXImp.Designer.cs">
+      <DependentUpon>frmMecEquipXImp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecSfPosterior.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecSfPosterior.Designer.cs">
+      <DependentUpon>frmMecSfPosterior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecELADiversas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecELADiversas.Designer.cs">
+      <DependentUpon>frmMecELADiversas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecCCCanaParDiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecCCCanaParDiv.Designer.cs">
+      <DependentUpon>frmMecCCCanaParDiv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecTZero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecTZero.Designer.cs">
+      <DependentUpon>frmMecTZero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecOpImplemento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecOpImplemento.Designer.cs">
+      <DependentUpon>frmMecOpImplemento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecFunc110100.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecFunc110100.Designer.cs">
+      <DependentUpon>frmMecFunc110100.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMecanizadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMecanizadas.Designer.cs">
+      <DependentUpon>frmMecanizadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmManuVeriBoletim.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +283,48 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\frmMecCCPlantioParcColh.resx">
+      <DependentUpon>frmMecCCPlantioParcColh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecCCanaParcNovas.resx">
+      <DependentUpon>frmMecCCanaParcNovas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecCCAdmDifParDiv.resx">
+      <DependentUpon>frmMecCCAdmDifParDiv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecCCEntreposto.resx">
+      <DependentUpon>frmMecCCEntreposto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecHoraOp.resx">
+      <DependentUpon>frmMecHoraOp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecImpXEquip.resx">
+      <DependentUpon>frmMecImpXEquip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecEquipXImp.resx">
+      <DependentUpon>frmMecEquipXImp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecSfPosterior.resx">
+      <DependentUpon>frmMecSfPosterior.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecELADiversas.resx">
+      <DependentUpon>frmMecELADiversas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecCCCanaParDiv.resx">
+      <DependentUpon>frmMecCCCanaParDiv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecTZero.resx">
+      <DependentUpon>frmMecTZero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecOpImplemento.resx">
+      <DependentUpon>frmMecOpImplemento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecFunc110100.resx">
+      <DependentUpon>frmMecFunc110100.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMecanizadas.resx">
+      <DependentUpon>frmMecanizadas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmManuVeriBoletim.resx">
       <DependentUpon>frmManuVeriBoletim.cs</DependentUpon>
     </EmbeddedResource>
@@ -252,6 +391,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="check_ok_accept_apply_1582.ico" />
     <Content Include="gas-station_icon-icons.com_60837.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
