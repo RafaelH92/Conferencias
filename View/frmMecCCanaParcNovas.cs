@@ -68,9 +68,9 @@ namespace CONFERENCIAS
 
 					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador+=2)
 					{
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
-
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
+						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
 					}
 
 					dgvConsulta.ClearSelection();

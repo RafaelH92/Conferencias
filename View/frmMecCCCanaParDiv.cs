@@ -66,11 +66,11 @@ namespace CONFERENCIAS
 
 					//Laço que faz a diferença da km inicial e km final, e adiciona na Grid
 
-					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador+=2)
+					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
 					{
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
-
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
+						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
 					}
 
 					dgvConsulta.ClearSelection();

@@ -40,6 +40,7 @@
             this.lbNome = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
+            this.lbVer = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -53,7 +54,7 @@
             this.pnlBody.BackColor = System.Drawing.Color.Black;
             this.pnlBody.Location = new System.Drawing.Point(282, 63);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(739, 525);
+            this.pnlBody.Size = new System.Drawing.Size(727, 779);
             this.pnlBody.TabIndex = 7;
             // 
             // pnlSidebar
@@ -61,13 +62,14 @@
             this.pnlSidebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlSidebar.BackColor = System.Drawing.Color.Black;
+            this.pnlSidebar.Controls.Add(this.lbVer);
             this.pnlSidebar.Controls.Add(this.btnInconsistencia);
             this.pnlSidebar.Controls.Add(this.pnlAtivo);
             this.pnlSidebar.Controls.Add(this.btnErros);
             this.pnlSidebar.Controls.Add(this.btnInteg);
             this.pnlSidebar.Location = new System.Drawing.Point(12, 24);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(270, 567);
+            this.pnlSidebar.Size = new System.Drawing.Size(270, 821);
             this.pnlSidebar.TabIndex = 6;
             // 
             // btnInconsistencia
@@ -191,7 +193,7 @@
             this.pnlHeader.Controls.Add(this.lbTitulo);
             this.pnlHeader.Location = new System.Drawing.Point(282, 24);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(739, 45);
+            this.pnlHeader.Size = new System.Drawing.Size(727, 45);
             this.pnlHeader.TabIndex = 8;
             // 
             // lbTitulo
@@ -209,11 +211,22 @@
             this.lbTitulo.Text = "label2";
             this.lbTitulo.Visible = false;
             // 
+            // lbVer
+            // 
+            this.lbVer.AutoSize = true;
+            this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lbVer.Location = new System.Drawing.Point(104, 802);
+            this.lbVer.Name = "lbVer";
+            this.lbVer.Size = new System.Drawing.Size(38, 12);
+            this.lbVer.TabIndex = 13;
+            this.lbVer.Text = "Ver: 6.1";
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 590);
+            this.ClientSize = new System.Drawing.Size(1022, 844);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.panel1);
@@ -223,10 +236,12 @@
             this.Name = "frmMenu";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Tag = "";
             this.Text = "Menu de Conferências";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlSidebar.ResumeLayout(false);
+            this.pnlSidebar.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlHeader.ResumeLayout(false);
@@ -248,5 +263,6 @@
         private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.Button btnLogoff;
         public System.Windows.Forms.Label lbTitulo;
+        private System.Windows.Forms.Label lbVer;
     }
 }

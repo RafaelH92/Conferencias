@@ -51,16 +51,17 @@
             // btnExecutar
             // 
             this.btnExecutar.BackColor = System.Drawing.Color.Black;
-            this.btnExecutar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnExecutar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SeaGreen;
-            this.btnExecutar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnExecutar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.btnExecutar.FlatAppearance.BorderSize = 0;
+            this.btnExecutar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.btnExecutar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.btnExecutar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExecutar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExecutar.ForeColor = System.Drawing.Color.White;
             this.btnExecutar.Image = ((System.Drawing.Image)(resources.GetObject("btnExecutar.Image")));
-            this.btnExecutar.Location = new System.Drawing.Point(538, 38);
+            this.btnExecutar.Location = new System.Drawing.Point(487, 61);
             this.btnExecutar.Name = "btnExecutar";
-            this.btnExecutar.Size = new System.Drawing.Size(234, 96);
+            this.btnExecutar.Size = new System.Drawing.Size(189, 61);
             this.btnExecutar.TabIndex = 6;
             this.btnExecutar.Text = "&Consultar!";
             this.btnExecutar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -102,7 +103,7 @@
             this.dgvConsulta.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvConsulta.EnableHeadersVisualStyles = false;
             this.dgvConsulta.GridColor = System.Drawing.Color.Black;
-            this.dgvConsulta.Location = new System.Drawing.Point(104, 165);
+            this.dgvConsulta.Location = new System.Drawing.Point(52, 165);
             this.dgvConsulta.Name = "dgvConsulta";
             this.dgvConsulta.ReadOnly = true;
             this.dgvConsulta.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -162,7 +163,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(85, 28);
+            this.label1.Location = new System.Drawing.Point(49, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 25);
             this.label1.TabIndex = 2;
@@ -175,7 +176,7 @@
             this.txtInicio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtInicio.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInicio.ForeColor = System.Drawing.Color.White;
-            this.txtInicio.Location = new System.Drawing.Point(174, 30);
+            this.txtInicio.Location = new System.Drawing.Point(138, 29);
             this.txtInicio.Mask = "00/00/0000";
             this.txtInicio.Name = "txtInicio";
             this.txtInicio.Size = new System.Drawing.Size(127, 23);
@@ -189,7 +190,7 @@
             this.txtFim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFim.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFim.ForeColor = System.Drawing.Color.White;
-            this.txtFim.Location = new System.Drawing.Point(174, 56);
+            this.txtFim.Location = new System.Drawing.Point(138, 55);
             this.txtFim.Mask = "00/00/0000";
             this.txtFim.Name = "txtFim";
             this.txtFim.Size = new System.Drawing.Size(127, 23);
@@ -201,7 +202,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(85, 56);
+            this.label4.Location = new System.Drawing.Point(49, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 25);
             this.label4.TabIndex = 5;
@@ -221,7 +222,7 @@
             this.Gb1.Margin = new System.Windows.Forms.Padding(2);
             this.Gb1.Name = "Gb1";
             this.Gb1.Padding = new System.Windows.Forms.Padding(2);
-            this.Gb1.Size = new System.Drawing.Size(407, 100);
+            this.Gb1.Size = new System.Drawing.Size(349, 100);
             this.Gb1.TabIndex = 18;
             this.Gb1.TabStop = false;
             this.Gb1.Text = "Periodo:";

@@ -30,9 +30,7 @@ namespace CONFERENCIAS
 			this.frmMenu = form;
 
 			InitializeComponent();
-
-			cbSafra.DataSource = Safras(); // Alimenta o combobox com a consulta das safras, no momento da instanciação do form.
-			cbSafra.ValueMember = "SAFRA"; // Seleciona o valor da lista que será exibido no combobox.
+			
 
 		}	
 		
@@ -69,11 +67,11 @@ namespace CONFERENCIAS
 
 					//Laço que faz a diferença da km inicial e km final, e adiciona na Grid
 
-					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador+=2)
+					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
 					{
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
-
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
+						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
 					}
 
 					dgvConsulta.ClearSelection();
@@ -100,14 +98,13 @@ namespace CONFERENCIAS
 		public List<MecOpImplemento> macOpImplemento() // Método que retorna a conferência dos erros 
 		{
 
-			string qyMac = "SELECT B.DT_OPERACAO AS DATA,   A.NO_BOLETIM AS BOLETIM,   A.CD_SAFRA AS SAFRA,   B.CD_EQUIPTO AS COD_EQUIPAMENTO,   E.DE_MODELO AS MODELO,   A.CD_EQ_IMPL1 AS IMPLEMENTO,   A.CD_CCUSTO AS COD_CCUSTO,   C.DE_CCUSTO AS CCUSTO,   A.CD_OPERACAO AS COD_OPERACAO,   D.DE_OPERACAO AS OPERACAO,   A.CD_UPNIVEL1 AS COD_PARCERIA,   A.CD_UPNIVEL3 AS TALHAO,   A.CD_USR_DML AS USUARIO  FROM PIMSCS.APT_MEC_DE A,   PIMSCS.APT_MEC_HE B,   PIMSCS.CCUSTOS C,   PIMSCS.OPERACOES D,   PIMSCS.MODELOS E,   PIMSCS.EQUIPTOS F  WHERE A.NO_BOLETIM = B.NO_BOLETIM  AND B.DT_OPERACAO BETWEEN :DataIni  AND :DataFim  AND A.CD_OPERACAO = D.CD_OPERACAO  AND A.CD_CCUSTO = C.CD_CCUSTO  AND F.CD_EQUIPTO = B.CD_EQUIPTO  AND F.CD_MODELO = E.CD_MODELO  AND A.CD_OPERACAO IN(57,   64,   65,   66,   72,   76,   92,   100,   102,   104,   108,   110,   111,   112,   114,   116,   118,   122,   124,   126,   115,   151,   169,   177,   188,   191,   123,   235)  AND A.CD_EQ_IMPL1 = 0  AND B.CD_EQUIPTO < 9000  AND A.CD_SAFRA >= :Safra  AND B.CD_EQUIPTO NOT IN (6116,6238)   ORDER BY B.DT_OPERACAO, B.NO_BOLETIM , B.DT_OPERACAO    ";
+			string qyMac = "SELECT B.DT_OPERACAO AS DATA,        A.NO_BOLETIM  AS BOLETIM,        A.CD_SAFRA    AS SAFRA,        B.CD_EQUIPTO  AS COD_EQUIPAMENTO,        E.DE_MODELO   AS MODELO,        A.CD_EQ_IMPL1 AS IMPLEMENTO,        A.CD_CCUSTO   AS COD_CCUSTO,        C.DE_CCUSTO   AS CCUSTO,        A.CD_OPERACAO AS COD_OPERACAO,        D.DE_OPERACAO AS OPERACAO,        A.CD_UPNIVEL1 AS COD_PARCERIA,        A.CD_UPNIVEL3 AS TALHAO,        A.CD_USR_DML  AS USUARIO   FROM PIMSCS.APT_MEC_DE A,        PIMSCS.APT_MEC_HE B,        PIMSCS.CCUSTOS    C,        PIMSCS.OPERACOES  D,        PIMSCS.MODELOS    E,        PIMSCS.EQUIPTOS   F  WHERE A.NO_BOLETIM = B.NO_BOLETIM    AND B.DT_OPERACAO BETWEEN :DataIni AND :DataFim    AND A.CD_OPERACAO = D.CD_OPERACAO    AND A.CD_CCUSTO = C.CD_CCUSTO    AND F.CD_EQUIPTO = B.CD_EQUIPTO    AND F.CD_MODELO = E.CD_MODELO    AND A.CD_OPERACAO IN (57,                          64,                          65,                          66,                          72,                          76,                          92,                          100,                          102,                          104,                          108,                          110,                          111,                          112,                          114,                          116,                          118,                          122,                          124,                          126,                          115,                          151,                          169,                          177,                          188,                          191,                          123,                          235)    AND A.CD_EQ_IMPL1 = 0    AND B.CD_EQUIPTO < 9000    AND B.CD_EQUIPTO NOT IN (6116, 6238)    AND A.FG_TP_APTO <> 'F'  ORDER BY B.DT_OPERACAO, B.NO_BOLETIM, B.DT_OPERACAO";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Safra", cbSafra.Text);
 
 
 			// Abre a conexão e executa a query
@@ -158,22 +155,7 @@ namespace CONFERENCIAS
 			frm.Show();
 		}
 
-		public List<Safra> Safras() // Método que retorna a conferência das safras 
-		{
-
-			string qySafras = "SELECT CD_SAFRA SAFRA FROM PIMSCS.SAFRAS S ORDER BY S.CD_SAFRA DESC";
-
-
-			// Abre a conexão e executa a query
-
-
-			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
-			{
-				var safras = conn.Query<Safra>(qySafras).ToList();
-
-				return safras;
-			}
-		}
+		
 	}
 
 

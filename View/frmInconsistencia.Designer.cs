@@ -85,7 +85,7 @@
             this.dgvConsulta.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvConsulta.EnableHeadersVisualStyles = false;
             this.dgvConsulta.GridColor = System.Drawing.Color.Black;
-            this.dgvConsulta.Location = new System.Drawing.Point(26, 135);
+            this.dgvConsulta.Location = new System.Drawing.Point(12, 134);
             this.dgvConsulta.Name = "dgvConsulta";
             this.dgvConsulta.ReadOnly = true;
             this.dgvConsulta.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -99,7 +99,7 @@
             this.dgvConsulta.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvConsulta.RowHeadersVisible = false;
             this.dgvConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvConsulta.Size = new System.Drawing.Size(1094, 516);
+            this.dgvConsulta.Size = new System.Drawing.Size(1105, 516);
             this.dgvConsulta.TabIndex = 4;
             this.dgvConsulta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConsulta_CellContentClick);
             // 
@@ -145,7 +145,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(68, 30);
+            this.label1.Location = new System.Drawing.Point(58, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 25);
             this.label1.TabIndex = 2;
@@ -158,7 +158,7 @@
             this.txtInicio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtInicio.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInicio.ForeColor = System.Drawing.Color.White;
-            this.txtInicio.Location = new System.Drawing.Point(157, 32);
+            this.txtInicio.Location = new System.Drawing.Point(147, 32);
             this.txtInicio.Mask = "00/00/0000";
             this.txtInicio.Name = "txtInicio";
             this.txtInicio.Size = new System.Drawing.Size(127, 23);
@@ -172,7 +172,7 @@
             this.txtFim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFim.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFim.ForeColor = System.Drawing.Color.White;
-            this.txtFim.Location = new System.Drawing.Point(157, 58);
+            this.txtFim.Location = new System.Drawing.Point(147, 58);
             this.txtFim.Mask = "00/00/0000";
             this.txtFim.Name = "txtFim";
             this.txtFim.Size = new System.Drawing.Size(127, 23);
@@ -184,7 +184,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(68, 58);
+            this.label4.Location = new System.Drawing.Point(58, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 25);
             this.label4.TabIndex = 5;
@@ -204,7 +204,7 @@
             this.Gb1.Margin = new System.Windows.Forms.Padding(2);
             this.Gb1.Name = "Gb1";
             this.Gb1.Padding = new System.Windows.Forms.Padding(2);
-            this.Gb1.Size = new System.Drawing.Size(374, 100);
+            this.Gb1.Size = new System.Drawing.Size(349, 100);
             this.Gb1.TabIndex = 18;
             this.Gb1.TabStop = false;
             this.Gb1.Text = "Periodo:";
@@ -215,7 +215,7 @@
             this.txtFrota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFrota.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFrota.ForeColor = System.Drawing.Color.White;
-            this.txtFrota.Location = new System.Drawing.Point(120, 43);
+            this.txtFrota.Location = new System.Drawing.Point(144, 41);
             this.txtFrota.Name = "txtFrota";
             this.txtFrota.Size = new System.Drawing.Size(109, 23);
             this.txtFrota.TabIndex = 6;
@@ -229,11 +229,11 @@
             this.groupBox1.Controls.Add(this.txtFrota);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(404, 20);
+            this.groupBox1.Location = new System.Drawing.Point(379, 20);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(269, 100);
+            this.groupBox1.Size = new System.Drawing.Size(294, 100);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Frota:";
@@ -242,7 +242,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(14, 43);
+            this.label2.Location = new System.Drawing.Point(38, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 25);
             this.label2.TabIndex = 6;
@@ -252,16 +252,17 @@
             // btnVerificar
             // 
             this.btnVerificar.BackColor = System.Drawing.Color.Black;
-            this.btnVerificar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnVerificar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SeaGreen;
-            this.btnVerificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnVerificar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.btnVerificar.FlatAppearance.BorderSize = 0;
+            this.btnVerificar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.btnVerificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.btnVerificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVerificar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVerificar.ForeColor = System.Drawing.Color.White;
             this.btnVerificar.Image = ((System.Drawing.Image)(resources.GetObject("btnVerificar.Image")));
-            this.btnVerificar.Location = new System.Drawing.Point(690, 24);
+            this.btnVerificar.Location = new System.Drawing.Point(689, 42);
             this.btnVerificar.Name = "btnVerificar";
-            this.btnVerificar.Size = new System.Drawing.Size(234, 96);
+            this.btnVerificar.Size = new System.Drawing.Size(189, 61);
             this.btnVerificar.TabIndex = 6;
             this.btnVerificar.Text = "&Verificar!";
             this.btnVerificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

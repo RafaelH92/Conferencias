@@ -185,7 +185,8 @@ namespace CONFERENCIAS
 						{
 							valor = null;
 							dgvConsulta.Rows[contador - 1].Cells[5].Value = "OK!";
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
+							//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
+							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
 						}
 						else if (diferenca < 0)
 						{
