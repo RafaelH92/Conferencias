@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.lbVer = new System.Windows.Forms.Label();
             this.btnInconsistencia = new System.Windows.Forms.Button();
             this.pnlAtivo = new System.Windows.Forms.Panel();
             this.btnErros = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.lbNome = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
-            this.lbVer = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -71,6 +71,17 @@
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(270, 821);
             this.pnlSidebar.TabIndex = 6;
+            // 
+            // lbVer
+            // 
+            this.lbVer.AutoSize = true;
+            this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lbVer.Location = new System.Drawing.Point(104, 802);
+            this.lbVer.Name = "lbVer";
+            this.lbVer.Size = new System.Drawing.Size(38, 12);
+            this.lbVer.TabIndex = 13;
+            this.lbVer.Text = "Ver: 6.2";
             // 
             // btnInconsistencia
             // 
@@ -210,17 +221,6 @@
             this.lbTitulo.TabIndex = 4;
             this.lbTitulo.Text = "label2";
             this.lbTitulo.Visible = false;
-            // 
-            // lbVer
-            // 
-            this.lbVer.AutoSize = true;
-            this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbVer.Location = new System.Drawing.Point(104, 802);
-            this.lbVer.Name = "lbVer";
-            this.lbVer.Size = new System.Drawing.Size(38, 12);
-            this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 6.1";
             // 
             // frmMenu
             // 
