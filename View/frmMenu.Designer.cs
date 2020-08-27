@@ -41,6 +41,7 @@
             this.lbNome = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
+            this.btnAgricola = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -62,6 +63,7 @@
             this.pnlSidebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlSidebar.BackColor = System.Drawing.Color.Black;
+            this.pnlSidebar.Controls.Add(this.btnAgricola);
             this.pnlSidebar.Controls.Add(this.lbVer);
             this.pnlSidebar.Controls.Add(this.btnInconsistencia);
             this.pnlSidebar.Controls.Add(this.pnlAtivo);
@@ -81,7 +83,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(38, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 6.2";
+            this.lbVer.Text = "Ver: 6.3";
             // 
             // btnInconsistencia
             // 
@@ -96,7 +98,7 @@
             this.btnInconsistencia.ForeColor = System.Drawing.Color.White;
             this.btnInconsistencia.Image = ((System.Drawing.Image)(resources.GetObject("btnInconsistencia.Image")));
             this.btnInconsistencia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInconsistencia.Location = new System.Drawing.Point(12, 401);
+            this.btnInconsistencia.Location = new System.Drawing.Point(11, 496);
             this.btnInconsistencia.Name = "btnInconsistencia";
             this.btnInconsistencia.Size = new System.Drawing.Size(255, 55);
             this.btnInconsistencia.TabIndex = 2;
@@ -222,6 +224,27 @@
             this.lbTitulo.Text = "label2";
             this.lbTitulo.Visible = false;
             // 
+            // btnAgricola
+            // 
+            this.btnAgricola.BackColor = System.Drawing.Color.Black;
+            this.btnAgricola.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgricola.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnAgricola.FlatAppearance.BorderSize = 0;
+            this.btnAgricola.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnAgricola.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnAgricola.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgricola.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgricola.ForeColor = System.Drawing.Color.White;
+            this.btnAgricola.Image = ((System.Drawing.Image)(resources.GetObject("btnAgricola.Image")));
+            this.btnAgricola.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgricola.Location = new System.Drawing.Point(9, 404);
+            this.btnAgricola.Name = "btnAgricola";
+            this.btnAgricola.Size = new System.Drawing.Size(255, 55);
+            this.btnAgricola.TabIndex = 14;
+            this.btnAgricola.Text = "&Agrícola";
+            this.btnAgricola.UseVisualStyleBackColor = false;
+            this.btnAgricola.Click += new System.EventHandler(this.btnAgricola_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,5 +287,6 @@
         private System.Windows.Forms.Button btnLogoff;
         public System.Windows.Forms.Label lbTitulo;
         private System.Windows.Forms.Label lbVer;
+        private System.Windows.Forms.Button btnAgricola;
     }
 }

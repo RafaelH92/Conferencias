@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Conexao\ConADM.cs" />
     <Compile Include="Conexao\ConPims.cs" />
+    <Compile Include="Entidades\BrocaParceria.cs" />
     <Compile Include="Entidades\MecHoraOp.cs" />
     <Compile Include="Entidades\MecImpXEquip.cs" />
     <Compile Include="Entidades\MecEquipXImp.cs" />
@@ -109,6 +110,9 @@
     <Compile Include="Entidades\ManuCCanaParcNovas.cs" />
     <Compile Include="Entidades\ManuParDiversas.cs" />
     <Compile Include="Entidades\ManuSfPosterior.cs" />
+    <Compile Include="Entidades\PerdaParceria.cs" />
+    <Compile Include="Entidades\PerdaFornecedor.cs" />
+    <Compile Include="Entidades\BrocaFornecedor.cs" />
     <Compile Include="Entidades\Safra.cs" />
     <Compile Include="Entidades\ManuFuncSede.cs" />
     <Compile Include="Entidades\ManuDuplicados.cs" />
@@ -116,6 +120,18 @@
     <Compile Include="Entidades\ConfLub.cs" />
     <Compile Include="Entidades\ConfAbast.cs" />
     <Compile Include="Entidades\ParamPrestador.cs" />
+    <Compile Include="View\frmBrocas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmBrocas.Designer.cs">
+      <DependentUpon>frmBrocas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmPerdas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmPerdas.Designer.cs">
+      <DependentUpon>frmPerdas.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmMecCCPlantioParcColh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +276,12 @@
     <Compile Include="View\frmManuais.Designer.cs">
       <DependentUpon>frmManuais.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\frmMenuAgricola.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMenuAgricola.Designer.cs">
+      <DependentUpon>frmMenuAgricola.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmMenuErros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +330,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\frmBrocas.resx">
+      <DependentUpon>frmBrocas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmPerdas.resx">
+      <DependentUpon>frmPerdas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmMecCCPlantioParcColh.resx">
       <DependentUpon>frmMecCCPlantioParcColh.cs</DependentUpon>
     </EmbeddedResource>
@@ -379,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmManuais.resx">
       <DependentUpon>frmManuais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMenuAgricola.resx">
+      <DependentUpon>frmMenuAgricola.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmMenuErros.resx">
       <DependentUpon>frmMenuErros.cs</DependentUpon>

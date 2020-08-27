@@ -94,6 +94,19 @@ namespace CONFERENCIAS.View
             lbTitulo.Text = "VERIFICAÇÃO DE INCONSISTÊNCIAS";
             lbTitulo.Visible = true;
         }
+
+        private void btnAgricola_Click(object sender, EventArgs e)
+        {
+            pnlBody.Controls.Clear();
+            pnlAtivo.Top = btnAgricola.Top;
+
+            frmMenuAgricola frm = new frmMenuAgricola(this);
+            frm.TopLevel = false;
+            pnlBody.Controls.Add(frm);
+
+            lbTitulo.Visible = false;
+            frm.Show();
+        }
     }
     
 }
