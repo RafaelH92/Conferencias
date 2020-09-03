@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.btnAgricola = new System.Windows.Forms.Button();
             this.lbVer = new System.Windows.Forms.Label();
             this.btnInconsistencia = new System.Windows.Forms.Button();
             this.pnlAtivo = new System.Windows.Forms.Panel();
@@ -41,7 +42,6 @@
             this.lbNome = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
-            this.btnAgricola = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -73,6 +73,27 @@
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(270, 821);
             this.pnlSidebar.TabIndex = 6;
+            // 
+            // btnAgricola
+            // 
+            this.btnAgricola.BackColor = System.Drawing.Color.Black;
+            this.btnAgricola.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgricola.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnAgricola.FlatAppearance.BorderSize = 0;
+            this.btnAgricola.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnAgricola.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnAgricola.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgricola.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgricola.ForeColor = System.Drawing.Color.White;
+            this.btnAgricola.Image = ((System.Drawing.Image)(resources.GetObject("btnAgricola.Image")));
+            this.btnAgricola.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgricola.Location = new System.Drawing.Point(9, 404);
+            this.btnAgricola.Name = "btnAgricola";
+            this.btnAgricola.Size = new System.Drawing.Size(255, 55);
+            this.btnAgricola.TabIndex = 14;
+            this.btnAgricola.Text = "&Agrícola";
+            this.btnAgricola.UseVisualStyleBackColor = false;
+            this.btnAgricola.Click += new System.EventHandler(this.btnAgricola_Click);
             // 
             // lbVer
             // 
@@ -224,27 +245,6 @@
             this.lbTitulo.Text = "label2";
             this.lbTitulo.Visible = false;
             // 
-            // btnAgricola
-            // 
-            this.btnAgricola.BackColor = System.Drawing.Color.Black;
-            this.btnAgricola.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAgricola.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnAgricola.FlatAppearance.BorderSize = 0;
-            this.btnAgricola.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnAgricola.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnAgricola.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgricola.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgricola.ForeColor = System.Drawing.Color.White;
-            this.btnAgricola.Image = ((System.Drawing.Image)(resources.GetObject("btnAgricola.Image")));
-            this.btnAgricola.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgricola.Location = new System.Drawing.Point(9, 404);
-            this.btnAgricola.Name = "btnAgricola";
-            this.btnAgricola.Size = new System.Drawing.Size(255, 55);
-            this.btnAgricola.TabIndex = 14;
-            this.btnAgricola.Text = "&Agrícola";
-            this.btnAgricola.UseVisualStyleBackColor = false;
-            this.btnAgricola.Click += new System.EventHandler(this.btnAgricola_Click);
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -283,10 +283,10 @@
         private System.Windows.Forms.Button btnInteg;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.Button btnLogoff;
         public System.Windows.Forms.Label lbTitulo;
         private System.Windows.Forms.Label lbVer;
         private System.Windows.Forms.Button btnAgricola;
+        public System.Windows.Forms.Label lbNome;
     }
 }

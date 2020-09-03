@@ -18,7 +18,10 @@ namespace CONFERENCIAS.Entidades
         public double LASCA { get; set; }
         public double PEDAÇO { get; set; }
         public double TOTAL_PERDAS { get; set; }
-
+        public double PORCENTAGEM_PERDAS { get; set; }
+        public double TCH { get; set; }
+        public double ÁREA_PONDERADA { get; set; }
+        public double TON_PERDIDAS { get; set; }
 
     }
 }

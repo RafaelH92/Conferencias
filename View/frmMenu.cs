@@ -24,6 +24,8 @@ namespace CONFERENCIAS.View
         {
             InitializeComponent();
 
+            //DateTime horaAtual = 
+
             DateTime dtVencLicenca = DateTime.Parse("28/05/2021");
 
             DateTime dataatual = DateTime.Today;
@@ -107,6 +109,7 @@ namespace CONFERENCIAS.View
             lbTitulo.Visible = false;
             frm.Show();
         }
+
     }
     
 }

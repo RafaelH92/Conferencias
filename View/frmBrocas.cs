@@ -34,8 +34,8 @@ namespace CONFERENCIAS
 			cbSafra.DataSource = safras(); // Alimenta o combobox com a consulta das safras, no momento da instanciação do form.
 			cbSafra.ValueMember = "SAFRA"; // Seleciona o valor da lista que será exibido no combobox.
 
-		}	
-		
+		}
+
 
 
 		void Consultar()
@@ -166,11 +166,27 @@ namespace CONFERENCIAS
 
 					if (rbFornecedor.Checked)
 					{
-						dgvConsulta.DataSource = brocaFornecedor();
+						if(txtFornecedor.Text == string.Empty)
+						{
+							dgvConsulta.DataSource = brocaFornecedor();
+						}
+						else
+						{
+							dgvConsulta.DataSource = brocaFornecedorF();
+						}
+						
 					}
 					else if (rbParceria.Checked)
 					{
-						dgvConsulta.DataSource = brocaParceria();
+						if(txtFornecedor.Text == string.Empty)
+						{
+							dgvConsulta.DataSource = brocaParceria();
+						}
+						else
+						{
+							dgvConsulta.DataSource = brocaParceriaF();
+						}
+						
 					}
 
 
@@ -195,20 +211,43 @@ namespace CONFERENCIAS
 			{
 
 				MessageBox.Show("OCORREU UM ERRO! " + ex.Message);
-			
+
 			}
 
-			
+
 		}
 
 		public List<BrocaFornecedor> brocaFornecedor() // Método que retorna a os dados de brocas
 		{
 
-			string qyBrocaForn = " SELECT FORNECEDOR,        SUM(QT_ENTRENOS_BROCADOS) AS QT_ENTRENOS_BROCADOS,        SUM(QT_ENTRENOS_TOTAL) AS QT_ENTRENOS_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PORCENTAGEM_ENTRENOS_BROCADOS    FROM (                 SELECT CASE                   WHEN UP1.CD_FORNEC = 55145 THEN                    'TESTON'                   WHEN UP1.CD_FORNEC = 55200 THEN                    'FABIANO'                   WHEN UP1.CD_FORNEC = 55204 THEN                    'PAULINHO'                   ELSE                    'DEMAIS_FORNECEDORES_MENORES'                 END AS FORNECEDOR,                                 AM.CD_UPNIVEL1  AS PARCERIA,                 AM.QT_ENTR_BROC AS QT_ENTRENOS_BROCADOS,                 AM.QT_ENTR_TOT  AS QT_ENTRENOS_TOTAL,                 AM.CD_SAFRA     AS SAFRA,                                 ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                                 UP3.QT_AREA_PROD ÁREA,                 ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                       UP3.QT_AREA_PROD,                       2) AS PONDERACAO_ENTRENOS_BROCADOS                   FROM PIMSCS.AMOSTBROCA AM, PIMSCS.UPNIVEL1 UP1, PIMSCS.UPNIVEL3 UP3                  WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra                         AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)   GROUP BY FORNECEDOR   UNION ALL   SELECT FORNECEDOR,        SUM(QT_ENTRENOS_BROCADOS) AS QT_ENTRENOS_BROCADOS,        SUM(QT_ENTRENOS_TOTAL) AS QT_ENTRENOS_TOTAL,        SUM(ÁREA) AS ÀREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PORCENTAGEM_ENTRENOS_BROCADOS    FROM (                 SELECT CASE                   WHEN UP1.CD_FORNEC IS NULL THEN                    'NULO'                   ELSE                    'TOTAL_GERAL'                 END AS FORNECEDOR,                                 AM.CD_UPNIVEL1  AS PARCERIA,                 AM.QT_ENTR_BROC AS QT_ENTRENOS_BROCADOS,                 AM.QT_ENTR_TOT  AS QT_ENTRENOS_TOTAL,                 AM.CD_SAFRA     AS SAFRA,                                 ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                                 UP3.QT_AREA_PROD ÁREA,                 ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                       UP3.QT_AREA_PROD,                       2) AS PONDERACAO_ENTRENOS_BROCADOS                   FROM PIMSCS.AMOSTBROCA AM, PIMSCS.UPNIVEL1 UP1, PIMSCS.UPNIVEL3 UP3                  WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = 22021                          AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)   GROUP BY FORNECEDOR"; 
+			string qyBrocaForn = "SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR UNION ALL SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÀREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR";
 
 			// Atribui os parâmentros dinâmicos
 
-			var param = new DynamicParameters(); 
+			var param = new DynamicParameters();
+			param.Add(":DataIni", txtInicio.Text);
+			param.Add(":DataFim", txtFim.Text);
+			param.Add(":Safra", cbSafra.Text);
+
+			// Abre a conexão e executa a query
+
+
+			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
+			{
+				var brocaForn = conn.Query<BrocaFornecedor>(qyBrocaForn, param).ToList();
+
+				return brocaForn;
+			}
+		}
+
+		public List<BrocaFornecedor> brocaFornecedorF() // Método que retorna a os dados de brocas
+		{
+
+			string qyBrocaForn = "SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND UP1.CD_FORNEC IN (" + txtFornecedor.Text + ")            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR UNION ALL SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÀREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND UP1.CD_FORNEC IN (" + txtFornecedor.Text + ")            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR ";
+
+			// Atribui os parâmentros dinâmicos
+
+			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
 			param.Add(":Safra", cbSafra.Text);
@@ -227,7 +266,30 @@ namespace CONFERENCIAS
 		public List<BrocaParceria> brocaParceria() // Método que retorna a os dados de perdas mecanizadas
 		{
 
-			string qyBrocaPar = "SELECT FORNECEDOR,        COD_PARCERIA,        PARCERIA,        SUM(QT_ENTRENOS_BROCADOS) AS QT_ENTRENOS_BROCADOS,        SUM(QT_ENTRENOS_TOTAL) AS QT_ENTRENOS_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PORCENTAGEM_ENTRENOS_BROCADOS    FROM (                 SELECT CASE                   WHEN UP1.CD_FORNEC = 55145 THEN                    'TESTON'                   WHEN UP1.CD_FORNEC = 55200 THEN                    'FABIANO'                   WHEN UP1.CD_FORNEC = 55204 THEN                    'PAULINHO'                   ELSE                    'DEMAIS_FORNECEDORES_MENORES'                 END AS FORNECEDOR,                                 AM.CD_UPNIVEL1  AS COD_PARCERIA,                 UP1.DE_UPNIVEL1 AS PARCERIA,                 AM.QT_ENTR_BROC AS QT_ENTRENOS_BROCADOS,                 AM.QT_ENTR_TOT  AS QT_ENTRENOS_TOTAL,                 AM.CD_SAFRA     AS SAFRA,                                 ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                                 UP3.QT_AREA_PROD ÁREA,                 ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                       UP3.QT_AREA_PROD,                       2) AS PONDERACAO_ENTRENOS_BROCADOS                   FROM PIMSCS.AMOSTBROCA AM, PIMSCS.UPNIVEL1 UP1, PIMSCS.UPNIVEL3 UP3                  WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra                          AND AM.DT_AMOSTRA BETWEEN :DataIni AND :DataFim)   GROUP BY FORNECEDOR, COD_PARCERIA, PARCERIA  ORDER BY FORNECEDOR DESC, COD_PARCERIA  ";
+			string qyBrocaPar = "SELECT FORNECEDOR,        COD_PARCERIA,        PARCERIA,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS COD_PARCERIA,                UP1.DE_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND AM.DT_AMOSTRA BETWEEN :DataIni AND :DataFim)  GROUP BY FORNECEDOR, COD_PARCERIA, PARCERIA  ORDER BY FORNECEDOR, COD_PARCERIA ";
+
+			// Atribui os parâmentros dinâmicos
+
+			var param = new DynamicParameters();
+			param.Add(":DataIni", txtInicio.Text);
+			param.Add(":DataFim", txtFim.Text);
+			param.Add(":Safra", cbSafra.Text);
+
+			// Abre a conexão e executa a query
+
+
+			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
+			{
+				var brocaPar = conn.Query<BrocaParceria>(qyBrocaPar, param).ToList();
+
+				return brocaPar;
+			}
+		}
+
+		public List<BrocaParceria> brocaParceriaF() // Método que retorna a os dados de perdas mecanizadas
+		{
+
+			string qyBrocaPar = " SELECT FORNECEDOR,        COD_PARCERIA,        PARCERIA,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS COD_PARCERIA,                UP1.DE_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND UP1.CD_FORNEC IN (" + txtFornecedor.Text + ")            AND AM.DT_AMOSTRA BETWEEN :DataIni AND :DataFim)  GROUP BY FORNECEDOR, COD_PARCERIA, PARCERIA  ORDER BY FORNECEDOR, COD_PARCERIA ";
 
 			// Atribui os parâmentros dinâmicos
 
@@ -266,7 +328,7 @@ namespace CONFERENCIAS
 
 
 
-		public bool VerificaDataMenor() // Verifica se a data inicial é menor que a data inicial
+		public bool VerificaDataMenor() // Verifica se a data final é menor que a data inicial
 		{
 			DateTime dataIni = DateTime.ParseExact(txtInicio.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
 			DateTime dataFim = DateTime.ParseExact(txtFim.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
@@ -282,6 +344,13 @@ namespace CONFERENCIAS
 		private void btnExecutar_Click(object sender, EventArgs e)
 		{
 			Consultar();
+
+			if (dgvConsulta.Rows.Count > 0)
+			{
+				btnPDF.Visible = true;
+			}
+
+			
 		}
 
 		private void dgvConsulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -300,6 +369,123 @@ namespace CONFERENCIAS
 
 			frmMenu.lbTitulo.Visible = false;
 		}
-	}
 
+		private void btnPDF_Click(object sender, EventArgs e)
+		{
+
+			imprimiPDF();
+			
+		}
+
+		public void imprimiPDF()
+		{
+			try
+			{
+
+				//Cria a iTextSharp Table da DataTable
+				iTextSharp.text.pdf.PdfPTable pdfTable = new iTextSharp.text.pdf.PdfPTable(dgvConsulta.ColumnCount);
+				pdfTable.DefaultCell.Padding = 2;
+				pdfTable.WidthPercentage = 100;
+				pdfTable.DefaultCell.BorderWidth = 0;
+				pdfTable.DefaultCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+
+
+				//Adiciona a linha do cabeçalho
+				foreach (DataGridViewColumn column in dgvConsulta.Columns)
+				{
+					iTextSharp.text.pdf.PdfPCell cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(column.HeaderText));
+					cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
+					cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+					cell.BorderWidth = 0;
+					pdfTable.AddCell(cell);
+				}
+
+				//Adiciona as linhas
+				foreach (DataGridViewRow row in dgvConsulta.Rows)
+				{
+					foreach (DataGridViewCell cell in row.Cells)
+					{
+						pdfTable.AddCell(cell.Value.ToString());
+					}
+				}
+
+				//Exporta para PDF
+				string folderPath =  @"\\10.0.3.35\d\Debug\report\RELATÓRIO DE " + frmMenu.lbTitulo.Text +  ".pdf";
+
+				using (System.IO.FileStream stream = new System.IO.FileStream(folderPath, System.IO.FileMode.Create))
+				{
+					//Configurando e adicionando os paragrafos
+
+					iTextSharp.text.Paragraph ph1 = new iTextSharp.text.Paragraph("RELATÓRIO DE " + frmMenu.lbTitulo.Text);
+					ph1.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+					ph1.Font.SetStyle(5);
+
+					iTextSharp.text.Paragraph ph2 = new iTextSharp.text.Paragraph(lbDeveloped.Text);
+					//ph2.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+					iTextSharp.text.Paragraph ph3 = new iTextSharp.text.Paragraph(lbRaf.Text);
+					//ph3.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+					ph3.Font.SetStyle(1); // 1 - negrito;
+
+					iTextSharp.text.Paragraph ph4 = new iTextSharp.text.Paragraph(lLemail.Text);
+					//ph4.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+					iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 10, 10, 10, 10);
+					iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDoc, stream);
+
+					
+					pdfDoc.Open();					
+					iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"\\10.0.3.35\d\Debug\image\logo_nova.JPG");
+					logo.ScalePercent(0.3f * 100);
+					logo.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+					pdfDoc.Add(logo);
+					pdfDoc.Add(ph1);
+					//pdfDoc.Add(new iTextSharp.text.Paragraph(" ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"));
+					pdfDoc.Add(new iTextSharp.text.Paragraph(" "));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Período.......: " + txtInicio.Text + " à " + txtFim.Text));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Usuário.......: " + frmMenu.lbNome.Text));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Emitido em.: " +  DateTime.Now.ToString()));
+					pdfDoc.Add(ph2);
+					pdfDoc.Add(ph3);
+					pdfDoc.Add(ph4);
+					pdfDoc.Add(new iTextSharp.text.Paragraph(" "));
+					pdfDoc.Add(pdfTable);					
+					pdfDoc.Close();
+					stream.Close();
+					System.Diagnostics.Process.Start(folderPath);
+
+					//	iTextSharp.text.Document doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4);
+					//	string caminho = Application.StartupPath + @"\Exemplo.pdf";
+					//	iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new System.IO.FileStream(caminho, System.IO.FileMode.Create));
+
+					//	try
+					//	{
+
+					//		doc.SetMargins(30, 30, 70, 70);
+					//		doc.AddCreationDate();
+					//		doc.Open();
+					//		iTextSharp.text.Paragraph par = new iTextSharp.text.Paragraph(brocaFornecedor().ToString());
+					//		par.Alignment = iTextSharp.text.Element.ALIGN_JUSTIFIED;
+					//		par.Add("Teste na criação de um arquivo PDF");
+					//		doc.Add(par);
+					//		doc.Close();
+					//		System.Diagnostics.Process.Start(caminho);
+					//	}
+					//	catch (Exception Ex)
+					//	{
+					//		MessageBox.Show("Ocorreu um erro ao gerar o PDF - Erro:", Ex.Message);
+					//	}
+					//}
+				}
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show("OPSS.. OCORREU UM ERRO! " + ex.Message);
+
+			}
+		}
+
+	}
 }

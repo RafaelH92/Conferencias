@@ -11,10 +11,10 @@ namespace CONFERENCIAS.Entidades
         public string FORNECEDOR { get; set; }
         public Int64 COD_PARCERIA  { get; set; }
         public string PARCERIA { get; set; }
-        public Int64 QT_ENTRENOS_BROCADOS  { get; set; }
-        public Int64 QT_ENTRENOS_TOTAL { get; set; }
+        public Int64 ENTR_BROCADOS  { get; set; }
+        public Int64 ENTR_TOTAL { get; set; }
         public double ÁREA { get; set; }
-        public double PORCENTAGEM_ENTRENOS_BROCADOS { get; set; }
+        public double PERCENTUAL { get; set; }
 
     }
 }
