@@ -49,14 +49,14 @@
             this.btnVoltar = new System.Windows.Forms.Button();
             this.cbSafra = new MetroFramework.Controls.MetroComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.gbSafra = new System.Windows.Forms.GroupBox();
+            this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.txtFornecedor = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnPDF = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.Gb1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.gbSafra.SuspendLayout();
+            this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExecutar
@@ -310,7 +310,7 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(5, 21);
             this.label2.Name = "label2";
@@ -319,23 +319,23 @@
             this.label2.Text = "Safra Atual:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // gbSafra
+            // gbFiltros
             // 
-            this.gbSafra.BackColor = System.Drawing.Color.Black;
-            this.gbSafra.Controls.Add(this.txtFornecedor);
-            this.gbSafra.Controls.Add(this.label3);
-            this.gbSafra.Controls.Add(this.cbSafra);
-            this.gbSafra.Controls.Add(this.label2);
-            this.gbSafra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbSafra.ForeColor = System.Drawing.Color.White;
-            this.gbSafra.Location = new System.Drawing.Point(515, 34);
-            this.gbSafra.Margin = new System.Windows.Forms.Padding(2);
-            this.gbSafra.Name = "gbSafra";
-            this.gbSafra.Padding = new System.Windows.Forms.Padding(2);
-            this.gbSafra.Size = new System.Drawing.Size(227, 100);
-            this.gbSafra.TabIndex = 21;
-            this.gbSafra.TabStop = false;
-            this.gbSafra.Text = "Filtros:";
+            this.gbFiltros.BackColor = System.Drawing.Color.Black;
+            this.gbFiltros.Controls.Add(this.txtFornecedor);
+            this.gbFiltros.Controls.Add(this.label3);
+            this.gbFiltros.Controls.Add(this.cbSafra);
+            this.gbFiltros.Controls.Add(this.label2);
+            this.gbFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbFiltros.ForeColor = System.Drawing.Color.White;
+            this.gbFiltros.Location = new System.Drawing.Point(515, 34);
+            this.gbFiltros.Margin = new System.Windows.Forms.Padding(2);
+            this.gbFiltros.Name = "gbFiltros";
+            this.gbFiltros.Padding = new System.Windows.Forms.Padding(2);
+            this.gbFiltros.Size = new System.Drawing.Size(227, 100);
+            this.gbFiltros.TabIndex = 21;
+            this.gbFiltros.TabStop = false;
+            this.gbFiltros.Text = "Filtros:";
             // 
             // txtFornecedor
             // 
@@ -352,13 +352,13 @@
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(5, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 25);
             this.label3.TabIndex = 24;
-            this.label3.Text = "Fornecedor:";
+            this.label3.Text = "Cod. Fornec:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnPDF
@@ -374,7 +374,7 @@
             this.btnPDF.Image = ((System.Drawing.Image)(resources.GetObject("btnPDF.Image")));
             this.btnPDF.Location = new System.Drawing.Point(913, 34);
             this.btnPDF.Name = "btnPDF";
-            this.btnPDF.Size = new System.Drawing.Size(142, 104);
+            this.btnPDF.Size = new System.Drawing.Size(142, 96);
             this.btnPDF.TabIndex = 22;
             this.btnPDF.Text = "&Gerar PDF";
             this.btnPDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -390,7 +390,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1079, 802);
             this.Controls.Add(this.btnPDF);
-            this.Controls.Add(this.gbSafra);
+            this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Gb1);
@@ -409,8 +409,8 @@
             this.Gb1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.gbSafra.ResumeLayout(false);
-            this.gbSafra.PerformLayout();
+            this.gbFiltros.ResumeLayout(false);
+            this.gbFiltros.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,7 +433,7 @@
         private System.Windows.Forms.Button btnVoltar;
         private MetroFramework.Controls.MetroComboBox cbSafra;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox gbSafra;
+        private System.Windows.Forms.GroupBox gbFiltros;
         private System.Windows.Forms.Button btnPDF;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox txtFornecedor;

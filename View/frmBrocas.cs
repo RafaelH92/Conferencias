@@ -377,7 +377,7 @@ namespace CONFERENCIAS
 			
 		}
 
-		public void imprimiPDF()
+		private void imprimiPDF()
 		{
 			try
 			{
@@ -446,6 +446,7 @@ namespace CONFERENCIAS
 					pdfDoc.Add(new iTextSharp.text.Paragraph("Período.......: " + txtInicio.Text + " à " + txtFim.Text));
 					pdfDoc.Add(new iTextSharp.text.Paragraph("Usuário.......: " + frmMenu.lbNome.Text));
 					pdfDoc.Add(new iTextSharp.text.Paragraph("Emitido em.: " +  DateTime.Now.ToString()));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Área ponderada*"));
 					pdfDoc.Add(ph2);
 					pdfDoc.Add(ph3);
 					pdfDoc.Add(ph4);

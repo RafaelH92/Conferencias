@@ -116,6 +116,7 @@
     <Compile Include="Entidades\PerdaParceria.cs" />
     <Compile Include="Entidades\PerdaFornecedor.cs" />
     <Compile Include="Entidades\BrocaFornecedor.cs" />
+    <Compile Include="Entidades\PerdaProc.cs" />
     <Compile Include="Entidades\Safra.cs" />
     <Compile Include="Entidades\ManuFuncSede.cs" />
     <Compile Include="Entidades\ManuDuplicados.cs" />

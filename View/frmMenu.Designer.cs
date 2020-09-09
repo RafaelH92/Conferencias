@@ -100,11 +100,11 @@
             this.lbVer.AutoSize = true;
             this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbVer.Location = new System.Drawing.Point(104, 802);
+            this.lbVer.Location = new System.Drawing.Point(106, 614);
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(38, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 6.3";
+            this.lbVer.Text = "Ver: 7.1";
             // 
             // btnInconsistencia
             // 

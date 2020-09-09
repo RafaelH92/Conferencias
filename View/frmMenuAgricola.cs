@@ -40,8 +40,6 @@ namespace CONFERENCIAS.View
 
             frm.Show();
 
-            MessageBox.Show("ATENÇÃO, O PROCESSO DE PERDAS DO PIMS DEVE ESTAR PROCESSADO PARA A CONSULTA RETORNAR OS VALORES!");
-
             frmMenu.lbTitulo.Text = "PERDAS MECANIZADAS";
             frmMenu.lbTitulo.Visible = true;
         }
