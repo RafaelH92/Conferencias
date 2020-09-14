@@ -49,7 +49,7 @@ namespace CONFERENCIAS
 				}
 				else if (VerificaDataProcsPerda() == true)
 				{
-					MessageBox.Show("DATA INICIAL NÃO PODE SER MAIOR QUE A DATA DE PROCESSAMENTO DE PERDAS --> " + processoPerdas());
+					MessageBox.Show("DATA NÃO PODE SER MAIOR QUE A DATA DE PROCESSAMENTO DE PERDAS --> " + processoPerdas());
 				}
 				else
 				{
@@ -342,9 +342,10 @@ namespace CONFERENCIAS
 		public bool VerificaDataProcsPerda() // Verifica se a data inicial é menor que a data inicial
 		{
 			DateTime dataIni = DateTime.ParseExact(txtInicio.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+			DateTime dataFim = DateTime.ParseExact(txtFim.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
 			DateTime dataProcesso = DateTime.ParseExact(processoPerdas(), "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
 
-			if (dataIni > dataProcesso)
+			if (dataIni > dataProcesso || dataFim > dataProcesso)
 			{
 				return true;
 			}

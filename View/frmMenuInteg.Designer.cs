@@ -61,7 +61,7 @@
             this.btnIStatusIntegracao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIStatusIntegracao.Location = new System.Drawing.Point(547, 155);
             this.btnIStatusIntegracao.Name = "btnIStatusIntegracao";
-            this.btnIStatusIntegracao.Size = new System.Drawing.Size(247, 56);
+            this.btnIStatusIntegracao.Size = new System.Drawing.Size(247, 55);
             this.btnIStatusIntegracao.TabIndex = 5;
             this.btnIStatusIntegracao.Text = "&Status da Integração";
             this.btnIStatusIntegracao.UseVisualStyleBackColor = false;

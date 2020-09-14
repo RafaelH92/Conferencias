@@ -183,7 +183,7 @@ namespace CONFERENCIAS
 
 						if (diferenca == 0)
 						{
-							valor = null;
+							valor = "---";
 							dgvConsulta.Rows[contador - 1].Cells[5].Value = "OK!";
 							//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
 							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
@@ -278,6 +278,11 @@ namespace CONFERENCIAS
 		private void btnExecutar_Click(object sender, EventArgs e)
 		{
 			Consultar();
+
+			if (dgvConsulta.Rows.Count > 0)
+			{
+				btnPDF.Visible = true;
+			}
 		}
 
 		private void dgvConsulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -295,6 +300,121 @@ namespace CONFERENCIAS
 			frm.Show();
 
 			frmMenu.lbTitulo.Visible = false;
+		}
+
+		private void btnPDF_Click(object sender, EventArgs e)
+		{
+			imprimiPDF();
+		}
+
+		private void imprimiPDF()
+		{
+			try
+			{
+
+				//Cria a iTextSharp Table da DataTable
+				iTextSharp.text.pdf.PdfPTable pdfTable = new iTextSharp.text.pdf.PdfPTable(dgvConsulta.ColumnCount);
+				pdfTable.DefaultCell.Padding = 2;
+				pdfTable.WidthPercentage = 100;
+				pdfTable.DefaultCell.BorderWidth = 0;
+				pdfTable.DefaultCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+
+
+				//Adiciona a linha do cabeçalho
+				foreach (DataGridViewColumn column in dgvConsulta.Columns)
+				{
+					iTextSharp.text.pdf.PdfPCell cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(column.HeaderText));
+					cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
+					cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+					cell.BorderWidth = 0;
+					pdfTable.AddCell(cell);
+				}
+
+				//Adiciona as linhas
+				foreach (DataGridViewRow row in dgvConsulta.Rows)
+				{
+					foreach (DataGridViewCell cell in row.Cells)
+					{
+						pdfTable.AddCell(cell.Value.ToString());
+					}
+				}
+
+				//Exporta para PDF
+				string folderPath = @"\\10.0.3.35\d\Debug\report\RELATÓRIO DE " + frmMenu.lbTitulo.Text + ".pdf";
+
+				using (System.IO.FileStream stream = new System.IO.FileStream(folderPath, System.IO.FileMode.Create))
+				{
+					//Configurando e adicionando os paragrafos
+
+					iTextSharp.text.Paragraph ph1 = new iTextSharp.text.Paragraph("RELATÓRIO DE " + frmMenu.lbTitulo.Text);
+					ph1.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+					ph1.Font.SetStyle(5);
+
+					iTextSharp.text.Paragraph ph2 = new iTextSharp.text.Paragraph(lbDeveloped.Text);
+					//ph2.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+					iTextSharp.text.Paragraph ph3 = new iTextSharp.text.Paragraph(lbRaf.Text);
+					//ph3.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+					ph3.Font.SetStyle(1); // 1 - negrito;
+
+					iTextSharp.text.Paragraph ph4 = new iTextSharp.text.Paragraph(lLemail.Text);
+					//ph4.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+					iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 10, 10, 10, 10);
+					iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDoc, stream);
+
+
+					pdfDoc.Open();
+					iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"\\10.0.3.35\d\Debug\image\logo_nova.JPG");
+					logo.ScalePercent(0.3f * 100);
+					logo.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+					pdfDoc.Add(logo);
+					pdfDoc.Add(ph1);
+					//pdfDoc.Add(new iTextSharp.text.Paragraph(" ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"));
+					pdfDoc.Add(new iTextSharp.text.Paragraph(" "));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Período.......: " + txtInicio.Text + " à " + txtFim.Text));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Usuário.......: " + frmMenu.lbNome.Text));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Emitido em.: " + DateTime.Now.ToString()));
+					pdfDoc.Add(ph2);
+					pdfDoc.Add(ph3);
+					pdfDoc.Add(ph4);
+					pdfDoc.Add(new iTextSharp.text.Paragraph(" "));
+					pdfDoc.Add(pdfTable);
+					pdfDoc.Close();
+					stream.Close();
+					System.Diagnostics.Process.Start(folderPath);
+
+					//	iTextSharp.text.Document doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4);
+					//	string caminho = Application.StartupPath + @"\Exemplo.pdf";
+					//	iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new System.IO.FileStream(caminho, System.IO.FileMode.Create));
+
+					//	try
+					//	{
+
+					//		doc.SetMargins(30, 30, 70, 70);
+					//		doc.AddCreationDate();
+					//		doc.Open();
+					//		iTextSharp.text.Paragraph par = new iTextSharp.text.Paragraph(brocaFornecedor().ToString());
+					//		par.Alignment = iTextSharp.text.Element.ALIGN_JUSTIFIED;
+					//		par.Add("Teste na criação de um arquivo PDF");
+					//		doc.Add(par);
+					//		doc.Close();
+					//		System.Diagnostics.Process.Start(caminho);
+					//	}
+					//	catch (Exception Ex)
+					//	{
+					//		MessageBox.Show("Ocorreu um erro ao gerar o PDF - Erro:", Ex.Message);
+					//	}
+					//}
+				}
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show("OPSS.. OCORREU UM ERRO! " + ex.Message);
+
+			}
 		}
 	}
 

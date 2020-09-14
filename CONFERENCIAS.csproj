@@ -124,6 +124,12 @@
     <Compile Include="Entidades\ConfLub.cs" />
     <Compile Include="Entidades\ConfAbast.cs" />
     <Compile Include="Entidades\ParamPrestador.cs" />
+    <Compile Include="View\frmFertirri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmFertirri.Designer.cs">
+      <DependentUpon>frmFertirri.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmBrocas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +340,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\frmFertirri.resx">
+      <DependentUpon>frmFertirri.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmBrocas.resx">
       <DependentUpon>frmBrocas.cs</DependentUpon>
     </EmbeddedResource>

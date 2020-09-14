@@ -47,9 +47,9 @@
             this.btnMecanizada.ForeColor = System.Drawing.Color.White;
             this.btnMecanizada.Image = ((System.Drawing.Image)(resources.GetObject("btnMecanizada.Image")));
             this.btnMecanizada.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMecanizada.Location = new System.Drawing.Point(378, 265);
+            this.btnMecanizada.Location = new System.Drawing.Point(295, 265);
             this.btnMecanizada.Name = "btnMecanizada";
-            this.btnMecanizada.Size = new System.Drawing.Size(338, 55);
+            this.btnMecanizada.Size = new System.Drawing.Size(247, 55);
             this.btnMecanizada.TabIndex = 3;
             this.btnMecanizada.Text = "&Atividades Mecanizadas";
             this.btnMecanizada.UseVisualStyleBackColor = false;
@@ -70,7 +70,7 @@
             this.btnManual.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnManual.Location = new System.Drawing.Point(42, 265);
             this.btnManual.Name = "btnManual";
-            this.btnManual.Size = new System.Drawing.Size(311, 55);
+            this.btnManual.Size = new System.Drawing.Size(247, 55);
             this.btnManual.TabIndex = 4;
             this.btnManual.Text = "&Atividades Manuais";
             this.btnManual.UseVisualStyleBackColor = false;

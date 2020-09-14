@@ -32,6 +32,7 @@
             this.btnBroca = new System.Windows.Forms.Button();
             this.btnPerdas = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnFertirri = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBroca
@@ -47,9 +48,9 @@
             this.btnBroca.ForeColor = System.Drawing.Color.White;
             this.btnBroca.Image = ((System.Drawing.Image)(resources.GetObject("btnBroca.Image")));
             this.btnBroca.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBroca.Location = new System.Drawing.Point(374, 367);
+            this.btnBroca.Location = new System.Drawing.Point(292, 367);
             this.btnBroca.Name = "btnBroca";
-            this.btnBroca.Size = new System.Drawing.Size(338, 55);
+            this.btnBroca.Size = new System.Drawing.Size(247, 55);
             this.btnBroca.TabIndex = 3;
             this.btnBroca.Text = "&Broca";
             this.btnBroca.UseVisualStyleBackColor = false;
@@ -70,7 +71,7 @@
             this.btnPerdas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPerdas.Location = new System.Drawing.Point(39, 367);
             this.btnPerdas.Name = "btnPerdas";
-            this.btnPerdas.Size = new System.Drawing.Size(311, 55);
+            this.btnPerdas.Size = new System.Drawing.Size(247, 55);
             this.btnPerdas.TabIndex = 4;
             this.btnPerdas.Text = "&Perdas Mecanizadas";
             this.btnPerdas.UseVisualStyleBackColor = false;
@@ -87,13 +88,34 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Selecione um tipo de conferência abaixo:";
             // 
+            // btnFertirri
+            // 
+            this.btnFertirri.BackColor = System.Drawing.Color.Black;
+            this.btnFertirri.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFertirri.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnFertirri.FlatAppearance.BorderSize = 0;
+            this.btnFertirri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnFertirri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnFertirri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFertirri.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFertirri.ForeColor = System.Drawing.Color.White;
+            this.btnFertirri.Image = ((System.Drawing.Image)(resources.GetObject("btnFertirri.Image")));
+            this.btnFertirri.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFertirri.Location = new System.Drawing.Point(545, 367);
+            this.btnFertirri.Name = "btnFertirri";
+            this.btnFertirri.Size = new System.Drawing.Size(247, 55);
+            this.btnFertirri.TabIndex = 7;
+            this.btnFertirri.Text = "&Fertirrigação";
+            this.btnFertirri.UseVisualStyleBackColor = false;
+            // 
             // frmMenuAgricola
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(864, 481);
+            this.ClientSize = new System.Drawing.Size(1013, 481);
             this.ControlBox = false;
+            this.Controls.Add(this.btnFertirri);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnBroca);
             this.Controls.Add(this.btnPerdas);
@@ -110,5 +132,6 @@
         private System.Windows.Forms.Button btnBroca;
         private System.Windows.Forms.Button btnPerdas;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnFertirri;
     }
 }
