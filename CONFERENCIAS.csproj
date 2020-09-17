@@ -93,6 +93,7 @@
     <Compile Include="Conexao\ConADM.cs" />
     <Compile Include="Conexao\ConPims.cs" />
     <Compile Include="Entidades\BrocaParceria.cs" />
+    <Compile Include="Entidades\FertirriParceria.cs" />
     <Compile Include="Entidades\MecHoraOp.cs" />
     <Compile Include="Entidades\MecImpXEquip.cs" />
     <Compile Include="Entidades\MecEquipXImp.cs" />
@@ -113,9 +114,11 @@
     <Compile Include="Entidades\ManuCCanaParcNovas.cs" />
     <Compile Include="Entidades\ManuParDiversas.cs" />
     <Compile Include="Entidades\ManuSfPosterior.cs" />
+    <Compile Include="Entidades\FertirriFornec.cs" />
     <Compile Include="Entidades\PerdaParceria.cs" />
     <Compile Include="Entidades\PerdaFornecedor.cs" />
     <Compile Include="Entidades\BrocaFornecedor.cs" />
+    <Compile Include="Entidades\FertirriProc.cs" />
     <Compile Include="Entidades\PerdaProc.cs" />
     <Compile Include="Entidades\Safra.cs" />
     <Compile Include="Entidades\ManuFuncSede.cs" />

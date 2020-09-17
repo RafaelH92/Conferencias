@@ -47,12 +47,12 @@
             this.Gb1 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnVoltar = new System.Windows.Forms.Button();
-            this.cbSafra = new MetroFramework.Controls.MetroComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.txtFornecedor = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnPDF = new System.Windows.Forms.Button();
+            this.txtOperacao = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.Gb1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -296,18 +296,6 @@
             this.btnVoltar.UseVisualStyleBackColor = false;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
-            // cbSafra
-            // 
-            this.cbSafra.FormattingEnabled = true;
-            this.cbSafra.ItemHeight = 23;
-            this.cbSafra.Location = new System.Drawing.Point(87, 17);
-            this.cbSafra.Name = "cbSafra";
-            this.cbSafra.Size = new System.Drawing.Size(135, 29);
-            this.cbSafra.Style = MetroFramework.MetroColorStyle.Green;
-            this.cbSafra.TabIndex = 23;
-            this.cbSafra.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.cbSafra.UseSelectable = true;
-            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -316,15 +304,15 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 25);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Safra Atual:";
+            this.label2.Text = "Cod. Oper:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // gbFiltros
             // 
             this.gbFiltros.BackColor = System.Drawing.Color.Black;
+            this.gbFiltros.Controls.Add(this.txtOperacao);
             this.gbFiltros.Controls.Add(this.txtFornecedor);
             this.gbFiltros.Controls.Add(this.label3);
-            this.gbFiltros.Controls.Add(this.cbSafra);
             this.gbFiltros.Controls.Add(this.label2);
             this.gbFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbFiltros.ForeColor = System.Drawing.Color.White;
@@ -335,7 +323,7 @@
             this.gbFiltros.Size = new System.Drawing.Size(227, 100);
             this.gbFiltros.TabIndex = 21;
             this.gbFiltros.TabStop = false;
-            this.gbFiltros.Text = "Filtros:";
+            this.gbFiltros.Text = "Filtros (Opcional):";
             // 
             // txtFornecedor
             // 
@@ -381,6 +369,19 @@
             this.btnPDF.UseVisualStyleBackColor = false;
             this.btnPDF.Visible = false;
             this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
+            // 
+            // txtOperacao
+            // 
+            this.txtOperacao.BackColor = System.Drawing.Color.Black;
+            this.txtOperacao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOperacao.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOperacao.ForeColor = System.Drawing.Color.White;
+            this.txtOperacao.Location = new System.Drawing.Point(87, 23);
+            this.txtOperacao.Name = "txtOperacao";
+            this.txtOperacao.Size = new System.Drawing.Size(135, 23);
+            this.txtOperacao.TabIndex = 26;
+            this.txtOperacao.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
+            this.txtOperacao.ValidatingType = typeof(System.DateTime);
             // 
             // frmFertirri
             // 
@@ -431,12 +432,12 @@
         private System.Windows.Forms.GroupBox Gb1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnVoltar;
-        private MetroFramework.Controls.MetroComboBox cbSafra;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbFiltros;
         private System.Windows.Forms.Button btnPDF;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox txtFornecedor;
+        private System.Windows.Forms.MaskedTextBox txtOperacao;
     }
 }
 

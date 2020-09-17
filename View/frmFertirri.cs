@@ -1,7 +1,7 @@
 ﻿/*************************************
  * Desenvolvido por Rafael H. Souza. *
  * Data: 27/04/2020                  *
- * Atualzado em: 26/08/2020          *
+ * Atualzado em: 16/09/2020          *
  *************************************/
 
 using System;
@@ -31,9 +31,6 @@ namespace CONFERENCIAS
 
 			InitializeComponent();
 
-			cbSafra.DataSource = safras(); // Alimenta o combobox com a consulta das safras, no momento da instanciação do form.
-			cbSafra.ValueMember = "SAFRA"; // Seleciona o valor da lista que será exibido no combobox.
-
 		}
 
 
@@ -49,6 +46,10 @@ namespace CONFERENCIAS
 				else if (VerificaDataMenor() == true)
 				{
 					MessageBox.Show("DATA INICIAL NÃO PODE SER MAIOR QUE A DATA FINAL!");
+				}
+				else if(VerificaDataProcsFertirri() == true)
+				{
+					MessageBox.Show("DATA NÃO PODE SER MAIOR QUE A DATA DE PROCESSAMENTO DE FERTIRRIGAÇÃO --> " + processoFertirri());
 				}
 				else
 				{
@@ -166,25 +167,41 @@ namespace CONFERENCIAS
 
 					if (rbFornecedor.Checked)
 					{
-						if(txtFornecedor.Text == string.Empty)
+						if(txtFornecedor.Text == string.Empty && txtOperacao.Text == string.Empty)
 						{
-							dgvConsulta.DataSource = brocaFornecedor();
+							dgvConsulta.DataSource = fertirriFornecAll();
 						}
-						else
+						else if(txtFornecedor.Text != string.Empty && txtOperacao.Text == string.Empty)
 						{
-							dgvConsulta.DataSource = brocaFornecedorF();
+							dgvConsulta.DataSource = fertirriFornecFor();
+						}
+						else if(txtFornecedor.Text == string.Empty && txtOperacao.Text != string.Empty)
+						{
+							dgvConsulta.DataSource = fertirriFornecOp();
+						}
+						else if(txtFornecedor.Text != string.Empty && txtOperacao.Text != string.Empty)
+						{
+							dgvConsulta.DataSource = fertirriFornecForeOp();
 						}
 						
 					}
 					else if (rbParceria.Checked)
 					{
-						if(txtFornecedor.Text == string.Empty)
+						if(txtFornecedor.Text == string.Empty && txtOperacao.Text == string.Empty)
 						{
-							dgvConsulta.DataSource = brocaParceria();
+							dgvConsulta.DataSource = fertirriParcAll();
 						}
-						else
+						else if (txtFornecedor.Text != string.Empty && txtOperacao.Text == string.Empty)
 						{
-							dgvConsulta.DataSource = brocaParceriaF();
+							dgvConsulta.DataSource = fertirriParcFor();
+						}
+						else if(txtFornecedor.Text == string.Empty && txtOperacao.Text != string.Empty)
+						{
+							dgvConsulta.DataSource = fertirriParcOp();
+						}
+						else if(txtFornecedor.Text != string.Empty && txtOperacao.Text != string.Empty)
+						{
+							dgvConsulta.DataSource = fertirriParcForOp();
 						}
 						
 					}
@@ -217,102 +234,187 @@ namespace CONFERENCIAS
 
 		}
 
-		public List<BrocaFornecedor> brocaFornecedor() // Método que retorna a os dados de brocas
+		public List<FertirriFornec> fertirriFornecAll() // Método que retorna a os dados de brocas
 		{
 
-			string qyBrocaForn = "SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR UNION ALL SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÀREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR";
+			string qyFertirriForn = " SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT CASE                   WHEN G.CD_FORNEC = 55145 THEN                    'TESTON'                   WHEN G.CD_FORNEC = 55200 THEN                    'FABIANO'                   WHEN G.CD_FORNEC = 55204 THEN                    'PAULINHO'                   ELSE                    'OUTROS_FORNEC'                 END AS FORNEC,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (73, 176)                  GROUP BY (CASE                      WHEN G.CD_FORNEC = 55145 THEN                       'TESTON'                      WHEN G.CD_FORNEC = 55200 THEN                       'FABIANO'                      WHEN G.CD_FORNEC = 55204 THEN                       'PAULINHO'                      ELSE                       'OUTROS_FORNEC'                    END),                    O.DE_OPERACAO          ORDER BY (CASE                      WHEN G.CD_FORNEC = 55145 THEN                       'TESTON'                      WHEN G.CD_FORNEC = 55200 THEN                       'FABIANO'                      WHEN G.CD_FORNEC = 55204 THEN                       'PAULINHO'                      ELSE                       'OUTROS_FORNEC'                    END),                    O.DE_OPERACAO) A,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (73, 176)          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) B,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) C,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) D   WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO  UNION ALL  SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT CASE                   WHEN G.CD_FORNEC IS NULL THEN                    'NULO'                   ELSE                    'TOTAL_GERAL'                 END AS FORNEC,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (73, 176)                  GROUP BY (CASE                      WHEN G.CD_FORNEC IS NULL THEN                       'NULO'                      ELSE                       'TOTAL_GERAL'                    END),                    O.DE_OPERACAO) A,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (73, 176)          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) B,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) C,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) D   WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO ";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Safra", cbSafra.Text);
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var brocaForn = conn.Query<BrocaFornecedor>(qyBrocaForn, param).ToList();
+				var fertirriForn = conn.Query<FertirriFornec>(qyFertirriForn, param).ToList();
 
-				return brocaForn;
+				return fertirriForn;
 			}
 		}
 
-		public List<BrocaFornecedor> brocaFornecedorF() // Método que retorna a os dados de brocas
+		public List<FertirriFornec> fertirriFornecFor() // Método que retorna a os dados de brocas
 		{
 
-			string qyBrocaForn = "SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND UP1.CD_FORNEC IN (" + txtFornecedor.Text + ")            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR UNION ALL SELECT FORNECEDOR,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÀREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND UP1.CD_FORNEC IN (" + txtFornecedor.Text + ")            AND AM.DT_AMOSTRA BETWEEN :Dataini AND :DataFim)  GROUP BY FORNECEDOR ";
+			string qyFertirriForn = " SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3   FROM (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS AREA           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A' 		   AND H.CD_OPERACAO IN (73, 176)            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO          ORDER BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) A,        (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD' 		   AND H.CD_OPERACAO IN (73, 176)            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) B,        (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) C,        (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) D  WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO UNION ALL SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3   FROM (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS AREA           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A' 		   AND H.CD_OPERACAO IN (73, 176)            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) A,        (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD' 		   AND H.CD_OPERACAO IN (73, 176)            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) B,        (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) C,        (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'            AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) D  WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO ";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Safra", cbSafra.Text);
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var brocaForn = conn.Query<BrocaFornecedor>(qyBrocaForn, param).ToList();
+				var fertirriForn = conn.Query<FertirriFornec>(qyFertirriForn, param).ToList();
 
-				return brocaForn;
+				return fertirriForn;
 			}
 		}
 
-		public List<BrocaParceria> brocaParceria() // Método que retorna a os dados de perdas mecanizadas
+		public List<FertirriFornec> fertirriFornecOp() // Método que retorna a os dados de brocas
 		{
 
-			string qyBrocaPar = "SELECT FORNECEDOR,        COD_PARCERIA,        PARCERIA,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS COD_PARCERIA,                UP1.DE_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND AM.DT_AMOSTRA BETWEEN :DataIni AND :DataFim)  GROUP BY FORNECEDOR, COD_PARCERIA, PARCERIA  ORDER BY FORNECEDOR, COD_PARCERIA ";
+			string qyFertirriForn = " SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT CASE                   WHEN G.CD_FORNEC = 55145 THEN                    'TESTON'                   WHEN G.CD_FORNEC = 55200 THEN                    'FABIANO'                   WHEN G.CD_FORNEC = 55204 THEN                    'PAULINHO'                   ELSE                    'OUTROS_FORNEC'                 END AS FORNEC,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ")                  GROUP BY (CASE                      WHEN G.CD_FORNEC = 55145 THEN                       'TESTON'                      WHEN G.CD_FORNEC = 55200 THEN                       'FABIANO'                      WHEN G.CD_FORNEC = 55204 THEN                       'PAULINHO'                      ELSE                       'OUTROS_FORNEC'                    END),                    O.DE_OPERACAO          ORDER BY (CASE                      WHEN G.CD_FORNEC = 55145 THEN                       'TESTON'                      WHEN G.CD_FORNEC = 55200 THEN                       'FABIANO'                      WHEN G.CD_FORNEC = 55204 THEN                       'PAULINHO'                      ELSE                       'OUTROS_FORNEC'                    END),                    O.DE_OPERACAO) A,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) B,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) C,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) D   WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO  UNION ALL  SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT CASE                   WHEN G.CD_FORNEC IS NULL THEN                    'NULO'                   ELSE                    'TOTAL_GERAL'                 END AS FORNEC,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ")                  GROUP BY (CASE                      WHEN G.CD_FORNEC IS NULL THEN                       'NULO'                      ELSE                       'TOTAL_GERAL'                    END),                    O.DE_OPERACAO) A,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) B,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) C,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) D   WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO  ";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Safra", cbSafra.Text);
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var brocaPar = conn.Query<BrocaParceria>(qyBrocaPar, param).ToList();
+				var fertirriForn = conn.Query<FertirriFornec>(qyFertirriForn, param).ToList();
 
-				return brocaPar;
+				return fertirriForn;
 			}
 		}
 
-		public List<BrocaParceria> brocaParceriaF() // Método que retorna a os dados de perdas mecanizadas
+		public List<FertirriFornec> fertirriFornecForeOp() // Método que retorna a os dados de brocas
 		{
 
-			string qyBrocaPar = " SELECT FORNECEDOR,        COD_PARCERIA,        PARCERIA,        SUM(ENTR_BROCADOS) AS ENTR_BROCADOS,        SUM(ENTR_TOTAL) AS ENTR_TOTAL,        SUM(ÁREA) AS ÁREA,        ROUND((SUM(PONDERACAO_ENTRENOS_BROCADOS)) / (SUM(ÁREA)), 2) PERCENTUAL   FROM (SELECT CASE                  WHEN UP1.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN UP1.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN UP1.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNECEDORES'                END AS FORNECEDOR,                AM.CD_UPNIVEL1 AS COD_PARCERIA,                UP1.DE_UPNIVEL1 AS PARCERIA,                AM.QT_ENTR_BROC AS ENTR_BROCADOS,                AM.QT_ENTR_TOT AS ENTR_TOTAL,                AM.CD_SAFRA AS SAFRA,                ROUND((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100, 2) AS ENTRENOS_BROCADOS,                UP3.QT_AREA_PROD ÁREA,                ROUND(((AM.QT_ENTR_BROC / AM.QT_ENTR_TOT) * 100) *                      UP3.QT_AREA_PROD,                      2) AS PONDERACAO_ENTRENOS_BROCADOS           FROM PIMSCS.AMOSTBROCA AM,                PIMSCS.UPNIVEL1   UP1,                PIMSCS.UPNIVEL3   UP3          WHERE AM.CD_UPNIVEL1 = UP1.CD_UPNIVEL1            AND AM.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND UP1.CD_UPNIVEL1 = UP3.CD_UPNIVEL1            AND AM.CD_UPNIVEL3 = UP3.CD_UPNIVEL3            AND AM.CD_SAFRA = UP3.CD_SAFRA            AND AM.CD_FITOSS = 1            AND UP3.CD_SAFRA = :Safra            AND UP1.CD_FORNEC IN (" + txtFornecedor.Text + ")            AND AM.DT_AMOSTRA BETWEEN :DataIni AND :DataFim)  GROUP BY FORNECEDOR, COD_PARCERIA, PARCERIA  ORDER BY FORNECEDOR, COD_PARCERIA ";
+			string qyFertirriForn = " SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT CASE                   WHEN G.CD_FORNEC = 55145 THEN                    'TESTON'                   WHEN G.CD_FORNEC = 55200 THEN                    'FABIANO'                   WHEN G.CD_FORNEC = 55204 THEN                    'PAULINHO'                   ELSE                    'OUTROS_FORNEC'                 END AS FORNEC,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ") 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")                  GROUP BY (CASE                      WHEN G.CD_FORNEC = 55145 THEN                       'TESTON'                      WHEN G.CD_FORNEC = 55200 THEN                       'FABIANO'                      WHEN G.CD_FORNEC = 55204 THEN                       'PAULINHO'                      ELSE                       'OUTROS_FORNEC'                    END),                    O.DE_OPERACAO          ORDER BY (CASE                      WHEN G.CD_FORNEC = 55145 THEN                       'TESTON'                      WHEN G.CD_FORNEC = 55200 THEN                       'FABIANO'                      WHEN G.CD_FORNEC = 55204 THEN                       'PAULINHO'                      ELSE                       'OUTROS_FORNEC'                    END),                    O.DE_OPERACAO) A,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ") 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) B,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) C,               (SELECT CASE                  WHEN G.CD_FORNEC = 55145 THEN                   'TESTON'                  WHEN G.CD_FORNEC = 55200 THEN                   'FABIANO'                  WHEN G.CD_FORNEC = 55204 THEN                   'PAULINHO'                  ELSE                   'OUTROS_FORNEC'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC = 55145 THEN                      'TESTON'                     WHEN G.CD_FORNEC = 55200 THEN                      'FABIANO'                     WHEN G.CD_FORNEC = 55204 THEN                      'PAULINHO'                     ELSE                      'OUTROS_FORNEC'                   END),                   O.DE_OPERACAO) D   WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO  UNION ALL  SELECT A.FORNEC,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT CASE                   WHEN G.CD_FORNEC IS NULL THEN                    'NULO'                   ELSE                    'TOTAL_GERAL'                 END AS FORNEC,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ") 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")                  GROUP BY (CASE                      WHEN G.CD_FORNEC IS NULL THEN                       'NULO'                      ELSE                       'TOTAL_GERAL'                    END),                    O.DE_OPERACAO) A,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ") 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) B,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) C,               (SELECT CASE                  WHEN G.CD_FORNEC IS NULL THEN                   'NULO'                  ELSE                   'TOTAL_GERAL'                END AS FORNEC,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY (CASE                     WHEN G.CD_FORNEC IS NULL THEN                      'NULO'                     ELSE                      'TOTAL_GERAL'                   END),                   O.DE_OPERACAO) D   WHERE A.FORNEC = B.FORNEC    AND A.FORNEC = C.FORNEC    AND A.FORNEC = D.FORNEC    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO  ";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Safra", cbSafra.Text);
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var brocaPar = conn.Query<BrocaParceria>(qyBrocaPar, param).ToList();
+				var fertirriForn = conn.Query<FertirriFornec>(qyFertirriForn, param).ToList();
 
-				return brocaPar;
+				return fertirriForn;
 			}
 		}
 
-		public List<Safra> safras() // Método que retorna a conferência das safras 
+		public List<FertirriParceria> fertirriParcAll() // Método que retorna a os dados de brocas
 		{
 
-			string qySafras = "SELECT CD_SAFRA SAFRA FROM PIMSCS.SAFRAS S ORDER BY S.CD_SAFRA DESC";
+			string qyFertirriPar = " SELECT A.COD,        A.PARCERIA,        A.TALHAO,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT H.CD_UPNIVEL1 AS COD,                 G.DE_UPNIVEL1 AS PARCERIA,                 H.CD_UPNIVEL3 AS TALHAO,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (73, 176)                  GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO          ORDER BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) A,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (73, 176)          GROUP BY H.CD_UPNIVEL1,                   G.DE_UPNIVEL1,                   H.CD_UPNIVEL3,                   O.DE_OPERACAO,                   O.DE_OPERACAO) B,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) C,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) D   WHERE A.COD = B.COD    AND A.COD = C.COD    AND A.COD = D.COD    AND A.PARCERIA = B.PARCERIA    AND A.PARCERIA = C.PARCERIA    AND A.PARCERIA = D.PARCERIA    AND A.TALHAO = B.TALHAO    AND A.TALHAO = C.TALHAO    AND A.TALHAO = D.TALHAO    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO   ORDER BY A.COD, A.PARCERIA, A.TALHAO, A.OPERACAO";
+
+			// Atribui os parâmentros dinâmicos
+
+			var param = new DynamicParameters();
+			param.Add(":DataIni", txtInicio.Text);
+			param.Add(":DataFim", txtFim.Text);
+
+			// Abre a conexão e executa a query
+
+
+			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
+			{
+				var fertirriPar = conn.Query<FertirriParceria>(qyFertirriPar, param).ToList();
+
+				return fertirriPar;
+			}
+		}
+
+		public List<FertirriParceria> fertirriParcOp() // Método que retorna a os dados de brocas
+		{
+
+			string qyFertirriPar = " SELECT A.COD,        A.PARCERIA,        A.TALHAO,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT H.CD_UPNIVEL1 AS COD,                 G.DE_UPNIVEL1 AS PARCERIA,                 H.CD_UPNIVEL3 AS TALHAO,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ")                  GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO          ORDER BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) A,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ")          GROUP BY H.CD_UPNIVEL1,                   G.DE_UPNIVEL1,                   H.CD_UPNIVEL3,                   O.DE_OPERACAO,                   O.DE_OPERACAO) B,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R'          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) C,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R'          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) D   WHERE A.COD = B.COD    AND A.COD = C.COD    AND A.COD = D.COD    AND A.PARCERIA = B.PARCERIA    AND A.PARCERIA = C.PARCERIA    AND A.PARCERIA = D.PARCERIA    AND A.TALHAO = B.TALHAO    AND A.TALHAO = C.TALHAO    AND A.TALHAO = D.TALHAO    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO   ORDER BY A.COD, A.PARCERIA, A.TALHAO, A.OPERACAO";
+
+			// Atribui os parâmentros dinâmicos
+
+			var param = new DynamicParameters();
+			param.Add(":DataIni", txtInicio.Text);
+			param.Add(":DataFim", txtFim.Text);
+
+			// Abre a conexão e executa a query
+
+
+			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
+			{
+				var fertirriPar = conn.Query<FertirriParceria>(qyFertirriPar, param).ToList();
+
+				return fertirriPar;
+			}
+		}
+
+		public List<FertirriParceria> fertirriParcForOp() // Método que retorna a os dados de brocas
+		{
+
+			string qyFertirriPar = " SELECT A.COD,        A.PARCERIA,        A.TALHAO,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT H.CD_UPNIVEL1 AS COD,                 G.DE_UPNIVEL1 AS PARCERIA,                 H.CD_UPNIVEL3 AS TALHAO,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ") 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")                  GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO          ORDER BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) A,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (" + txtOperacao.Text + ") 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY H.CD_UPNIVEL1,                   G.DE_UPNIVEL1,                   H.CD_UPNIVEL3,                   O.DE_OPERACAO,                   O.DE_OPERACAO) B,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) C,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) D   WHERE A.COD = B.COD    AND A.COD = C.COD    AND A.COD = D.COD    AND A.PARCERIA = B.PARCERIA    AND A.PARCERIA = C.PARCERIA    AND A.PARCERIA = D.PARCERIA    AND A.TALHAO = B.TALHAO    AND A.TALHAO = C.TALHAO    AND A.TALHAO = D.TALHAO    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO   ORDER BY A.COD, A.PARCERIA, A.TALHAO, A.OPERACAO";
+
+			// Atribui os parâmentros dinâmicos
+
+			var param = new DynamicParameters();
+			param.Add(":DataIni", txtInicio.Text);
+			param.Add(":DataFim", txtFim.Text);
+
+			// Abre a conexão e executa a query
+
+
+			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
+			{
+				var fertirriPar = conn.Query<FertirriParceria>(qyFertirriPar, param).ToList();
+
+				return fertirriPar;
+			}
+		}
+
+		public List<FertirriParceria> fertirriParcFor() // Método que retorna a os dados de brocas
+		{
+
+			string qyFertirriPar = " SELECT A.COD,        A.PARCERIA,        A.TALHAO,        A.OPERACAO,        A.AREA,        B.HORAS,        C.M3,        D.K2O,        ROUND(B.HORAS / A.AREA, 2) AS HR_HA,        ROUND(C.M3 / B.HORAS, 2) AS M3_HR,        ROUND(C.M3 / A.AREA, 2) AS M3_HA,        ROUND(D.K2O / A.AREA, 2) AS K2O_HA,        ROUND(D.K2O / C.M3, 2) AS K2O_M3    FROM (                 SELECT H.CD_UPNIVEL1 AS COD,                 G.DE_UPNIVEL1 AS PARCERIA,                 H.CD_UPNIVEL3 AS TALHAO,                 O.DE_OPERACAO AS OPERACAO,                 SUM(H.QT_PROD_REC) AS AREA                   FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'A'            AND H.CD_OPERACAO IN (73,176) 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")                  GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO          ORDER BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) A,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS HORAS           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'HD'            AND H.CD_OPERACAO IN (73,176) 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY H.CD_UPNIVEL1,                   G.DE_UPNIVEL1,                   H.CD_UPNIVEL3,                   O.DE_OPERACAO,                   O.DE_OPERACAO) B,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS M3           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_UNID_MED = 'M³'            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) C,               (SELECT H.CD_UPNIVEL1 AS COD,                G.DE_UPNIVEL1 AS PARCERIA,                H.CD_UPNIVEL3 AS TALHAO,                O.DE_OPERACAO AS OPERACAO,                SUM(H.QT_PROD_REC) AS K2O           FROM PIMSCS.HISTMANEJO H, PIMSCS.UPNIVEL1 G, PIMSCS.OPERACOES O          WHERE H.CD_UPNIVEL1 = G.CD_UPNIVEL1            AND H.CD_OPERACAO = O.CD_OPERACAO            AND H.DT_HISTORICO BETWEEN :DataIni AND :DataFim            AND H.FG_ORIGEM = 'V'            AND H.CD_RECURSO = 9008            AND H.CD_HIST = 'R' 		   AND G.CD_FORNEC IN (" + txtFornecedor.Text + ")          GROUP BY H.CD_UPNIVEL1, G.DE_UPNIVEL1, H.CD_UPNIVEL3, O.DE_OPERACAO) D   WHERE A.COD = B.COD    AND A.COD = C.COD    AND A.COD = D.COD    AND A.PARCERIA = B.PARCERIA    AND A.PARCERIA = C.PARCERIA    AND A.PARCERIA = D.PARCERIA    AND A.TALHAO = B.TALHAO    AND A.TALHAO = C.TALHAO    AND A.TALHAO = D.TALHAO    AND A.OPERACAO = B.OPERACAO    AND A.OPERACAO = C.OPERACAO    AND A.OPERACAO = D.OPERACAO   ORDER BY A.COD, A.PARCERIA, A.TALHAO, A.OPERACAO";
+
+			// Atribui os parâmentros dinâmicos
+
+			var param = new DynamicParameters();
+			param.Add(":DataIni", txtInicio.Text);
+			param.Add(":DataFim", txtFim.Text);
+
+			// Abre a conexão e executa a query
+
+
+			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
+			{
+				var fertirriPar = conn.Query<FertirriParceria>(qyFertirriPar, param).ToList();
+
+				return fertirriPar;
+			}
+		}
+
+
+		public string processoFertirri() // Método que retorna a data de processamento de apontamento de fertirrigação
+		{
+
+			string qyProcessoFertirri = " SELECT P.VALOR FROM  PARAMETROS P WHERE P.SECAO = 'ATRC_MDI' AND P.ENTRADA = 'DT_PROC_AREA'";
 
 
 			// Abre a conexão e executa a query
@@ -320,13 +422,13 @@ namespace CONFERENCIAS
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var safras = conn.Query<Safra>(qySafras).ToList();
+				var param = conn.Query<PerdaProc>(qyProcessoFertirri).ToList();
 
-				return safras;
+				string dataProcesso = param[0].VALOR.ToString();
+
+				return dataProcesso;
 			}
 		}
-
-
 
 		public bool VerificaDataMenor() // Verifica se a data final é menor que a data inicial
 		{
@@ -334,6 +436,19 @@ namespace CONFERENCIAS
 			DateTime dataFim = DateTime.ParseExact(txtFim.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
 
 			if (dataIni > dataFim)
+			{
+				return true;
+			}
+			else return false;
+		}
+
+		public bool VerificaDataProcsFertirri() // Verifica se a data inicial é menor que a data inicial
+		{
+			DateTime dataIni = DateTime.ParseExact(txtInicio.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+			DateTime dataFim = DateTime.ParseExact(txtFim.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+			DateTime dataProcesso = DateTime.ParseExact(processoFertirri(), "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+
+			if (dataIni > dataProcesso || dataFim > dataProcesso)
 			{
 				return true;
 			}
@@ -384,10 +499,14 @@ namespace CONFERENCIAS
 
 				//Cria a iTextSharp Table da DataTable
 				iTextSharp.text.pdf.PdfPTable pdfTable = new iTextSharp.text.pdf.PdfPTable(dgvConsulta.ColumnCount);
-				pdfTable.DefaultCell.Padding = 2;
+				pdfTable.DefaultCell.Padding = 0;
+				pdfTable.DefaultCell.PaddingBottom = 5;
+				pdfTable.DefaultCell.PaddingTop = 5;
 				pdfTable.WidthPercentage = 100;
 				pdfTable.DefaultCell.BorderWidth = 0;
 				pdfTable.DefaultCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+				var font = iTextSharp.text.FontFactory.GetFont("Arial", 9);
+				pdfTable.DefaultCell.Phrase = new iTextSharp.text.Phrase() { Font = font };
 
 
 
@@ -398,7 +517,10 @@ namespace CONFERENCIAS
 					cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
 					cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
 					cell.BorderWidth = 0;
-					pdfTable.AddCell(cell);
+					pdfTable.AddCell(new iTextSharp.text.Phrase(column.HeaderText.ToString(), font));
+					//pdfTable.AddCell(cell);
+					//pdfTable.AddCell(new Phrase(cell.ToString(), font));
+
 				}
 
 				//Adiciona as linhas
@@ -406,12 +528,12 @@ namespace CONFERENCIAS
 				{
 					foreach (DataGridViewCell cell in row.Cells)
 					{
-						pdfTable.AddCell(cell.Value.ToString());
+						pdfTable.AddCell(new iTextSharp.text.Phrase(cell.Value.ToString(), font));
 					}
 				}
 
 				//Exporta para PDF
-				string folderPath =  @"\\10.0.3.35\d\Debug\report\RELATÓRIO DE " + frmMenu.lbTitulo.Text +  ".pdf";
+				string folderPath = @"\\10.0.3.35\d\Debug\report\RELATÓRIO DE " + frmMenu.lbTitulo.Text + ".pdf";
 
 				using (System.IO.FileStream stream = new System.IO.FileStream(folderPath, System.IO.FileMode.Create))
 				{
@@ -434,8 +556,8 @@ namespace CONFERENCIAS
 					iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 10, 10, 10, 10);
 					iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDoc, stream);
 
-					
-					pdfDoc.Open();					
+
+					pdfDoc.Open();
 					iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"\\10.0.3.35\d\Debug\image\logo_nova.JPG");
 					logo.ScalePercent(0.3f * 100);
 					logo.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
@@ -445,13 +567,12 @@ namespace CONFERENCIAS
 					pdfDoc.Add(new iTextSharp.text.Paragraph(" "));
 					pdfDoc.Add(new iTextSharp.text.Paragraph("Período.......: " + txtInicio.Text + " à " + txtFim.Text));
 					pdfDoc.Add(new iTextSharp.text.Paragraph("Usuário.......: " + frmMenu.lbNome.Text));
-					pdfDoc.Add(new iTextSharp.text.Paragraph("Emitido em.: " +  DateTime.Now.ToString()));
-					pdfDoc.Add(new iTextSharp.text.Paragraph("Área ponderada*"));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Emitido em.: " + DateTime.Now.ToString()));
 					pdfDoc.Add(ph2);
 					pdfDoc.Add(ph3);
 					pdfDoc.Add(ph4);
 					pdfDoc.Add(new iTextSharp.text.Paragraph(" "));
-					pdfDoc.Add(pdfTable);					
+					pdfDoc.Add(pdfTable);
 					pdfDoc.Close();
 					stream.Close();
 					System.Diagnostics.Process.Start(folderPath);

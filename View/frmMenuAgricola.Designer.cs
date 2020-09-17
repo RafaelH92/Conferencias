@@ -107,6 +107,7 @@
             this.btnFertirri.TabIndex = 7;
             this.btnFertirri.Text = "&Fertirrigação";
             this.btnFertirri.UseVisualStyleBackColor = false;
+            this.btnFertirri.Click += new System.EventHandler(this.btnFertirri_Click);
             // 
             // frmMenuAgricola
             // 

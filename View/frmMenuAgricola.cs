@@ -57,5 +57,19 @@ namespace CONFERENCIAS.View
             frmMenu.lbTitulo.Text = "BROCA";
             frmMenu.lbTitulo.Visible = true;
         }
+
+        private void btnFertirri_Click(object sender, EventArgs e)
+        {
+            frmMenu.pnlBody.Controls.Clear();
+
+            frmFertirri frm = new frmFertirri(frmMenu);
+            frm.TopLevel = false;
+            frmMenu.pnlBody.Controls.Add(frm);
+
+            frm.Show();
+
+            frmMenu.lbTitulo.Text = "FERTIRRIGAÇÃO";
+            frmMenu.lbTitulo.Visible = true;
+        }
     }
 }
