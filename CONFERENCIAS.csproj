@@ -93,7 +93,8 @@
     <Compile Include="Conexao\ConADM.cs" />
     <Compile Include="Conexao\ConPims.cs" />
     <Compile Include="Entidades\BrocaParceria.cs" />
-    <Compile Include="Entidades\FertirriParceria.cs" />
+    <Compile Include="Entidades\FertirriParc.cs" />
+    <Compile Include="Entidades\FertirriTalhao.cs" />
     <Compile Include="Entidades\MecHoraOp.cs" />
     <Compile Include="Entidades\MecImpXEquip.cs" />
     <Compile Include="Entidades\MecEquipXImp.cs" />

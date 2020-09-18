@@ -36,7 +36,7 @@
             this.btnExecutar = new System.Windows.Forms.Button();
             this.dgvConsulta = new System.Windows.Forms.DataGridView();
             this.rbFornecedor = new System.Windows.Forms.RadioButton();
-            this.rbParceria = new System.Windows.Forms.RadioButton();
+            this.rbTalhao = new System.Windows.Forms.RadioButton();
             this.lbDeveloped = new System.Windows.Forms.Label();
             this.lbRaf = new System.Windows.Forms.Label();
             this.lLemail = new System.Windows.Forms.LinkLabel();
@@ -53,6 +53,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnPDF = new System.Windows.Forms.Button();
             this.txtOperacao = new System.Windows.Forms.MaskedTextBox();
+            this.rbParceria = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.Gb1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -138,7 +139,7 @@
             this.rbFornecedor.Checked = true;
             this.rbFornecedor.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbFornecedor.ForeColor = System.Drawing.Color.Silver;
-            this.rbFornecedor.Location = new System.Drawing.Point(17, 25);
+            this.rbFornecedor.Location = new System.Drawing.Point(16, 19);
             this.rbFornecedor.Name = "rbFornecedor";
             this.rbFornecedor.Size = new System.Drawing.Size(105, 21);
             this.rbFornecedor.TabIndex = 8;
@@ -146,19 +147,19 @@
             this.rbFornecedor.Text = "FORNECEDOR";
             this.rbFornecedor.UseVisualStyleBackColor = true;
             // 
-            // rbParceria
+            // rbTalhao
             // 
-            this.rbParceria.AutoSize = true;
-            this.rbParceria.BackColor = System.Drawing.Color.Black;
-            this.rbParceria.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbParceria.ForeColor = System.Drawing.Color.Silver;
-            this.rbParceria.Location = new System.Drawing.Point(17, 60);
-            this.rbParceria.Name = "rbParceria";
-            this.rbParceria.Size = new System.Drawing.Size(83, 21);
-            this.rbParceria.TabIndex = 9;
-            this.rbParceria.TabStop = true;
-            this.rbParceria.Text = "PARCERIA";
-            this.rbParceria.UseVisualStyleBackColor = false;
+            this.rbTalhao.AutoSize = true;
+            this.rbTalhao.BackColor = System.Drawing.Color.Black;
+            this.rbTalhao.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbTalhao.ForeColor = System.Drawing.Color.Silver;
+            this.rbTalhao.Location = new System.Drawing.Point(16, 73);
+            this.rbTalhao.Name = "rbTalhao";
+            this.rbTalhao.Size = new System.Drawing.Size(73, 21);
+            this.rbTalhao.TabIndex = 9;
+            this.rbTalhao.TabStop = true;
+            this.rbTalhao.Text = "TALHÃO";
+            this.rbTalhao.UseVisualStyleBackColor = false;
             // 
             // lbDeveloped
             // 
@@ -269,6 +270,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbParceria);
+            this.groupBox1.Controls.Add(this.rbTalhao);
             this.groupBox1.Controls.Add(this.rbFornecedor);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(383, 34);
@@ -383,6 +385,18 @@
             this.txtOperacao.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
             this.txtOperacao.ValidatingType = typeof(System.DateTime);
             // 
+            // rbParceria
+            // 
+            this.rbParceria.AutoSize = true;
+            this.rbParceria.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbParceria.ForeColor = System.Drawing.Color.Silver;
+            this.rbParceria.Location = new System.Drawing.Point(16, 46);
+            this.rbParceria.Name = "rbParceria";
+            this.rbParceria.Size = new System.Drawing.Size(83, 21);
+            this.rbParceria.TabIndex = 10;
+            this.rbParceria.Text = "PARCERIA";
+            this.rbParceria.UseVisualStyleBackColor = true;
+            // 
             // frmFertirri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -421,7 +435,7 @@
         private System.Windows.Forms.Button btnExecutar;
         private System.Windows.Forms.DataGridView dgvConsulta;
         private System.Windows.Forms.RadioButton rbFornecedor;
-        private System.Windows.Forms.RadioButton rbParceria;
+        private System.Windows.Forms.RadioButton rbTalhao;
         private System.Windows.Forms.Label lbDeveloped;
         private System.Windows.Forms.Label lbRaf;
         private System.Windows.Forms.LinkLabel lLemail;
@@ -438,6 +452,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox txtFornecedor;
         private System.Windows.Forms.MaskedTextBox txtOperacao;
+        private System.Windows.Forms.RadioButton rbParceria;
     }
 }
 

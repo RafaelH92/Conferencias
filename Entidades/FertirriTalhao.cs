@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CONFERENCIAS.Entidades
 {
-    public class FertirriParceria
+    public class FertirriTalhao
     {
         public Int64 COD { get; set; }
         public string PARCERIA { get; set; }

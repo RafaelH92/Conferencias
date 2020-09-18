@@ -104,7 +104,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(38, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.3";
+            this.lbVer.Text = "Ver: 7.4";
             // 
             // btnInconsistencia
             // 
