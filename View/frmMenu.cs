@@ -110,6 +110,18 @@ namespace CONFERENCIAS.View
             frm.Show();
         }
 
+        private void btnSobre_Click(object sender, EventArgs e)
+        {
+            pnlBody.Controls.Clear();
+            pnlAtivo.Top = btnSobre.Top;
+
+            frmSobre frm = new frmSobre(this);
+            frm.TopLevel = false;
+            pnlBody.Controls.Add(frm);
+
+            lbTitulo.Visible = false;
+            frm.Show();
+        }
     }
     
 }

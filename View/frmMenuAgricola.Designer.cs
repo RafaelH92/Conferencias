@@ -48,9 +48,9 @@
             this.btnBroca.ForeColor = System.Drawing.Color.White;
             this.btnBroca.Image = ((System.Drawing.Image)(resources.GetObject("btnBroca.Image")));
             this.btnBroca.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBroca.Location = new System.Drawing.Point(292, 367);
+            this.btnBroca.Location = new System.Drawing.Point(292, 318);
             this.btnBroca.Name = "btnBroca";
-            this.btnBroca.Size = new System.Drawing.Size(247, 55);
+            this.btnBroca.Size = new System.Drawing.Size(255, 55);
             this.btnBroca.TabIndex = 3;
             this.btnBroca.Text = "&Broca";
             this.btnBroca.UseVisualStyleBackColor = false;
@@ -69,9 +69,9 @@
             this.btnPerdas.ForeColor = System.Drawing.Color.White;
             this.btnPerdas.Image = ((System.Drawing.Image)(resources.GetObject("btnPerdas.Image")));
             this.btnPerdas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPerdas.Location = new System.Drawing.Point(39, 367);
+            this.btnPerdas.Location = new System.Drawing.Point(39, 318);
             this.btnPerdas.Name = "btnPerdas";
-            this.btnPerdas.Size = new System.Drawing.Size(247, 55);
+            this.btnPerdas.Size = new System.Drawing.Size(255, 55);
             this.btnPerdas.TabIndex = 4;
             this.btnPerdas.Text = "&Perdas Mecanizadas";
             this.btnPerdas.UseVisualStyleBackColor = false;
@@ -101,9 +101,9 @@
             this.btnFertirri.ForeColor = System.Drawing.Color.White;
             this.btnFertirri.Image = ((System.Drawing.Image)(resources.GetObject("btnFertirri.Image")));
             this.btnFertirri.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFertirri.Location = new System.Drawing.Point(545, 367);
+            this.btnFertirri.Location = new System.Drawing.Point(545, 318);
             this.btnFertirri.Name = "btnFertirri";
-            this.btnFertirri.Size = new System.Drawing.Size(247, 55);
+            this.btnFertirri.Size = new System.Drawing.Size(255, 55);
             this.btnFertirri.TabIndex = 7;
             this.btnFertirri.Text = "&Fertirrigação";
             this.btnFertirri.UseVisualStyleBackColor = false;

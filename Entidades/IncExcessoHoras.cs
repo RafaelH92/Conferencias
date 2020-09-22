@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace CONFERENCIAS.Entidades
 {
-    public class Inconsistncia
+    public class IncExcessoHoras
     {
 
-        public Int64 BOLETIM { get; set; }
         public DateTime DATA { get; set; }
-        public int COD_FUNC { get; set; }
-        public string FUNCIONARIO { get; set; }
         public int EQUIPTO { get; set; }
         public string MODELO{ get; set; }
-        public Int32 INICIO { get; set; }
-        public Int32 FIM { get; set; }
+        public double HORAS { get; set; }
 
     }
 }

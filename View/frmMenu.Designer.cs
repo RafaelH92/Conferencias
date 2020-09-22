@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.btnSobre = new System.Windows.Forms.Button();
             this.btnAgricola = new System.Windows.Forms.Button();
             this.lbVer = new System.Windows.Forms.Label();
             this.btnInconsistencia = new System.Windows.Forms.Button();
@@ -63,6 +64,7 @@
             this.pnlSidebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlSidebar.BackColor = System.Drawing.Color.Black;
+            this.pnlSidebar.Controls.Add(this.btnSobre);
             this.pnlSidebar.Controls.Add(this.btnAgricola);
             this.pnlSidebar.Controls.Add(this.lbVer);
             this.pnlSidebar.Controls.Add(this.btnInconsistencia);
@@ -73,6 +75,27 @@
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(270, 821);
             this.pnlSidebar.TabIndex = 6;
+            // 
+            // btnSobre
+            // 
+            this.btnSobre.BackColor = System.Drawing.Color.Black;
+            this.btnSobre.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSobre.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnSobre.FlatAppearance.BorderSize = 0;
+            this.btnSobre.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnSobre.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnSobre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSobre.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSobre.ForeColor = System.Drawing.Color.White;
+            this.btnSobre.Image = ((System.Drawing.Image)(resources.GetObject("btnSobre.Image")));
+            this.btnSobre.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSobre.Location = new System.Drawing.Point(9, 552);
+            this.btnSobre.Name = "btnSobre";
+            this.btnSobre.Size = new System.Drawing.Size(255, 55);
+            this.btnSobre.TabIndex = 15;
+            this.btnSobre.Text = "&Sobre - (Leia-Me)";
+            this.btnSobre.UseVisualStyleBackColor = false;
+            this.btnSobre.Click += new System.EventHandler(this.btnSobre_Click);
             // 
             // btnAgricola
             // 
@@ -87,7 +110,7 @@
             this.btnAgricola.ForeColor = System.Drawing.Color.White;
             this.btnAgricola.Image = ((System.Drawing.Image)(resources.GetObject("btnAgricola.Image")));
             this.btnAgricola.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgricola.Location = new System.Drawing.Point(9, 404);
+            this.btnAgricola.Location = new System.Drawing.Point(9, 357);
             this.btnAgricola.Name = "btnAgricola";
             this.btnAgricola.Size = new System.Drawing.Size(255, 55);
             this.btnAgricola.TabIndex = 14;
@@ -100,11 +123,11 @@
             this.lbVer.AutoSize = true;
             this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbVer.Location = new System.Drawing.Point(106, 614);
+            this.lbVer.Location = new System.Drawing.Point(112, 638);
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(38, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.4";
+            this.lbVer.Text = "Ver: 7.5";
             // 
             // btnInconsistencia
             // 
@@ -119,7 +142,7 @@
             this.btnInconsistencia.ForeColor = System.Drawing.Color.White;
             this.btnInconsistencia.Image = ((System.Drawing.Image)(resources.GetObject("btnInconsistencia.Image")));
             this.btnInconsistencia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInconsistencia.Location = new System.Drawing.Point(11, 496);
+            this.btnInconsistencia.Location = new System.Drawing.Point(9, 454);
             this.btnInconsistencia.Name = "btnInconsistencia";
             this.btnInconsistencia.Size = new System.Drawing.Size(255, 55);
             this.btnInconsistencia.TabIndex = 2;
@@ -130,7 +153,7 @@
             // pnlAtivo
             // 
             this.pnlAtivo.BackColor = System.Drawing.Color.Green;
-            this.pnlAtivo.Location = new System.Drawing.Point(0, 201);
+            this.pnlAtivo.Location = new System.Drawing.Point(0, 168);
             this.pnlAtivo.Name = "pnlAtivo";
             this.pnlAtivo.Size = new System.Drawing.Size(10, 55);
             this.pnlAtivo.TabIndex = 0;
@@ -148,7 +171,7 @@
             this.btnErros.ForeColor = System.Drawing.Color.White;
             this.btnErros.Image = ((System.Drawing.Image)(resources.GetObject("btnErros.Image")));
             this.btnErros.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnErros.Location = new System.Drawing.Point(11, 302);
+            this.btnErros.Location = new System.Drawing.Point(9, 266);
             this.btnErros.Name = "btnErros";
             this.btnErros.Size = new System.Drawing.Size(255, 55);
             this.btnErros.TabIndex = 0;
@@ -169,7 +192,7 @@
             this.btnInteg.ForeColor = System.Drawing.Color.White;
             this.btnInteg.Image = ((System.Drawing.Image)(resources.GetObject("btnInteg.Image")));
             this.btnInteg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInteg.Location = new System.Drawing.Point(9, 201);
+            this.btnInteg.Location = new System.Drawing.Point(9, 168);
             this.btnInteg.Name = "btnInteg";
             this.btnInteg.Size = new System.Drawing.Size(261, 55);
             this.btnInteg.TabIndex = 0;
@@ -288,5 +311,6 @@
         private System.Windows.Forms.Label lbVer;
         private System.Windows.Forms.Button btnAgricola;
         public System.Windows.Forms.Label lbNome;
+        private System.Windows.Forms.Button btnSobre;
     }
 }

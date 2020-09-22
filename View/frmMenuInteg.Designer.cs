@@ -59,9 +59,9 @@
             this.btnIStatusIntegracao.ForeColor = System.Drawing.Color.White;
             this.btnIStatusIntegracao.Image = ((System.Drawing.Image)(resources.GetObject("btnIStatusIntegracao.Image")));
             this.btnIStatusIntegracao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIStatusIntegracao.Location = new System.Drawing.Point(547, 155);
+            this.btnIStatusIntegracao.Location = new System.Drawing.Point(547, 128);
             this.btnIStatusIntegracao.Name = "btnIStatusIntegracao";
-            this.btnIStatusIntegracao.Size = new System.Drawing.Size(247, 55);
+            this.btnIStatusIntegracao.Size = new System.Drawing.Size(255, 55);
             this.btnIStatusIntegracao.TabIndex = 5;
             this.btnIStatusIntegracao.Text = "&Status da Integração";
             this.btnIStatusIntegracao.UseVisualStyleBackColor = false;
@@ -80,9 +80,9 @@
             this.btnLub.ForeColor = System.Drawing.Color.White;
             this.btnLub.Image = ((System.Drawing.Image)(resources.GetObject("btnLub.Image")));
             this.btnLub.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLub.Location = new System.Drawing.Point(294, 156);
+            this.btnLub.Location = new System.Drawing.Point(294, 129);
             this.btnLub.Name = "btnLub";
-            this.btnLub.Size = new System.Drawing.Size(247, 55);
+            this.btnLub.Size = new System.Drawing.Size(255, 55);
             this.btnLub.TabIndex = 3;
             this.btnLub.Text = "&Lubrificantes";
             this.btnLub.UseVisualStyleBackColor = false;
@@ -101,9 +101,9 @@
             this.btnComb.ForeColor = System.Drawing.Color.White;
             this.btnComb.Image = ((System.Drawing.Image)(resources.GetObject("btnComb.Image")));
             this.btnComb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnComb.Location = new System.Drawing.Point(41, 156);
+            this.btnComb.Location = new System.Drawing.Point(41, 129);
             this.btnComb.Name = "btnComb";
-            this.btnComb.Size = new System.Drawing.Size(247, 55);
+            this.btnComb.Size = new System.Drawing.Size(255, 55);
             this.btnComb.TabIndex = 4;
             this.btnComb.Text = "&Combustíveis";
             this.btnComb.UseVisualStyleBackColor = false;
