@@ -40,6 +40,7 @@
             this.lbRaf = new System.Windows.Forms.Label();
             this.lbDeveloped = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -51,7 +52,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(214, 18);
             this.label1.TabIndex = 6;
-            this.label1.Text = "NOVIDADES DA VERSÃO 7.5:";
+            this.label1.Text = "NOVIDADES DA VERSÃO 7.6:";
             // 
             // label2
             // 
@@ -104,7 +105,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(286, 353);
+            this.label6.Location = new System.Drawing.Point(286, 375);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(305, 16);
             this.label6.TabIndex = 11;
@@ -115,7 +116,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(587, 353);
+            this.label7.Location = new System.Drawing.Point(587, 375);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(129, 16);
             this.label7.TabIndex = 12;
@@ -167,6 +168,17 @@
             this.label8.TabIndex = 18;
             this.label8.Text = "IV - Ajustado a posição dos menus.";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(216, 316);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(374, 17);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "VI - Adicionado uma conferência dos processos do PIMS.";
+            // 
             // frmSobre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,6 +186,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1013, 481);
             this.ControlBox = false;
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lLemail);
             this.Controls.Add(this.lbRaf);
@@ -206,5 +219,6 @@
         private System.Windows.Forms.Label lbRaf;
         private System.Windows.Forms.Label lbDeveloped;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

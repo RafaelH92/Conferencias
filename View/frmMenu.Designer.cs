@@ -43,6 +43,7 @@
             this.lbNome = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
+            this.btnFechamento = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -64,6 +65,7 @@
             this.pnlSidebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlSidebar.BackColor = System.Drawing.Color.Black;
+            this.pnlSidebar.Controls.Add(this.btnFechamento);
             this.pnlSidebar.Controls.Add(this.btnSobre);
             this.pnlSidebar.Controls.Add(this.btnAgricola);
             this.pnlSidebar.Controls.Add(this.lbVer);
@@ -89,7 +91,7 @@
             this.btnSobre.ForeColor = System.Drawing.Color.White;
             this.btnSobre.Image = ((System.Drawing.Image)(resources.GetObject("btnSobre.Image")));
             this.btnSobre.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSobre.Location = new System.Drawing.Point(9, 552);
+            this.btnSobre.Location = new System.Drawing.Point(7, 635);
             this.btnSobre.Name = "btnSobre";
             this.btnSobre.Size = new System.Drawing.Size(255, 55);
             this.btnSobre.TabIndex = 15;
@@ -123,11 +125,11 @@
             this.lbVer.AutoSize = true;
             this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbVer.Location = new System.Drawing.Point(112, 638);
+            this.lbVer.Location = new System.Drawing.Point(114, 709);
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(38, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.5";
+            this.lbVer.Text = "Ver: 7.6";
             // 
             // btnInconsistencia
             // 
@@ -268,6 +270,27 @@
             this.lbTitulo.Text = "label2";
             this.lbTitulo.Visible = false;
             // 
+            // btnFechamento
+            // 
+            this.btnFechamento.BackColor = System.Drawing.Color.Black;
+            this.btnFechamento.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFechamento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnFechamento.FlatAppearance.BorderSize = 0;
+            this.btnFechamento.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnFechamento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFechamento.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFechamento.ForeColor = System.Drawing.Color.White;
+            this.btnFechamento.Image = ((System.Drawing.Image)(resources.GetObject("btnFechamento.Image")));
+            this.btnFechamento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFechamento.Location = new System.Drawing.Point(7, 546);
+            this.btnFechamento.Name = "btnFechamento";
+            this.btnFechamento.Size = new System.Drawing.Size(255, 55);
+            this.btnFechamento.TabIndex = 16;
+            this.btnFechamento.Text = "&Fechamento";
+            this.btnFechamento.UseVisualStyleBackColor = false;
+            this.btnFechamento.Click += new System.EventHandler(this.btnFechamento_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,5 +335,6 @@
         private System.Windows.Forms.Button btnAgricola;
         public System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.Button btnSobre;
+        private System.Windows.Forms.Button btnFechamento;
     }
 }

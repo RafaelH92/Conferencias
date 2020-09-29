@@ -122,6 +122,22 @@ namespace CONFERENCIAS.View
             lbTitulo.Visible = false;
             frm.Show();
         }
+
+        private void btnFechamento_Click(object sender, EventArgs e)
+        {
+            pnlBody.Controls.Clear();
+            pnlAtivo.Top = btnFechamento.Top;
+
+            frmFechamento frm = new frmFechamento(this);
+            frm.TopLevel = false;
+            pnlBody.Controls.Add(frm);
+
+            lbTitulo.Visible = false;
+            frm.Show();
+            lbTitulo.Text = "          FECHAMENTO";
+            lbTitulo.Visible = true;
+            frm.Consultar();
+        }
     }
     
 }
