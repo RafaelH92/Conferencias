@@ -160,6 +160,19 @@
         kwmfHgAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnInconsistencia.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAABGdBTUEAALGPC/xhBQAAAcdJREFUWEft
+        mT1uwkAQRjGSTQcX4CDQBXwGKDAtPT+KAkICkypXAUtAm/sAp4icfFpPwaaY3U2WCZF51c7g+fSEEmts
+        KvdItVodDocvPwKDQRBQkC8Q+vkLkiShIF+kaYpcKhzBIMap8AUj1Gw2nxU4UEtHWqjX630ocKCWjrSQ
+        kdILtdvtdwUO1NL5M6FWq0UtnW9CURRtNpvL5YK+JbgYCWEYUgRghIxg8Fooy7I8z/f7/Zs1h8MBI7vd
+        jiKAL6E4jlGOx+OitGc6nWKw0+lQzQj1+337f/vFYoGyXq8XpT2NRgOD8/mcakYI98NXhc2Nkckxcp3j
+        LUhCqFarPSlwoJaOtNBoNMJHAAdq6eAjUSHcV4pvCAdq6UgLGZEWclo/JISc1g8JISOlF3JaP0SFbNYP
+        CSEjpRdyWj8khB7rh4IJeqwfCibosX4omKD/vX5IPAYZuRbqdrsoJ5NJUdozm80wiL9Uqn0JATwR47n4
+        eDwul0t6C8mCy3AxRrbbLUUARshp/QBhGK7X6/P5jL4lp9NptVrZvmxwWj+8wQgZKb2Q0/rhDUbIaf3w
+        BiNk5CZCd/fTQhAECKVXfo4MBgP/P77cEZXKF3/0Q/5ifGufAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAgIAAAAEAIAAoCAEAFgAAACgAAACAAAAAAAEAAAEAIAAAAAAAAAABAMMOAADDDgAAAAAAAAAA

@@ -32,6 +32,7 @@
             this.btnMecanizada = new System.Windows.Forms.Button();
             this.btnManual = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnInconsistencia = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMecanizada
@@ -87,6 +88,27 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Selecione um tipo de conferência abaixo:";
             // 
+            // btnInconsistencia
+            // 
+            this.btnInconsistencia.BackColor = System.Drawing.Color.Black;
+            this.btnInconsistencia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInconsistencia.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnInconsistencia.FlatAppearance.BorderSize = 0;
+            this.btnInconsistencia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnInconsistencia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnInconsistencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInconsistencia.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInconsistencia.ForeColor = System.Drawing.Color.White;
+            this.btnInconsistencia.Image = ((System.Drawing.Image)(resources.GetObject("btnInconsistencia.Image")));
+            this.btnInconsistencia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInconsistencia.Location = new System.Drawing.Point(556, 226);
+            this.btnInconsistencia.Name = "btnInconsistencia";
+            this.btnInconsistencia.Size = new System.Drawing.Size(255, 55);
+            this.btnInconsistencia.TabIndex = 7;
+            this.btnInconsistencia.Text = "&Inconsistências";
+            this.btnInconsistencia.UseVisualStyleBackColor = false;
+            this.btnInconsistencia.Click += new System.EventHandler(this.btnInconsistencia_Click);
+            // 
             // frmMenuErros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,6 +116,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(864, 481);
             this.ControlBox = false;
+            this.Controls.Add(this.btnInconsistencia);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMecanizada);
             this.Controls.Add(this.btnManual);
@@ -110,5 +133,6 @@
         private System.Windows.Forms.Button btnMecanizada;
         private System.Windows.Forms.Button btnManual;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnInconsistencia;
     }
 }

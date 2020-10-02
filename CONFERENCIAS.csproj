@@ -122,6 +122,7 @@
     <Compile Include="Entidades\BrocaFornecedor.cs" />
     <Compile Include="Entidades\FertirriProc.cs" />
     <Compile Include="Entidades\Fechamento.cs" />
+    <Compile Include="Entidades\Rateio.cs" />
     <Compile Include="Entidades\PerdaProc.cs" />
     <Compile Include="Entidades\Safra.cs" />
     <Compile Include="Entidades\ManuFuncSede.cs" />
@@ -147,6 +148,18 @@
     </Compile>
     <Compile Include="View\frmBrocas.Designer.cs">
       <DependentUpon>frmBrocas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmRateio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmRateio.Designer.cs">
+      <DependentUpon>frmRateio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMenuTransporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMenuTransporte.Designer.cs">
+      <DependentUpon>frmMenuTransporte.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmSobre.cs">
       <SubType>Form</SubType>
@@ -366,6 +379,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmBrocas.resx">
       <DependentUpon>frmBrocas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmRateio.resx">
+      <DependentUpon>frmRateio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMenuTransporte.resx">
+      <DependentUpon>frmMenuTransporte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmSobre.resx">
       <DependentUpon>frmSobre.cs</DependentUpon>

@@ -21,28 +21,15 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS.View
 {
-    public partial class frmMenuErros : Form
+    public partial class frmMenuTransporte : Form
     {
         frmMenu frmMenu;
-        public frmMenuErros(frmMenu form)
+        public frmMenuTransporte(frmMenu form)
         {
             this.frmMenu = form;
             InitializeComponent();
         }
 
-        private void btnManual_Click(object sender, EventArgs e)
-        {
-            frmMenu.pnlBody.Controls.Clear();
-
-            frmManuais frm = new frmManuais(frmMenu);
-            frm.TopLevel = false;
-            frmMenu.pnlBody.Controls.Add(frm);
-
-            frm.Show();
-
-            frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS MANUAIS";
-            frmMenu.lbTitulo.Visible = true;
-        }
 
         private void btnMecanizada_Click(object sender, EventArgs e)
         {
@@ -58,17 +45,17 @@ namespace CONFERENCIAS.View
             frmMenu.lbTitulo.Visible = true;
         }
 
-        private void btnInconsistencia_Click(object sender, EventArgs e)
+        private void btnRateio_Click(object sender, EventArgs e)
         {
             frmMenu.pnlBody.Controls.Clear();
 
-            frmInconsistencia frm = new frmInconsistencia(frmMenu);
+            frmRateio frm = new frmRateio(frmMenu);
             frm.TopLevel = false;
             frmMenu.pnlBody.Controls.Add(frm);
 
             frm.Show();
 
-            frmMenu.lbTitulo.Text = "VERIFICAÇÃO DE INCONSISTÊNCIAS";
+            frmMenu.lbTitulo.Text = "RATEIO DOS CAMINHÕES CANAVIEIROS";
             frmMenu.lbTitulo.Visible = true;
         }
     }

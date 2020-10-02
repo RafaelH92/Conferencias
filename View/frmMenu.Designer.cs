@@ -31,10 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.btnFechamento = new System.Windows.Forms.Button();
             this.btnSobre = new System.Windows.Forms.Button();
             this.btnAgricola = new System.Windows.Forms.Button();
             this.lbVer = new System.Windows.Forms.Label();
-            this.btnInconsistencia = new System.Windows.Forms.Button();
+            this.btnTransporte = new System.Windows.Forms.Button();
             this.pnlAtivo = new System.Windows.Forms.Panel();
             this.btnErros = new System.Windows.Forms.Button();
             this.btnInteg = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.lbNome = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
-            this.btnFechamento = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -69,7 +69,7 @@
             this.pnlSidebar.Controls.Add(this.btnSobre);
             this.pnlSidebar.Controls.Add(this.btnAgricola);
             this.pnlSidebar.Controls.Add(this.lbVer);
-            this.pnlSidebar.Controls.Add(this.btnInconsistencia);
+            this.pnlSidebar.Controls.Add(this.btnTransporte);
             this.pnlSidebar.Controls.Add(this.pnlAtivo);
             this.pnlSidebar.Controls.Add(this.btnErros);
             this.pnlSidebar.Controls.Add(this.btnInteg);
@@ -77,6 +77,27 @@
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(270, 821);
             this.pnlSidebar.TabIndex = 6;
+            // 
+            // btnFechamento
+            // 
+            this.btnFechamento.BackColor = System.Drawing.Color.Black;
+            this.btnFechamento.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFechamento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnFechamento.FlatAppearance.BorderSize = 0;
+            this.btnFechamento.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnFechamento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFechamento.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFechamento.ForeColor = System.Drawing.Color.White;
+            this.btnFechamento.Image = ((System.Drawing.Image)(resources.GetObject("btnFechamento.Image")));
+            this.btnFechamento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFechamento.Location = new System.Drawing.Point(7, 546);
+            this.btnFechamento.Name = "btnFechamento";
+            this.btnFechamento.Size = new System.Drawing.Size(255, 55);
+            this.btnFechamento.TabIndex = 16;
+            this.btnFechamento.Text = "&Fechamento";
+            this.btnFechamento.UseVisualStyleBackColor = false;
+            this.btnFechamento.Click += new System.EventHandler(this.btnFechamento_Click);
             // 
             // btnSobre
             // 
@@ -129,28 +150,28 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(38, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.7";
+            this.lbVer.Text = "Ver: 7.8";
             // 
-            // btnInconsistencia
+            // btnTransporte
             // 
-            this.btnInconsistencia.BackColor = System.Drawing.Color.Black;
-            this.btnInconsistencia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInconsistencia.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnInconsistencia.FlatAppearance.BorderSize = 0;
-            this.btnInconsistencia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnInconsistencia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnInconsistencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInconsistencia.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInconsistencia.ForeColor = System.Drawing.Color.White;
-            this.btnInconsistencia.Image = ((System.Drawing.Image)(resources.GetObject("btnInconsistencia.Image")));
-            this.btnInconsistencia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInconsistencia.Location = new System.Drawing.Point(9, 454);
-            this.btnInconsistencia.Name = "btnInconsistencia";
-            this.btnInconsistencia.Size = new System.Drawing.Size(255, 55);
-            this.btnInconsistencia.TabIndex = 2;
-            this.btnInconsistencia.Text = "&Inconsistências";
-            this.btnInconsistencia.UseVisualStyleBackColor = false;
-            this.btnInconsistencia.Click += new System.EventHandler(this.btnInconsistencia_Click);
+            this.btnTransporte.BackColor = System.Drawing.Color.Black;
+            this.btnTransporte.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTransporte.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnTransporte.FlatAppearance.BorderSize = 0;
+            this.btnTransporte.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnTransporte.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnTransporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTransporte.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTransporte.ForeColor = System.Drawing.Color.White;
+            this.btnTransporte.Image = ((System.Drawing.Image)(resources.GetObject("btnTransporte.Image")));
+            this.btnTransporte.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTransporte.Location = new System.Drawing.Point(9, 454);
+            this.btnTransporte.Name = "btnTransporte";
+            this.btnTransporte.Size = new System.Drawing.Size(255, 55);
+            this.btnTransporte.TabIndex = 2;
+            this.btnTransporte.Text = "&Transportes";
+            this.btnTransporte.UseVisualStyleBackColor = false;
+            this.btnTransporte.Click += new System.EventHandler(this.btnTransporte_Click);
             // 
             // pnlAtivo
             // 
@@ -270,27 +291,6 @@
             this.lbTitulo.Text = "label2";
             this.lbTitulo.Visible = false;
             // 
-            // btnFechamento
-            // 
-            this.btnFechamento.BackColor = System.Drawing.Color.Black;
-            this.btnFechamento.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFechamento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnFechamento.FlatAppearance.BorderSize = 0;
-            this.btnFechamento.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnFechamento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFechamento.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFechamento.ForeColor = System.Drawing.Color.White;
-            this.btnFechamento.Image = ((System.Drawing.Image)(resources.GetObject("btnFechamento.Image")));
-            this.btnFechamento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFechamento.Location = new System.Drawing.Point(7, 546);
-            this.btnFechamento.Name = "btnFechamento";
-            this.btnFechamento.Size = new System.Drawing.Size(255, 55);
-            this.btnFechamento.TabIndex = 16;
-            this.btnFechamento.Text = "&Fechamento";
-            this.btnFechamento.UseVisualStyleBackColor = false;
-            this.btnFechamento.Click += new System.EventHandler(this.btnFechamento_Click);
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,7 +323,7 @@
 
         public System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.Panel pnlSidebar;
-        private System.Windows.Forms.Button btnInconsistencia;
+        private System.Windows.Forms.Button btnTransporte;
         private System.Windows.Forms.Panel pnlAtivo;
         private System.Windows.Forms.Button btnErros;
         private System.Windows.Forms.Button btnInteg;

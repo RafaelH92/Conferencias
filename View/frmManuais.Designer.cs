@@ -37,6 +37,7 @@
             this.btnCCColhNov = new System.Windows.Forms.Button();
             this.btnCCPlanColh = new System.Windows.Forms.Button();
             this.btnVeriManu = new System.Windows.Forms.Button();
+            this.btnVoltar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnManuDupl
@@ -209,6 +210,24 @@
             this.btnVeriManu.UseVisualStyleBackColor = false;
             this.btnVeriManu.Click += new System.EventHandler(this.btnVeriManu_Click);
             // 
+            // btnVoltar
+            // 
+            this.btnVoltar.BackColor = System.Drawing.Color.Black;
+            this.btnVoltar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVoltar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnVoltar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoltar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVoltar.Image = ((System.Drawing.Image)(resources.GetObject("btnVoltar.Image")));
+            this.btnVoltar.Location = new System.Drawing.Point(12, 36);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(71, 37);
+            this.btnVoltar.TabIndex = 27;
+            this.btnVoltar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVoltar.UseVisualStyleBackColor = false;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
+            // 
             // frmManuais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +235,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(880, 565);
             this.ControlBox = false;
+            this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnVeriManu);
             this.Controls.Add(this.btnCCPlanColh);
             this.Controls.Add(this.btnCCColhNov);
@@ -241,5 +261,6 @@
         private System.Windows.Forms.Button btnCCColhNov;
         private System.Windows.Forms.Button btnCCPlanColh;
         private System.Windows.Forms.Button btnVeriManu;
+        private System.Windows.Forms.Button btnVoltar;
     }
 }

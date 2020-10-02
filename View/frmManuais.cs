@@ -133,5 +133,17 @@ namespace CONFERENCIAS.View
             frmMenu.lbTitulo.Text = "VERIFICAÇÃO DA SEQUÊNCIA DOS BOLETINS";
             frm.Show();
         }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            frmMenu.pnlBody.Controls.Clear();
+            frmMenuErros frm = new frmMenuErros(frmMenu);
+            frm.TopLevel = false;
+            frmMenu.pnlBody.Controls.Add(frm);
+
+            frm.Show();
+
+            frmMenu.lbTitulo.Visible = false;
+        }
     }
 }

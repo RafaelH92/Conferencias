@@ -42,6 +42,7 @@
             this.btnEqXIm = new System.Windows.Forms.Button();
             this.btnImXEq = new System.Windows.Forms.Button();
             this.btnHora = new System.Windows.Forms.Button();
+            this.btnVoltar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImplemento
@@ -321,6 +322,24 @@
             this.btnHora.UseVisualStyleBackColor = false;
             this.btnHora.Click += new System.EventHandler(this.btnHora_Click);
             // 
+            // btnVoltar
+            // 
+            this.btnVoltar.BackColor = System.Drawing.Color.Black;
+            this.btnVoltar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVoltar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnVoltar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVoltar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoltar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVoltar.Image = ((System.Drawing.Image)(resources.GetObject("btnVoltar.Image")));
+            this.btnVoltar.Location = new System.Drawing.Point(21, 24);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(71, 37);
+            this.btnVoltar.TabIndex = 27;
+            this.btnVoltar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVoltar.UseVisualStyleBackColor = false;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
+            // 
             // frmMecanizadas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,6 +347,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(880, 565);
             this.ControlBox = false;
+            this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnHora);
             this.Controls.Add(this.btnImXEq);
             this.Controls.Add(this.btnEqXIm);
@@ -363,5 +383,6 @@
         private System.Windows.Forms.Button btnEqXIm;
         private System.Windows.Forms.Button btnImXEq;
         private System.Windows.Forms.Button btnHora;
+        private System.Windows.Forms.Button btnVoltar;
     }
 }

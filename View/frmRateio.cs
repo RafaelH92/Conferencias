@@ -22,10 +22,10 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS
 {
-	public partial class frmInconsistencia : Form
+	public partial class frmRateio : Form
 	{
 		frmMenu frmMenu;
-		public frmInconsistencia(frmMenu form)
+		public frmRateio(frmMenu form)
 		{
 			this.frmMenu = form;
 
@@ -47,7 +47,7 @@ namespace CONFERENCIAS
 				{
 					MessageBox.Show("DATA INICIAL NÃO PODE SER MAIOR QUE A DATA FINAL!");
 				}
-				else if (rbDesc.Checked)
+				else
 				{
 
 
@@ -55,62 +55,22 @@ namespace CONFERENCIAS
 
 					// Metódo utilizando Dapper
 
-					if (txtFrota.Text == string.Empty)
-					{
-						MessageBox.Show("INFORME O EQUIPAMENTO!");
-					}
-					else
+					
+					
 					{
 
 
 						dgvConsulta.Columns.Clear();
 
-						dgvConsulta.DataSource = inconsistncias();
-
-						dgvConsulta.Columns.Add("descontinuidade", "DESCONTINUIDADE");
-						//dgvConsulta.Columns["diferença"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-						dgvConsulta.Columns.Add("status", "STATUS");
-						//dgvConsulta.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+						dgvConsulta.DataSource = rateio();
 
 
-						//Laço que faz a diferença da km inicial e km final, e adiciona na Grid
-
-						for (int contador = 1; contador < dgvConsulta.Rows.Count; contador++)
-						{
-							Int32 diferenca = Convert.ToInt32(dgvConsulta.Rows[contador - 1].Cells[7].Value) - Convert.ToInt32(dgvConsulta.Rows[contador].Cells[6].Value);
-
-							string valor = Convert.ToString(diferenca);
-							valor = valor.Insert(valor.Length - 1, ",");
-
-							if (valor == ",0")
-							{
-								valor = null;
-								dgvConsulta.Rows[contador - 1].Cells[9].Value = "OK!";
-								//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
-								dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
-							}
-							else if (valor != ",0")
-							{
-								dgvConsulta.Rows[contador - 1].Cells[9].Value = "VERIFIQUE!";
-								dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.IndianRed;
-								dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.White;
-							}
-
-							dgvConsulta.Rows[contador - 1].Cells[8].Value = valor;
-
-
-
-						}
-						//Laço que verifica se o campo esta nulo e o preenche para exportar para PDF
 						for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
 						{
-							if (dgvConsulta.Rows[contador - 1].Cells[8].Value == null)
-							{
-								dgvConsulta.Rows[contador - 1].Cells[8].Value = "---";
-								dgvConsulta.Rows[contador - 1].Cells[9].Value = "OK!";
-							}
-						}
+							
+							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
 
+						}
 
 						dgvConsulta.ClearSelection();
 
@@ -120,40 +80,7 @@ namespace CONFERENCIAS
 						lLemail.Visible = true;
 					}
 				}
-				else if (rbExce.Checked)
-				{
 
-					//-------------------------------------------------------------------
-
-					// Metódo utilizando Dapper
-
-					dgvConsulta.Columns.Clear();
-
-					if(rbExce.Checked && txtFrota.Text == string.Empty)
-					{
-						dgvConsulta.DataSource = excessoHorasAll();
-					}
-					else if (rbExce.Checked && txtFrota.Text != string.Empty)
-					{
-						dgvConsulta.DataSource = excessoHorasEq();
-					}
-					
-
-					//Laço que faz a diferença da km inicial e km final, e adiciona na Grid
-
-					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
-					{
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.IndianRed;
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.White;
-					}
-
-					dgvConsulta.ClearSelection();
-
-					lbDeveloped.Visible = true;
-					//lbNome.Visible = true;
-					lbRaf.Visible = true;
-					lLemail.Visible = true;
-				}
 
 			}
 			catch (Exception ex)
@@ -167,55 +94,10 @@ namespace CONFERENCIAS
 		}
 
 
-		public List<Inconsistncia> inconsistncias() // Método que retorna a conferência dos abastecimentos 
+		public List<Rateio> rateio() // Método que retorna a conferência dos abastecimentos 
 		{
 
-			string qyIncon = "SELECT A.NO_BOLETIM AS BOLETIM, A.DT_OPERACAO AS DATA, A.CD_FUNC AS COD_FUNC, F.DE_FUNC AS FUNCIONARIO, A.CD_EQUIPTO AS EQUIPTO, M.DE_MODELO AS MODELO, B.QT_HK_INICIO AS INICIO, B.QT_HK_FINAL AS FIM FROM PIMSCS.APT_MEC_HE A, PIMSCS.APT_MEC_DE B, PIMSCS.FUNCIONARS F, PIMSCS.MODELOS    M, PIMSCS.EQUIPTOS   E WHERE A.NO_BOLETIM = B.NO_BOLETIM AND A.CD_FUNC = F.CD_FUNC AND E.CD_MODELO = M.CD_MODELO AND E.CD_EQUIPTO = A.CD_EQUIPTO AND A.CD_EQUIPTO = :Frota AND B.FG_TP_APTO = 'M' AND A.DT_OPERACAO >= :DataIni AND A.DT_OPERACAO <= :DataFim ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO";
-
-			// Atribui os parâmentros dinâmicos
-
-			var param = new DynamicParameters();
-			param.Add(":DataIni", txtInicio.Text);
-			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Frota", txtFrota.Text);
-
-			// Abre a conexão e executa a query
-
-
-			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
-			{
-				var incon = conn.Query<Inconsistncia>(qyIncon, param).ToList();
-
-				return incon;
-			}
-		}
-
-		public List<IncExcessoHoras> excessoHorasAll() // Método que retorna a conferência dos abastecimentos 
-		{
-
-			string qyExce = " SELECT A.DATA,  A.EQUIPTO, A.MODELO, SUM(A.TOTAL) AS HORAS    FROM (                 SELECT A.NO_BOLETIM  AS BOLETIM,                 A.DT_OPERACAO AS DATA,                 A.CD_EQUIPTO  AS EQUIPTO,                 M.DE_MODELO   AS MODELO,                 B.QT_HK_TOTAL AS TOTAL           FROM PIMSCS.APT_MEC_HE A,                 PIMSCS.APT_MEC_DE B,                 PIMSCS.FUNCIONARS F,                 PIMSCS.MODELOS    M,                 PIMSCS.EQUIPTOS   E          WHERE A.NO_BOLETIM = B.NO_BOLETIM            AND A.CD_FUNC = F.CD_FUNC            AND E.CD_MODELO = M.CD_MODELO            AND E.CD_EQUIPTO = A.CD_EQUIPTO            AND A.FG_TP_APTO = B.FG_TP_APTO               AND B.FG_TP_APTO != 'F'            AND A.DT_OPERACAO BETWEEN :DataIni AND :DataFim            AND M.CD_GRUPO_OP IN (SELECT G.CD_GRUPO_OP                                    FROM PIMSCS.GRUOPERATI G                                   WHERE G.CD_UNIMED = 'HD')          ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO) A   GROUP BY A.DATA, A.EQUIPTO, A.MODELO  HAVING SUM(A.TOTAL) > 24.00   ORDER BY A.DATA, A.EQUIPTO, A.MODELO ";
-
-			// Atribui os parâmentros dinâmicos
-
-			var param = new DynamicParameters();
-			param.Add(":DataIni", txtInicio.Text);
-			param.Add(":DataFim", txtFim.Text);			
-
-			// Abre a conexão e executa a query
-
-
-			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
-			{
-				var exce = conn.Query<IncExcessoHoras>(qyExce, param).ToList();
-
-				return exce;
-			}
-		}
-
-		public List<IncExcessoHoras> excessoHorasEq() // Método que retorna a conferência dos abastecimentos 
-		{
-
-			string qyExce = " SELECT A.DATA,  A.EQUIPTO, A.MODELO, SUM(A.TOTAL) AS HORAS    FROM (                 SELECT A.NO_BOLETIM  AS BOLETIM,                 A.DT_OPERACAO AS DATA,                 A.CD_EQUIPTO  AS EQUIPTO,                 M.DE_MODELO   AS MODELO,                 B.QT_HK_TOTAL AS TOTAL           FROM PIMSCS.APT_MEC_HE A,                 PIMSCS.APT_MEC_DE B,                 PIMSCS.FUNCIONARS F,                 PIMSCS.MODELOS    M,                 PIMSCS.EQUIPTOS   E          WHERE A.NO_BOLETIM = B.NO_BOLETIM            AND A.CD_FUNC = F.CD_FUNC            AND E.CD_MODELO = M.CD_MODELO            AND E.CD_EQUIPTO = A.CD_EQUIPTO            AND A.FG_TP_APTO = B.FG_TP_APTO               AND B.FG_TP_APTO != 'F'            AND A.DT_OPERACAO BETWEEN :DataIni AND :DataFim            AND M.CD_GRUPO_OP IN (SELECT G.CD_GRUPO_OP                                    FROM PIMSCS.GRUOPERATI G                                   WHERE G.CD_UNIMED = 'HD')          ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO) A 		 		  WHERE A.EQUIPTO IN (" + txtFrota.Text + ")   GROUP BY A.DATA, A.EQUIPTO, A.MODELO  HAVING SUM(A.TOTAL) > 24.00   ORDER BY A.DATA, A.EQUIPTO, A.MODELO";
+			string qyRat = " SELECT CD_EQUIPTO AS EQUIPAMENTO,        SUM(QT_CANA_ENT) / 1000 TONELADAS,        SUM(QT_VIAG_ENT) VIAGENS,        SUM(QT_CARGA_ENT) CARGAS,        ROUND(SUM(KG_DISTANCIA) / SUM(QT_CANA_ENT), 0) AS RAIO,        ROUND((SUM(KG_DISTANCIA) / SUM(QT_CANA_ENT) * 2) * SUM(QT_VIAG_ENT),              0) AS RATEIO   FROM PIMSCS.HISTPRDEQU  WHERE CD_TP_RECURSO = 'CM'    AND DT_HISTORICO BETWEEN :Dataini AND :DataFim  GROUP BY CD_EQUIPTO  ORDER BY CD_EQUIPTO ";
 
 			// Atribui os parâmentros dinâmicos
 
@@ -223,17 +105,17 @@ namespace CONFERENCIAS
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
 
+
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var exce = conn.Query<IncExcessoHoras>(qyExce, param).ToList();
+				var rat = conn.Query<Rateio>(qyRat, param).ToList();
 
-				return exce;
+				return rat;
 			}
 		}
-
 
 		public bool VerificaDataMenor() // Verifica se a data inicial é menor que a data inicial
 		{
@@ -288,7 +170,7 @@ namespace CONFERENCIAS
 				pdfTable.DefaultCell.Padding = 0;
 				pdfTable.DefaultCell.PaddingBottom = 5;
 				pdfTable.DefaultCell.PaddingTop = 5;
-				pdfTable.WidthPercentage = 100;
+				pdfTable.WidthPercentage = 60;
 				pdfTable.DefaultCell.BorderWidth = 0;
 				pdfTable.DefaultCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
 				var font = iTextSharp.text.FontFactory.GetFont("Arial", 8.5f);
@@ -398,7 +280,7 @@ namespace CONFERENCIAS
 		private void btnVoltar_Click_1(object sender, EventArgs e)
 		{
 			frmMenu.pnlBody.Controls.Clear();
-			frmMenuErros frm = new frmMenuErros(frmMenu);
+			frmMenuTransporte frm = new frmMenuTransporte(frmMenu);
 			frm.TopLevel = false;
 			frmMenu.pnlBody.Controls.Add(frm);
 

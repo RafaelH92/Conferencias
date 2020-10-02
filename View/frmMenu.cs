@@ -82,21 +82,6 @@ namespace CONFERENCIAS.View
             lbTitulo.Visible = false;
         }
 
-        private void btnInconsistencia_Click(object sender, EventArgs e)
-        {
-            pnlBody.Controls.Clear();
-            pnlAtivo.Top = btnInconsistencia.Top;
-
-            frmInconsistencia frm = new frmInconsistencia(this);
-            frm.TopLevel = false;
-            pnlBody.Controls.Add(frm);
-
-            frm.Show();
-
-            lbTitulo.Text = "VERIFICAÇÃO DE INCONSISTÊNCIAS";
-            lbTitulo.Visible = true;
-        }
-
         private void btnAgricola_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
@@ -137,6 +122,19 @@ namespace CONFERENCIAS.View
             lbTitulo.Text = "          FECHAMENTO";
             lbTitulo.Visible = true;
             frm.Consultar();
+        }
+
+        private void btnTransporte_Click(object sender, EventArgs e)
+        {
+            pnlBody.Controls.Clear();
+            pnlAtivo.Top = btnTransporte.Top;
+
+            frmMenuTransporte frm = new frmMenuTransporte(this);
+            frm.TopLevel = false;
+            pnlBody.Controls.Add(frm);
+
+            lbTitulo.Visible = false;
+            frm.Show();
         }
     }
     
