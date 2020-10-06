@@ -33,6 +33,7 @@
             this.btnManual = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnInconsistencia = new System.Windows.Forms.Button();
+            this.btnAbast = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMecanizada
@@ -109,13 +110,35 @@
             this.btnInconsistencia.UseVisualStyleBackColor = false;
             this.btnInconsistencia.Click += new System.EventHandler(this.btnInconsistencia_Click);
             // 
+            // btnAbast
+            // 
+            this.btnAbast.BackColor = System.Drawing.Color.Black;
+            this.btnAbast.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAbast.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnAbast.FlatAppearance.BorderSize = 0;
+            this.btnAbast.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnAbast.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnAbast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbast.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbast.ForeColor = System.Drawing.Color.White;
+            this.btnAbast.Image = ((System.Drawing.Image)(resources.GetObject("btnAbast.Image")));
+            this.btnAbast.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAbast.Location = new System.Drawing.Point(817, 226);
+            this.btnAbast.Name = "btnAbast";
+            this.btnAbast.Size = new System.Drawing.Size(255, 55);
+            this.btnAbast.TabIndex = 8;
+            this.btnAbast.Text = "&Abastecimento";
+            this.btnAbast.UseVisualStyleBackColor = false;
+            this.btnAbast.Click += new System.EventHandler(this.btnAbast_Click);
+            // 
             // frmMenuErros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(864, 481);
+            this.ClientSize = new System.Drawing.Size(1086, 481);
             this.ControlBox = false;
+            this.Controls.Add(this.btnAbast);
             this.Controls.Add(this.btnInconsistencia);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMecanizada);
@@ -134,5 +157,6 @@
         private System.Windows.Forms.Button btnManual;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnInconsistencia;
+        private System.Windows.Forms.Button btnAbast;
     }
 }

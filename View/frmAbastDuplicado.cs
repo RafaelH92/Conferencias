@@ -1,7 +1,7 @@
 ﻿/*************************************
  * Desenvolvido por Rafael H. Souza. *
  * Data: 27/04/2020                  *
- * Atualzado em: 28/09/2020          *
+ * Atualzado em: 04/06/2020          *
  *************************************/
 
 using System;
@@ -22,54 +22,56 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS
 {
-	public partial class frmFechamento : Form
+	public partial class frmAbastDuplicado : Form
 	{
 		frmMenu frmMenu;
-		public frmFechamento(frmMenu form)
+		public frmAbastDuplicado(frmMenu form)
 		{
 			this.frmMenu = form;
 
 			InitializeComponent();
 
-		}
+		}	
+		
 
 
-
-		public void Consultar()
+		void Consultar()
 		{
 			try
 			{
-				
+				if (txtInicio.Text == "__/__/____" || txtFim.Text == "__/__/____")
 				{
-
+					MessageBox.Show("PREENCHA CORRETAMENTE OS CAMPOS!");
+				}
+				else if (VerificaDataMenor() == true)
+				{
+					MessageBox.Show("DATA INICIAL NÃO PODE SER MAIOR QUE A DATA FINAL!");
+				}
+				else
+				{
+				
+					//-------------------------------------------------------------------
 
 					// Metódo utilizando Dapper
 
 					dgvConsulta.Columns.Clear();
 
-					dgvConsulta.DataSource = fechamento();
+					dgvConsulta.DataSource = abastDuplicado();
+
+					//dgvConsulta.Columns.Add("descontinuidade", "DESCONTINUIDADE");
+					//dgvConsulta.Columns["diferença"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+					//dgvConsulta.Columns.Add("status", "STATUS");
+					//dgvConsulta.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
 
-					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++) //Laço que verifica se está sem processar a mais de 3 dias
+					//Laço que faz a diferença da km inicial e km final, e adiciona na Grid
+
+					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
 					{
-						DateTime dtAtual = DateTime.Now; //Recupera a data atual
-
-						TimeSpan data = dtAtual - Convert.ToDateTime(dgvConsulta.Rows[contador - 1].Cells[1].Value); //Operação que faz a diferença entre a data atual e a data que está processado
-
-						int totDias = data.Days; //Recupera a diferença dos dias
-
-						if (totDias > 3)
-						{
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.IndianRed;
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.White;
-						}
-						else
-						{
-							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
-						}
-						
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
+						//dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.Silver;
+						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
 					}
-
 
 					dgvConsulta.ClearSelection();
 
@@ -85,30 +87,59 @@ namespace CONFERENCIAS
 			{
 
 				MessageBox.Show("OCORREU UM ERRO! " + ex.Message);
-
+			
 			}
 
-
+			
 		}
 
-		public List<Fechamento> fechamento() // Método que retorna os processos do PIMS e suas datas
+
+		public List<AbastDuplicado> abastDuplicado() // Método que retorna a conferência dos erros 
 		{
 
-			string qyFechamento = " SELECT A.DESCRICAO AS PROCESSO,        A.DATA_PROCESSO AS DATA,        A.SECAO,        A.ENTRADA,        CASE          WHEN (B.DATA_ATUAL_FORMATADA - A.DATA_PROCESSO) > 3 THEN           'ATENÇÃO! PROCESSO EM ATRASO'          ELSE           'PROCESSAMENTO OK!'        END STATUS    FROM (                 SELECT P.SECAO AS SECAO,                 P.ENTRADA AS ENTRADA,                 TO_DATE(P.VALOR) AS DATA_PROCESSO,                 P.DESCRICAO           FROM PIMSCS.PARAMETROS P          WHERE P.SECAO IN ('ATRC_MEC',                            'ATRC_PRD',                            'ATRC_INS',                            'RCMP_PRDOP',                            'ATRC_MAN',                            'COLCAM',                            'RCMP_FLUXO',                            'MNF_LUB',                            'RCMP',                            'ATRC_MDI',                            'PRCL_ANM',                            'AGRO_CLIM',                            'AGRO_BROC',                            'AGRO_FORMIGA',                            'ATMEC_RCMP',                            'CSTG_C',                            'MNF_MAN',                            'MNF_PNEUS',                            'ATRC_PLAN',                            'PRCL_MAT',                            'RCMP_PERDA',                            'MNF_ABAST')            AND P.ENTRADA IN ('DT_PROCESSO',                              'DT_HISTMDO',                              'DT_HIST_COLCAM',                              'DT_PROC_DISTCOM',                              'DT_PROC_AGRE',                              'DT_PROC_PROD',                              'DT_PROC_AREA',                              'DT_PROC_PRECIP',                              'DT_MOVTO',                              'DT_PROC_Z_PRECIP',                              'ATMEC_RCMP',                              'RCMP_FLUXO',                              'DT_GERA_ATIVMEC',                              'DT_PRODOPER',                              'ATMEC_RCMP',                              'DT_PROCESSO',                              'DT_PROC_APT_FUNC',                              'DT_PROC_BX_PL_SAFRA',                              'DT_PROC_GAR_EQUIPTO',                              'DT_PROC_OS_SEM_APT',                              'DT_PROC_SERVPREVEXEC',                              'DT_PROC_TEMPO_PER',                              'DT_HISTBOLETIM')          ORDER BY P.DESCRICAO) A,               (SELECT TO_DATE(TO_CHAR(SYSDATE, 'DD/MM/YYYY'), 'DD/MM/YYYY') AS DATA_ATUAL_FORMATADA           FROM DUAL) B   WHERE A.DESCRICAO NOT IN        ('Data do último processamento de distribuição de combustível/lubrificante pelo Manfro para equipamentos no Plantio',         'Data para geração de agreg. para apto de Lubrificação')   ORDER BY A.SECAO, A.ENTRADA";
+			string qyAbastDupl = " SELECT A.NO_BOLETIM  AS BOLETIM_A,        B.NO_BOLETIM  AS BOLETIM_B,        A.DT_OPERACAO AS DATA,        A.CD_EQUIPTO  AS EQUIPAMENTO,        A.CD_MATERIAL AS COMBUSTIVEL,        A.NO_HOR_ODOM AS HORIMETRO,        A.QT_ABASTEC  AS QUANTIDADE    FROM (SELECT D.NO_BOLETIM,                D.DT_OPERACAO,                D.CD_EQUIPTO,                D.CD_MATERIAL,                D.NO_HOR_ODOM,                D.QT_ABASTEC           FROM PIMSCS.APT_ABAST_DE D          WHERE D.DT_OPERACAO BETWEEN :DataIni AND :DataFim                  ORDER BY D.NO_BOLETIM, D.CD_EQUIPTO, D.QT_ABASTEC) A,               (SELECT D.NO_BOLETIM,                D.DT_OPERACAO,                D.CD_EQUIPTO,                D.CD_MATERIAL,                D.NO_HOR_ODOM,                D.QT_ABASTEC           FROM PIMSCS.APT_ABAST_DE D          WHERE D.DT_OPERACAO BETWEEN :DataIni AND :DataFim                  ORDER BY D.NO_BOLETIM, D.CD_EQUIPTO, D.QT_ABASTEC) B   WHERE A.QT_ABASTEC = B.QT_ABASTEC    AND A.DT_OPERACAO = B.DT_OPERACAO    AND A.CD_MATERIAL = B.CD_MATERIAL    AND A.CD_EQUIPTO = B.CD_EQUIPTO    AND A.NO_HOR_ODOM = B.NO_HOR_ODOM    AND A.NO_BOLETIM != B.NO_BOLETIM   ORDER BY A.NO_BOLETIM, B.NO_BOLETIM, A.DT_OPERACAO, A.CD_EQUIPTO, A.NO_HOR_ODOM, A.QT_ABASTEC";
 
 			// Atribui os parâmentros dinâmicos
+
+			var param = new DynamicParameters();
+			param.Add(":DataIni", txtInicio.Text);
+			param.Add(":DataFim", txtFim.Text);
+
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var fechamento = conn.Query<Fechamento>(qyFechamento).ToList();
+				var erroAbast = conn.Query<AbastDuplicado>(qyAbastDupl, param).ToList();
 
-				return fechamento;
+				return erroAbast;
 			}
 		}
 
+
+		public bool VerificaDataMenor() // Verifica se a data inicial é menor que a data inicial
+		{
+			DateTime dataIni = DateTime.ParseExact(txtInicio.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+			DateTime dataFim = DateTime.ParseExact(txtFim.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+
+			if (dataIni > dataFim)
+			{
+				return true;
+			}
+			else return false;
+		}
+
+
+		private void btnExecutar_Click(object sender, EventArgs e)
+		{
+			Consultar();
+
+			if (dgvConsulta.Rows.Count > 0)
+			{
+				btnPDF.Visible = true;
+			}
+		}
 
 		private void dgvConsulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
@@ -118,20 +149,14 @@ namespace CONFERENCIAS
 		private void btnVoltar_Click(object sender, EventArgs e)
 		{
 			frmMenu.pnlBody.Controls.Clear();
-			frmMenuAgricola frm = new frmMenuAgricola(frmMenu);
+
+			frmAbastecimento frm = new frmAbastecimento(frmMenu);
 			frm.TopLevel = false;
 			frmMenu.pnlBody.Controls.Add(frm);
 
+			frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS DE ABASTECIMENTO"; 
+
 			frm.Show();
-
-			frmMenu.lbTitulo.Visible = false;
-		}
-
-		private void btnPDF_Click(object sender, EventArgs e)
-		{
-
-			imprimiPDF();
-			
 		}
 
 		private void imprimiPDF()
@@ -175,13 +200,13 @@ namespace CONFERENCIAS
 				}
 
 				//Exporta para PDF
-				string folderPath = @"\\10.0.3.35\d\Debug\report\RELATÓRIO DE FECHAMENTO.pdf";
+				string folderPath = @"\\10.0.3.35\d\Debug\report\RELATÓRIO DE " + frmMenu.lbTitulo.Text + ".pdf";
 
 				using (System.IO.FileStream stream = new System.IO.FileStream(folderPath, System.IO.FileMode.Create))
 				{
 					//Configurando e adicionando os paragrafos
 
-					iTextSharp.text.Paragraph ph1 = new iTextSharp.text.Paragraph("RELATÓRIO DE FECHAMENTO");
+					iTextSharp.text.Paragraph ph1 = new iTextSharp.text.Paragraph("RELATÓRIO DE " + frmMenu.lbTitulo.Text);
 					ph1.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
 					ph1.Font.SetStyle(5);
 
@@ -207,6 +232,7 @@ namespace CONFERENCIAS
 					pdfDoc.Add(ph1);
 					//pdfDoc.Add(new iTextSharp.text.Paragraph(" ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"));
 					pdfDoc.Add(new iTextSharp.text.Paragraph(" "));
+					pdfDoc.Add(new iTextSharp.text.Paragraph("Período.......: " + txtInicio.Text + " à " + txtFim.Text));
 					pdfDoc.Add(new iTextSharp.text.Paragraph("Usuário.......: " + frmMenu.lbNome.Text));
 					pdfDoc.Add(new iTextSharp.text.Paragraph("Emitido em.: " + DateTime.Now.ToString()));
 					pdfDoc.Add(ph2);
@@ -250,13 +276,10 @@ namespace CONFERENCIAS
 			}
 		}
 
-		private void tmAtualiza_Tick(object sender, EventArgs e)
+		private void btnPDF_Click(object sender, EventArgs e)
 		{
-			while (cbFechamento.Checked)
-			{
-				Consultar();
-				break;
-			}
+			imprimiPDF();
 		}
 	}
+
 }

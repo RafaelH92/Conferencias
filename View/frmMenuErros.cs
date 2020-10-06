@@ -71,5 +71,19 @@ namespace CONFERENCIAS.View
             frmMenu.lbTitulo.Text = "VERIFICAÇÃO DE INCONSISTÊNCIAS";
             frmMenu.lbTitulo.Visible = true;
         }
+
+        private void btnAbast_Click(object sender, EventArgs e)
+        {
+            frmMenu.pnlBody.Controls.Clear();
+
+            frmAbastecimento frm = new frmAbastecimento(frmMenu);
+            frm.TopLevel = false;
+            frmMenu.pnlBody.Controls.Add(frm);
+
+            frm.Show();
+
+            frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS DE ABASTECIMENTO";
+            frmMenu.lbTitulo.Visible = true;
+        }
     }
 }

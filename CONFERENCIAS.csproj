@@ -96,6 +96,7 @@
     <Compile Include="Entidades\FertirriParc.cs" />
     <Compile Include="Entidades\FertirriTalhao.cs" />
     <Compile Include="Entidades\IncExcessoHoras.cs" />
+    <Compile Include="Entidades\AbastDuplicado.cs" />
     <Compile Include="Entidades\MecHoraOp.cs" />
     <Compile Include="Entidades\MecImpXEquip.cs" />
     <Compile Include="Entidades\MecEquipXImp.cs" />
@@ -148,6 +149,18 @@
     </Compile>
     <Compile Include="View\frmBrocas.Designer.cs">
       <DependentUpon>frmBrocas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmAbastecimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmAbastecimento.Designer.cs">
+      <DependentUpon>frmAbastecimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmAbastDuplicado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmAbastDuplicado.Designer.cs">
+      <DependentUpon>frmAbastDuplicado.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmRateio.cs">
       <SubType>Form</SubType>
@@ -379,6 +392,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmBrocas.resx">
       <DependentUpon>frmBrocas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmAbastecimento.resx">
+      <DependentUpon>frmAbastecimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmAbastDuplicado.resx">
+      <DependentUpon>frmAbastDuplicado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmRateio.resx">
       <DependentUpon>frmRateio.cs</DependentUpon>

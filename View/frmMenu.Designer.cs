@@ -150,7 +150,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(38, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.8";
+            this.lbVer.Text = "Ver: 7.9";
             // 
             // btnTransporte
             // 

@@ -11,6 +11,7 @@ namespace CONFERENCIAS.Entidades
         public Int64 EQUIPAMENTO { get; set; }
         public double TONELADAS { get; set; }
         public Int64 VIAGENS { get; set; }
+        public Int64 CARGAS { get; set; }
         public Int64 RAIO { get; set; }
         public Int64 RATEIO { get; set; }
 
