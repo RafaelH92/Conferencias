@@ -146,11 +146,11 @@
             this.lbVer.AutoSize = true;
             this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbVer.Location = new System.Drawing.Point(114, 709);
+            this.lbVer.Location = new System.Drawing.Point(100, 693);
             this.lbVer.Name = "lbVer";
-            this.lbVer.Size = new System.Drawing.Size(38, 12);
+            this.lbVer.Size = new System.Drawing.Size(45, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.9";
+            this.lbVer.Text = "Ver: 7.9.1";
             // 
             // btnTransporte
             // 
@@ -301,14 +301,13 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlSidebar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "frmMenu";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Tag = "";
             this.Text = "Menu de Conferências";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmMenu_Load);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebar.PerformLayout();
             this.panel1.ResumeLayout(false);

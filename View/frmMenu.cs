@@ -136,6 +136,12 @@ namespace CONFERENCIAS.View
             lbTitulo.Visible = false;
             frm.Show();
         }
+
+        private void frmMenu_Load(object sender, EventArgs e)
+        {
+            this.MaximizeBox = false; //Desabilita o botão de Maximizar do form
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized; //Força a aplicação a abrir em "tela cheia" (Maximizado)
+        }
     }
     
 }
