@@ -1,7 +1,7 @@
 ﻿/*************************************
  * Desenvolvido por Rafael H. Souza. *
  * Data: 27/04/2020                  *
- * Atualzado em: 04/06/2020          *
+ * Atualzado em: 16/10/2020          *
  *************************************/
 
 using System;
@@ -22,10 +22,10 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS
 {
-	public partial class frmRateio : Form
+	public partial class frmConsecutivo : Form
 	{
 		frmMenu frmMenu;
-		public frmRateio(frmMenu form)
+		public frmConsecutivo(frmMenu form)
 		{
 			this.frmMenu = form;
 
@@ -62,7 +62,7 @@ namespace CONFERENCIAS
 
 						dgvConsulta.Columns.Clear();
 
-						dgvConsulta.DataSource = rateio();
+						dgvConsulta.DataSource = consecutivo();
 
 
 						for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
@@ -94,10 +94,10 @@ namespace CONFERENCIAS
 		}
 
 
-		public List<Rateio> rateio() // Método que retorna a geração do rateio
+		public List<Consecutivo> consecutivo() // Método que retorna a conferência dos consecutivos
 		{
 
-			string qyRat = " SELECT CD_EQUIPTO AS EQUIPAMENTO,        SUM(QT_CANA_ENT) / 1000 TONELADAS,        SUM(QT_VIAG_ENT) VIAGENS,        SUM(QT_CARGA_ENT) CARGAS,        ROUND(SUM(KG_DISTANCIA) / SUM(QT_CANA_ENT), 0) AS RAIO,        ROUND((SUM(KG_DISTANCIA) / SUM(QT_CANA_ENT) * 2) * SUM(QT_VIAG_ENT),              0) AS RATEIO   FROM PIMSCS.HISTPRDEQU  WHERE CD_TP_RECURSO = 'CM'    AND DT_HISTORICO BETWEEN :Dataini AND :DataFim  GROUP BY CD_EQUIPTO  ORDER BY CD_EQUIPTO ";
+			string qyConsec = " SELECT A.LIBERACAO,        A.CONSECUTIVO,        A.SEQUENCIA,        A.COD_PARCERIA,        A.PARCERIA,        A.DATA_DE_ENTRADA,        A.CAMINHAO,        A.MODELO          FROM (SELECT G.NO_LIBERACAO AS LIBERACAO,                 G.NO_PESAGEM   AS CONSECUTIVO,                 G.NO_SEQUENCIA AS SEQUENCIA,                 G.CD_UPNIVEL1  AS COD_PARCERIA,                 U.DE_UPNIVEL1  AS PARCERIA,                 G.DT_ENTRADA   AS DATA_DE_ENTRADA,                 R.CD_EQUIPTO   AS CAMINHAO,                 M.DE_MODELO    AS MODELO                     FROM PIMSCS.APT_CARGAS     G,                 PIMSCS.APT_CARGAS_REC R,                 PIMSCS.UPNIVEL1       U,                 PIMSCS.EQUIPTOS       E,                 PIMSCS.MODELOS        M                    WHERE                    G.NO_LIBERACAO = R.NO_LIBERACAO        AND G.CD_UPNIVEL1 = U.CD_UPNIVEL1        AND E.CD_MODELO = M.CD_MODELO        AND R.CD_EQUIPTO = E.CD_EQUIPTO        AND R.CD_TP_RECURSO = 'CM'        AND G.DT_MOVIMENTO BETWEEN :DataIni AND :DataFim                    ORDER BY G.NO_PESAGEM, G.NO_SEQUENCIA) A,               (SELECT G.NO_LIBERACAO AS LIBERACAO,                 G.NO_PESAGEM   AS CONSECUTIVO,                 G.NO_SEQUENCIA AS SEQUENCIA,                 G.CD_UPNIVEL1  AS COD_PARCERIA,                 U.DE_UPNIVEL1  AS PARCERIA,                 G.DT_ENTRADA   AS DATA_DE_ENTRADA,                 R.CD_EQUIPTO   AS CAMINHAO,                 M.DE_MODELO    AS MODELO                     FROM PIMSCS.APT_CARGAS     G,                 PIMSCS.APT_CARGAS_REC R,                 PIMSCS.UPNIVEL1       U,                 PIMSCS.EQUIPTOS       E,                 PIMSCS.MODELOS        M                    WHERE                    G.NO_LIBERACAO = R.NO_LIBERACAO        AND G.CD_UPNIVEL1 = U.CD_UPNIVEL1        AND E.CD_MODELO = M.CD_MODELO        AND R.CD_EQUIPTO = E.CD_EQUIPTO        AND R.CD_TP_RECURSO = 'CM'        AND G.DT_MOVIMENTO BETWEEN :DataIni AND :DataFim                    ORDER BY G.NO_PESAGEM, G.NO_SEQUENCIA) B   WHERE A.LIBERACAO != B.LIBERACAO    AND A.CONSECUTIVO = B.CONSECUTIVO    AND A.SEQUENCIA = B.SEQUENCIA    AND A.CAMINHAO != B.CAMINHAO   ORDER BY A.CONSECUTIVO, A.SEQUENCIA ";
 
 			// Atribui os parâmentros dinâmicos
 
@@ -111,9 +111,9 @@ namespace CONFERENCIAS
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var rat = conn.Query<Rateio>(qyRat, param).ToList();
+				var consec = conn.Query<Consecutivo>(qyConsec, param).ToList();
 
-				return rat;
+				return consec;
 			}
 		}
 
@@ -170,7 +170,7 @@ namespace CONFERENCIAS
 				pdfTable.DefaultCell.Padding = 0;
 				pdfTable.DefaultCell.PaddingBottom = 5;
 				pdfTable.DefaultCell.PaddingTop = 5;
-				pdfTable.WidthPercentage = 60;
+				pdfTable.WidthPercentage = 100;
 				pdfTable.DefaultCell.BorderWidth = 0;
 				pdfTable.DefaultCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
 				var font = iTextSharp.text.FontFactory.GetFont("Arial", 8.5f);

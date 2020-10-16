@@ -58,5 +58,19 @@ namespace CONFERENCIAS.View
             frmMenu.lbTitulo.Text = "RATEIO DOS CAMINHÕES CANAVIEIROS";
             frmMenu.lbTitulo.Visible = true;
         }
+
+        private void btnConsecutivo_Click(object sender, EventArgs e)
+        {
+            frmMenu.pnlBody.Controls.Clear();
+
+            frmConsecutivo frm = new frmConsecutivo(frmMenu);
+            frm.TopLevel = false;
+            frmMenu.pnlBody.Controls.Add(frm);
+
+            frm.Show();
+
+            frmMenu.lbTitulo.Text = "CARGAS COM CONSECUTIVOS IGUAIS";
+            frmMenu.lbTitulo.Visible = true;
+        }
     }
 }

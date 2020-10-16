@@ -123,6 +123,7 @@
     <Compile Include="Entidades\BrocaFornecedor.cs" />
     <Compile Include="Entidades\FertirriProc.cs" />
     <Compile Include="Entidades\Fechamento.cs" />
+    <Compile Include="Entidades\Consecutivo.cs" />
     <Compile Include="Entidades\Rateio.cs" />
     <Compile Include="Entidades\PerdaProc.cs" />
     <Compile Include="Entidades\Safra.cs" />
@@ -161,6 +162,12 @@
     </Compile>
     <Compile Include="View\frmAbastDuplicado.Designer.cs">
       <DependentUpon>frmAbastDuplicado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmConsecutivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmConsecutivo.Designer.cs">
+      <DependentUpon>frmConsecutivo.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmRateio.cs">
       <SubType>Form</SubType>
@@ -398,6 +405,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmAbastDuplicado.resx">
       <DependentUpon>frmAbastDuplicado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmConsecutivo.resx">
+      <DependentUpon>frmConsecutivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmRateio.resx">
       <DependentUpon>frmRateio.cs</DependentUpon>

@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenuTransporte));
             this.btnRateio = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnConsecutivo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRateio
@@ -65,6 +66,28 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Selecione um tipo de conferência abaixo:";
             // 
+            // btnConsecutivo
+            // 
+            this.btnConsecutivo.BackColor = System.Drawing.Color.Black;
+            this.btnConsecutivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsecutivo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnConsecutivo.FlatAppearance.BorderSize = 0;
+            this.btnConsecutivo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnConsecutivo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnConsecutivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsecutivo.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsecutivo.ForeColor = System.Drawing.Color.White;
+            this.btnConsecutivo.Image = ((System.Drawing.Image)(resources.GetObject("btnConsecutivo.Image")));
+            this.btnConsecutivo.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.btnConsecutivo.Location = new System.Drawing.Point(303, 414);
+            this.btnConsecutivo.Name = "btnConsecutivo";
+            this.btnConsecutivo.Size = new System.Drawing.Size(255, 55);
+            this.btnConsecutivo.TabIndex = 7;
+            this.btnConsecutivo.Text = "&Cargas com Consecutivos Iguais";
+            this.btnConsecutivo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConsecutivo.UseVisualStyleBackColor = false;
+            this.btnConsecutivo.Click += new System.EventHandler(this.btnConsecutivo_Click);
+            // 
             // frmMenuTransporte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -72,6 +95,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(864, 481);
             this.ControlBox = false;
+            this.Controls.Add(this.btnConsecutivo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRateio);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -86,5 +110,6 @@
         #endregion
         private System.Windows.Forms.Button btnRateio;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnConsecutivo;
     }
 }

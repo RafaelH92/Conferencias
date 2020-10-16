@@ -148,9 +148,9 @@
             this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.lbVer.Location = new System.Drawing.Point(100, 693);
             this.lbVer.Name = "lbVer";
-            this.lbVer.Size = new System.Drawing.Size(45, 12);
+            this.lbVer.Size = new System.Drawing.Size(43, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.9.1";
+            this.lbVer.Text = "Ver: 7.10";
             // 
             // btnTransporte
             // 
