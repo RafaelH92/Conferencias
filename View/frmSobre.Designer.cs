@@ -43,7 +43,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -177,10 +176,9 @@
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(216, 276);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(593, 17);
+            this.label9.Size = new System.Drawing.Size(491, 17);
             this.label9.TabIndex = 19;
-            this.label9.Text = "VI - Adicionado uma consulta para verifiar apontamentos de abastecimentos duplica" +
-    "dos.";
+            this.label9.Text = "VI - Corrigido a consulta de apontamentos de abastecimento duplicados.";
             // 
             // label10
             // 
@@ -204,17 +202,6 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "VIII - Adicionado verificação de cargas com consecutivos iguais.";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(243, 236);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(527, 17);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "VIII - CORRIGIDO O BUG ONDE A APLICAÇÃO NÃO FICAVA NA BARRA DE TAREFAS.";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -234,7 +221,6 @@
             this.ClientSize = new System.Drawing.Size(1013, 511);
             this.ControlBox = false;
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -273,7 +259,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
     }
 }
