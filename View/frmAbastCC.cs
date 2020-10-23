@@ -1,7 +1,7 @@
 ﻿/*************************************
  * Desenvolvido por Rafael H. Souza. *
  * Data: 27/04/2020                  *
- * Atualzado em: 04/06/2020          *
+ * Atualzado em: 22/10/2020          *
  *************************************/
 
 using System;
@@ -22,10 +22,10 @@ using CONFERENCIAS.View;
 
 namespace CONFERENCIAS
 {
-	public partial class frmInconsistencia : Form
+	public partial class frmAbastCC : Form
 	{
 		frmMenu frmMenu;
-		public frmInconsistencia(frmMenu form)
+		public frmAbastCC(frmMenu form)
 		{
 			this.frmMenu = form;
 
@@ -47,7 +47,7 @@ namespace CONFERENCIAS
 				{
 					MessageBox.Show("DATA INICIAL NÃO PODE SER MAIOR QUE A DATA FINAL!");
 				}
-				else if (rbDesc.Checked)
+				else 
 				{
 
 
@@ -55,62 +55,72 @@ namespace CONFERENCIAS
 
 					// Metódo utilizando Dapper
 
-					if (txtFrota.Text == string.Empty)
+					dgvConsulta.Columns.Clear();
+
+					if (txtCcusto.Text == string.Empty)
 					{
-						MessageBox.Show("INFORME O EQUIPAMENTO!");
-					}
+						dgvConsulta.DataSource = abastCCAll();
+
+						for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
+						{
+							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
+						}
+
+                        //Laço que verifica se o campo esta nulo e o preenche para exportar para PDF
+
+                        for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
+                        {
+                            if (dgvConsulta.Rows[contador - 1].Cells[1].Value == null)
+                            {
+                                dgvConsulta.Rows[contador - 1].Cells[1].Value = "---";
+                                
+                            }
+							if (dgvConsulta.Rows[contador - 1].Cells[2].Value == null)
+							{
+								dgvConsulta.Rows[contador - 1].Cells[2].Value = "---";
+
+							}
+							if (dgvConsulta.Rows[contador - 1].Cells[3].Value == null)
+							{
+								dgvConsulta.Rows[contador - 1].Cells[3].Value = "---";
+
+							}
+						}
+                    }
 					else
 					{
 
 
 						dgvConsulta.Columns.Clear();
 
-						dgvConsulta.DataSource = inconsistncias();
-
-						dgvConsulta.Columns.Add("descontinuidade", "DESCONTINUIDADE");
-						//dgvConsulta.Columns["diferença"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-						dgvConsulta.Columns.Add("status", "STATUS");
-						//dgvConsulta.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+						dgvConsulta.DataSource = abastCC();
 
 
-						//Laço que faz a diferença da km inicial e km final, e adiciona na Grid
-
-						for (int contador = 1; contador < dgvConsulta.Rows.Count; contador++)
-						{
-							Int32 diferenca = Convert.ToInt32(dgvConsulta.Rows[contador - 1].Cells[7].Value) - Convert.ToInt32(dgvConsulta.Rows[contador].Cells[6].Value);
-
-							string valor = Convert.ToString(diferenca);
-							valor = valor.Insert(valor.Length - 1, ",");
-
-							if (valor == ",0")
-							{
-								valor = null;
-								dgvConsulta.Rows[contador - 1].Cells[9].Value = "OK!";
-								//dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.DarkGreen;
-								dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
-							}
-							else if (valor != ",0")
-							{
-								dgvConsulta.Rows[contador - 1].Cells[9].Value = "VERIFIQUE!";
-								dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.IndianRed;
-								dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.White;
-							}
-
-							dgvConsulta.Rows[contador - 1].Cells[8].Value = valor;
-
-
-
-						}
-						//Laço que verifica se o campo esta nulo e o preenche para exportar para PDF
 						for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
 						{
-							if (dgvConsulta.Rows[contador - 1].Cells[8].Value == null)
-							{
-								dgvConsulta.Rows[contador - 1].Cells[8].Value = "---";
-								dgvConsulta.Rows[contador - 1].Cells[9].Value = "OK!";
-							}
+							dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.FromArgb(35, 35, 35);
 						}
 
+						//Laço que verifica se o campo esta nulo e o preenche para exportar para PDF
+
+						for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
+						{
+							if (dgvConsulta.Rows[contador - 1].Cells[1].Value == null)
+							{
+								dgvConsulta.Rows[contador - 1].Cells[1].Value = "---";
+
+							}
+							if (dgvConsulta.Rows[contador - 1].Cells[2].Value == null)
+							{
+								dgvConsulta.Rows[contador - 1].Cells[2].Value = "---";
+
+							}
+							if (dgvConsulta.Rows[contador - 1].Cells[3].Value == null)
+							{
+								dgvConsulta.Rows[contador - 1].Cells[3].Value = "---";
+
+							}
+						}
 
 						dgvConsulta.ClearSelection();
 
@@ -119,40 +129,6 @@ namespace CONFERENCIAS
 						lbRaf.Visible = true;
 						lLemail.Visible = true;
 					}
-				}
-				else if (rbExce.Checked)
-				{
-
-					//-------------------------------------------------------------------
-
-					// Metódo utilizando Dapper
-
-					dgvConsulta.Columns.Clear();
-
-					if(rbExce.Checked && txtFrota.Text == string.Empty)
-					{
-						dgvConsulta.DataSource = excessoHorasAll();
-					}
-					else if (rbExce.Checked && txtFrota.Text != string.Empty)
-					{
-						dgvConsulta.DataSource = excessoHorasEq();
-					}
-					
-
-					//Laço que faz que muda de cor a grid
-
-					for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
-					{
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.BackColor = Color.IndianRed;
-						dgvConsulta.Rows[contador - 1].DefaultCellStyle.ForeColor = Color.White;
-					}
-
-					dgvConsulta.ClearSelection();
-
-					lbDeveloped.Visible = true;
-					//lbNome.Visible = true;
-					lbRaf.Visible = true;
-					lLemail.Visible = true;
 				}
 
 			}
@@ -167,55 +143,33 @@ namespace CONFERENCIAS
 		}
 
 
-		public List<Inconsistncia> inconsistncias() // Método que retorna a conferência dos abastecimentos 
+		public List<AbastCC> abastCCAll() // Método que retorna a conferência dos abastecimentos 
 		{
 
-			string qyIncon = "SELECT A.NO_BOLETIM AS BOLETIM, A.DT_OPERACAO AS DATA, A.CD_FUNC AS COD_FUNC, F.DE_FUNC AS FUNCIONARIO, A.CD_EQUIPTO AS EQUIPTO, M.DE_MODELO AS MODELO, B.QT_HK_INICIO AS INICIO, B.QT_HK_FINAL AS FIM FROM PIMSCS.APT_MEC_HE A, PIMSCS.APT_MEC_DE B, PIMSCS.FUNCIONARS F, PIMSCS.MODELOS    M, PIMSCS.EQUIPTOS   E WHERE A.NO_BOLETIM = B.NO_BOLETIM AND A.CD_FUNC = F.CD_FUNC AND E.CD_MODELO = M.CD_MODELO AND E.CD_EQUIPTO = A.CD_EQUIPTO AND A.CD_EQUIPTO = :Frota AND B.FG_TP_APTO = 'M' AND A.DT_OPERACAO >= :DataIni AND A.DT_OPERACAO <= :DataFim ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO";
+			string qyAbast = " SELECT TO_CHAR(A.NSEQABAST) AS ID_ABAST,        TO_CHAR(A.DDTAABAST) AS DATA,        TO_CHAR(A.CDESABAST) AS OPERACAO,        TO_CHAR((A.NCCAABAST || ' - ' || B.DE_CCUSTO)) AS CCUSTO,        A.NQTDABAST AS QUANTIDADE   FROM ABAST.APTABAST A, PIMSCS.CCUSTOS B  WHERE A.NCCAABAST = B.CD_CCUSTO    AND A.DDTAABAST BETWEEN :DataIni AND :DataFim    AND A.CDESABAST IN        ('Abastecimento por centro de custo', 'Centro de Custo')  UNION ALL  SELECT CASE          WHEN A.NSEQABAST = NULL THEN           'NULO'          ELSE           'TOTAL'        END ID_ABAST,        CASE          WHEN A.DDTAABAST = NULL THEN           'NULO'          ELSE           ''        END DATA,        CASE          WHEN A.CDESABAST = NULL THEN           'NULO'          ELSE           ''        END OPERACAO,        CASE          WHEN A.NCCAABAST || ' - ' || B.DE_CCUSTO = NULL THEN           'NULO'          ELSE           ''        END CCUSTO,        SUM(A.NQTDABAST) AS QUANTIDADE   FROM ABAST.APTABAST A, PIMSCS.CCUSTOS B  WHERE A.NCCAABAST = B.CD_CCUSTO    AND A.DDTAABAST BETWEEN :DataIni AND :DataFim    AND A.CDESABAST IN        ('Abastecimento por centro de custo', 'Centro de Custo')   GROUP BY (CASE             WHEN A.NSEQABAST = NULL THEN              'NULO'             ELSE              'TOTAL'           END),           (CASE             WHEN A.DDTAABAST = NULL THEN              'NULO'             ELSE              ''           END),           (CASE             WHEN A.CDESABAST = NULL THEN              'NULO'             ELSE              ''           END),           (CASE             WHEN A.NCCAABAST || ' - ' || B.DE_CCUSTO = NULL THEN              'NULO'             ELSE              ''           END)   ORDER BY DATA, CCUSTO";
 
 			// Atribui os parâmentros dinâmicos
 
 			var param = new DynamicParameters();
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
-			param.Add(":Frota", txtFrota.Text);
+			// param.Add(":Frota", txtCcusto.Text);
 
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var incon = conn.Query<Inconsistncia>(qyIncon, param).ToList();
+				var abast = conn.Query<AbastCC>(qyAbast, param).ToList();
 
-				return incon;
+				return abast;
 			}
 		}
 
-		public List<IncExcessoHoras> excessoHorasAll() // Método que retorna a conferência dos abastecimentos 
+		public List<AbastCC> abastCC() // Método que retorna a conferência dos abastecimentos 
 		{
 
-			string qyExce = " SELECT A.DATA,  A.EQUIPTO, A.MODELO, SUM(A.TOTAL) AS HORAS    FROM (                 SELECT A.NO_BOLETIM  AS BOLETIM,                 A.DT_OPERACAO AS DATA,                 A.CD_EQUIPTO  AS EQUIPTO,                 M.DE_MODELO   AS MODELO,                 B.QT_HK_TOTAL AS TOTAL           FROM PIMSCS.APT_MEC_HE A,                 PIMSCS.APT_MEC_DE B,                 PIMSCS.FUNCIONARS F,                 PIMSCS.MODELOS    M,                 PIMSCS.EQUIPTOS   E          WHERE A.NO_BOLETIM = B.NO_BOLETIM            AND A.CD_FUNC = F.CD_FUNC            AND E.CD_MODELO = M.CD_MODELO            AND E.CD_EQUIPTO = A.CD_EQUIPTO            AND A.FG_TP_APTO = B.FG_TP_APTO               AND B.FG_TP_APTO != 'F'            AND A.DT_OPERACAO BETWEEN :DataIni AND :DataFim            AND M.CD_GRUPO_OP IN (SELECT G.CD_GRUPO_OP                                    FROM PIMSCS.GRUOPERATI G                                   WHERE G.CD_UNIMED = 'HD')          ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO) A   GROUP BY A.DATA, A.EQUIPTO, A.MODELO  HAVING SUM(A.TOTAL) > 24.00   ORDER BY A.DATA, A.EQUIPTO, A.MODELO ";
-
-			// Atribui os parâmentros dinâmicos
-
-			var param = new DynamicParameters();
-			param.Add(":DataIni", txtInicio.Text);
-			param.Add(":DataFim", txtFim.Text);			
-
-			// Abre a conexão e executa a query
-
-
-			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
-			{
-				var exce = conn.Query<IncExcessoHoras>(qyExce, param).ToList();
-
-				return exce;
-			}
-		}
-
-		public List<IncExcessoHoras> excessoHorasEq() // Método que retorna a conferência dos abastecimentos 
-		{
-
-			string qyExce = " SELECT A.DATA,  A.EQUIPTO, A.MODELO, SUM(A.TOTAL) AS HORAS    FROM (                 SELECT A.NO_BOLETIM  AS BOLETIM,                 A.DT_OPERACAO AS DATA,                 A.CD_EQUIPTO  AS EQUIPTO,                 M.DE_MODELO   AS MODELO,                 B.QT_HK_TOTAL AS TOTAL           FROM PIMSCS.APT_MEC_HE A,                 PIMSCS.APT_MEC_DE B,                 PIMSCS.FUNCIONARS F,                 PIMSCS.MODELOS    M,                 PIMSCS.EQUIPTOS   E          WHERE A.NO_BOLETIM = B.NO_BOLETIM            AND A.CD_FUNC = F.CD_FUNC            AND E.CD_MODELO = M.CD_MODELO            AND E.CD_EQUIPTO = A.CD_EQUIPTO            AND A.FG_TP_APTO = B.FG_TP_APTO               AND B.FG_TP_APTO != 'F'            AND A.DT_OPERACAO BETWEEN :DataIni AND :DataFim            AND M.CD_GRUPO_OP IN (SELECT G.CD_GRUPO_OP                                    FROM PIMSCS.GRUOPERATI G                                   WHERE G.CD_UNIMED = 'HD')          ORDER BY A.DT_OPERACAO, B.QT_HK_INICIO) A 		 		  WHERE A.EQUIPTO IN (" + txtFrota.Text + ")   GROUP BY A.DATA, A.EQUIPTO, A.MODELO  HAVING SUM(A.TOTAL) > 24.00   ORDER BY A.DATA, A.EQUIPTO, A.MODELO";
+			string qyAbast = " SELECT TO_CHAR(A.NSEQABAST) AS ID_ABAST,        TO_CHAR(A.DDTAABAST) AS DATA,        TO_CHAR(A.CDESABAST) AS OPERACAO,        TO_CHAR((A.NCCAABAST || ' - ' || B.DE_CCUSTO)) AS CCUSTO,        A.NQTDABAST AS QUANTIDADE   FROM ABAST.APTABAST A, PIMSCS.CCUSTOS B  WHERE A.NCCAABAST = B.CD_CCUSTO    AND A.NCCAABAST IN (" + txtCcusto.Text + ")    AND A.DDTAABAST BETWEEN :DataIni AND :DataFim    AND A.CDESABAST IN        ('Abastecimento por centro de custo', 'Centro de Custo')  UNION ALL  SELECT CASE          WHEN A.NSEQABAST = NULL THEN           'NULO'          ELSE           'TOTAL'        END ID_ABAST,        CASE          WHEN A.DDTAABAST = NULL THEN           'NULO'          ELSE           ''        END DATA,        CASE          WHEN A.CDESABAST = NULL THEN           'NULO'          ELSE           ''        END OPERACAO,        CASE          WHEN A.NCCAABAST || ' - ' || B.DE_CCUSTO = NULL THEN           'NULO'          ELSE           ''        END CCUSTO,        SUM(A.NQTDABAST) AS QUANTIDADE   FROM ABAST.APTABAST A, PIMSCS.CCUSTOS B  WHERE A.NCCAABAST = B.CD_CCUSTO    AND A.NCCAABAST IN (" + txtCcusto.Text + ")    AND A.DDTAABAST BETWEEN :DataIni AND :DataFim    AND A.CDESABAST IN        ('Abastecimento por centro de custo', 'Centro de Custo')   GROUP BY (CASE             WHEN A.NSEQABAST = NULL THEN              'NULO'             ELSE              'TOTAL'           END),           (CASE             WHEN A.DDTAABAST = NULL THEN              'NULO'             ELSE              ''           END),           (CASE             WHEN A.CDESABAST = NULL THEN              'NULO'             ELSE              ''           END),           (CASE             WHEN A.NCCAABAST || ' - ' || B.DE_CCUSTO = NULL THEN              'NULO'             ELSE              ''           END)   ORDER BY DATA, CCUSTO";
 
 			// Atribui os parâmentros dinâmicos
 
@@ -223,14 +177,15 @@ namespace CONFERENCIAS
 			param.Add(":DataIni", txtInicio.Text);
 			param.Add(":DataFim", txtFim.Text);
 
+
 			// Abre a conexão e executa a query
 
 
 			using (IDbConnection conn = new OracleConnection("Password=pims;User ID=CONSULTOR;Data Source=ORA81_TCP"))
 			{
-				var exce = conn.Query<IncExcessoHoras>(qyExce, param).ToList();
+				var abast = conn.Query<AbastCC>(qyAbast, param).ToList();
 
-				return exce;
+				return abast;
 			}
 		}
 
@@ -398,13 +353,14 @@ namespace CONFERENCIAS
 		private void btnVoltar_Click_1(object sender, EventArgs e)
 		{
 			frmMenu.pnlBody.Controls.Clear();
-			frmMenuErros frm = new frmMenuErros(frmMenu);
+
+			frmAbastecimento frm = new frmAbastecimento(frmMenu);
 			frm.TopLevel = false;
 			frmMenu.pnlBody.Controls.Add(frm);
 
-			frm.Show();
+			frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS DE ABASTECIMENTO";
 
-			frmMenu.lbTitulo.Visible = false;
+			frm.Show();
 		}
 	}
 

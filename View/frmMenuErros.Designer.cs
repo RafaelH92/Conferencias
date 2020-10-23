@@ -102,7 +102,7 @@
             this.btnInconsistencia.ForeColor = System.Drawing.Color.White;
             this.btnInconsistencia.Image = ((System.Drawing.Image)(resources.GetObject("btnInconsistencia.Image")));
             this.btnInconsistencia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInconsistencia.Location = new System.Drawing.Point(556, 226);
+            this.btnInconsistencia.Location = new System.Drawing.Point(795, 226);
             this.btnInconsistencia.Name = "btnInconsistencia";
             this.btnInconsistencia.Size = new System.Drawing.Size(255, 55);
             this.btnInconsistencia.TabIndex = 7;
@@ -123,7 +123,7 @@
             this.btnAbast.ForeColor = System.Drawing.Color.White;
             this.btnAbast.Image = ((System.Drawing.Image)(resources.GetObject("btnAbast.Image")));
             this.btnAbast.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAbast.Location = new System.Drawing.Point(817, 226);
+            this.btnAbast.Location = new System.Drawing.Point(543, 226);
             this.btnAbast.Name = "btnAbast";
             this.btnAbast.Size = new System.Drawing.Size(255, 55);
             this.btnAbast.TabIndex = 8;

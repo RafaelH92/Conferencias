@@ -92,6 +92,9 @@
   <ItemGroup>
     <Compile Include="Conexao\ConADM.cs" />
     <Compile Include="Conexao\ConPims.cs" />
+    <Compile Include="Entidades\AbastCC.cs" />
+    <Compile Include="Entidades\AbasTan.cs" />
+    <Compile Include="Entidades\AbastLt.cs" />
     <Compile Include="Entidades\BrocaParceria.cs" />
     <Compile Include="Entidades\FertirriParc.cs" />
     <Compile Include="Entidades\FertirriTalhao.cs" />
@@ -133,6 +136,18 @@
     <Compile Include="Entidades\ConfLub.cs" />
     <Compile Include="Entidades\ConfAbast.cs" />
     <Compile Include="Entidades\ParamPrestador.cs" />
+    <Compile Include="View\frmAbasTan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmAbasTan.Designer.cs">
+      <DependentUpon>frmAbasTan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmAbastLt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmAbastLt.Designer.cs">
+      <DependentUpon>frmAbastLt.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmFechamento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +183,12 @@
     </Compile>
     <Compile Include="View\frmConsecutivo.Designer.cs">
       <DependentUpon>frmConsecutivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmAbastCC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmAbastCC.Designer.cs">
+      <DependentUpon>frmAbastCC.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmRateio.cs">
       <SubType>Form</SubType>
@@ -391,6 +412,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\frmAbasTan.resx">
+      <DependentUpon>frmAbasTan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmAbastLt.resx">
+      <DependentUpon>frmAbastLt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmFechamento.resx">
       <DependentUpon>frmFechamento.cs</DependentUpon>
     </EmbeddedResource>
@@ -408,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmConsecutivo.resx">
       <DependentUpon>frmConsecutivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmAbastCC.resx">
+      <DependentUpon>frmAbastCC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmRateio.resx">
       <DependentUpon>frmRateio.cs</DependentUpon>

@@ -56,5 +56,44 @@ namespace CONFERENCIAS.View
             frmMenu.lbTitulo.Text = "APONTAMENTOS DUPLICADOS";
             frm.Show();
         }
+
+        private void btnAbastCC_Click(object sender, EventArgs e)
+        {
+            frmMenu.pnlBody.Controls.Clear();
+
+            frmAbastCC frm = new frmAbastCC(frmMenu);
+            frm.TopLevel = false;
+            frmMenu.pnlBody.Controls.Add(frm);
+
+            frmMenu.lbTitulo.Visible = true;
+            frmMenu.lbTitulo.Text = "APONTAMENTOS POR CENTRO DE CUSTO";
+            frm.Show();
+        }
+
+        private void btnAbastLt_Click(object sender, EventArgs e)
+        {
+            frmMenu.pnlBody.Controls.Clear();
+
+            frmAbastLt frm = new frmAbastLt(frmMenu);
+            frm.TopLevel = false;
+            frmMenu.pnlBody.Controls.Add(frm);
+
+            frmMenu.lbTitulo.Visible = true;
+            frmMenu.lbTitulo.Text = "APONTAMENTOS COM QUANTIDADE MENOR QUE 1 LITRO";
+            frm.Show();
+        }
+
+        private void btnAbasTan_Click(object sender, EventArgs e)
+        {
+            frmMenu.pnlBody.Controls.Clear();
+
+            frmAbastTan frm = new frmAbastTan(frmMenu);
+            frm.TopLevel = false;
+            frmMenu.pnlBody.Controls.Add(frm);
+
+            frmMenu.lbTitulo.Visible = true;
+            frmMenu.lbTitulo.Text = "APTOS COM QUANTIDADE MAIOR QUE CAPACIDADE DO TANQUE";
+            frm.Show();
+        }
     }
 }

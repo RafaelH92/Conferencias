@@ -82,7 +82,7 @@ namespace CONFERENCIAS.View
 
             frm.Show();
 
-            frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS DE ABASTECIMENTO";
+            frmMenu.lbTitulo.Text = "VERIFICAÇÕES DE APONTAMENTOS DE ABASTECIMENTO";
             frmMenu.lbTitulo.Visible = true;
         }
     }

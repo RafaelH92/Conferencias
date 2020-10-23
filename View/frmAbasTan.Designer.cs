@@ -1,6 +1,6 @@
 ﻿namespace CONFERENCIAS
 {
-    partial class frmAbastDuplicado
+    partial class frmAbastTan
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAbastDuplicado));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAbastTan));
             this.dgvConsulta = new System.Windows.Forms.DataGridView();
             this.lbDeveloped = new System.Windows.Forms.Label();
             this.lbRaf = new System.Windows.Forms.Label();
@@ -268,7 +268,7 @@
             this.btnPDF.Visible = false;
             this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
             // 
-            // frmAbastDuplicado
+            // frmAbastTan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -286,7 +286,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "frmAbastDuplicado";
+            this.Name = "frmAbastTan";
             this.Text = "Conferências Combustíveis";
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).EndInit();
             this.Gb1.ResumeLayout(false);

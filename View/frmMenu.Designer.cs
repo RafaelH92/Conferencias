@@ -37,7 +37,7 @@
             this.lbVer = new System.Windows.Forms.Label();
             this.btnTransporte = new System.Windows.Forms.Button();
             this.pnlAtivo = new System.Windows.Forms.Panel();
-            this.btnErros = new System.Windows.Forms.Button();
+            this.btnVeriAptos = new System.Windows.Forms.Button();
             this.btnInteg = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLogoff = new System.Windows.Forms.Button();
@@ -71,7 +71,7 @@
             this.pnlSidebar.Controls.Add(this.lbVer);
             this.pnlSidebar.Controls.Add(this.btnTransporte);
             this.pnlSidebar.Controls.Add(this.pnlAtivo);
-            this.pnlSidebar.Controls.Add(this.btnErros);
+            this.pnlSidebar.Controls.Add(this.btnVeriAptos);
             this.pnlSidebar.Controls.Add(this.btnInteg);
             this.pnlSidebar.Location = new System.Drawing.Point(12, 24);
             this.pnlSidebar.Name = "pnlSidebar";
@@ -148,9 +148,9 @@
             this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.lbVer.Location = new System.Drawing.Point(100, 693);
             this.lbVer.Name = "lbVer";
-            this.lbVer.Size = new System.Drawing.Size(50, 12);
+            this.lbVer.Size = new System.Drawing.Size(43, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.10.1";
+            this.lbVer.Text = "Ver: 7.11";
             // 
             // btnTransporte
             // 
@@ -181,26 +181,27 @@
             this.pnlAtivo.Size = new System.Drawing.Size(10, 55);
             this.pnlAtivo.TabIndex = 0;
             // 
-            // btnErros
+            // btnVeriAptos
             // 
-            this.btnErros.BackColor = System.Drawing.Color.Black;
-            this.btnErros.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnErros.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnErros.FlatAppearance.BorderSize = 0;
-            this.btnErros.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnErros.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnErros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnErros.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnErros.ForeColor = System.Drawing.Color.White;
-            this.btnErros.Image = ((System.Drawing.Image)(resources.GetObject("btnErros.Image")));
-            this.btnErros.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnErros.Location = new System.Drawing.Point(9, 266);
-            this.btnErros.Name = "btnErros";
-            this.btnErros.Size = new System.Drawing.Size(255, 55);
-            this.btnErros.TabIndex = 0;
-            this.btnErros.Text = "&Erros Apontamentos";
-            this.btnErros.UseVisualStyleBackColor = false;
-            this.btnErros.Click += new System.EventHandler(this.btnErros_Click);
+            this.btnVeriAptos.BackColor = System.Drawing.Color.Black;
+            this.btnVeriAptos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVeriAptos.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnVeriAptos.FlatAppearance.BorderSize = 0;
+            this.btnVeriAptos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVeriAptos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnVeriAptos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVeriAptos.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeriAptos.ForeColor = System.Drawing.Color.White;
+            this.btnVeriAptos.Image = ((System.Drawing.Image)(resources.GetObject("btnVeriAptos.Image")));
+            this.btnVeriAptos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVeriAptos.Location = new System.Drawing.Point(9, 266);
+            this.btnVeriAptos.Name = "btnVeriAptos";
+            this.btnVeriAptos.Size = new System.Drawing.Size(255, 55);
+            this.btnVeriAptos.TabIndex = 0;
+            this.btnVeriAptos.Text = "&Verificações de Apontamentos";
+            this.btnVeriAptos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVeriAptos.UseVisualStyleBackColor = false;
+            this.btnVeriAptos.Click += new System.EventHandler(this.btnErros_Click);
             // 
             // btnInteg
             // 
@@ -284,7 +285,7 @@
             this.lbTitulo.AutoSize = true;
             this.lbTitulo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitulo.ForeColor = System.Drawing.Color.LightGray;
-            this.lbTitulo.Location = new System.Drawing.Point(392, 11);
+            this.lbTitulo.Location = new System.Drawing.Point(372, 11);
             this.lbTitulo.Name = "lbTitulo";
             this.lbTitulo.Size = new System.Drawing.Size(58, 19);
             this.lbTitulo.TabIndex = 4;
@@ -324,7 +325,7 @@
         private System.Windows.Forms.Panel pnlSidebar;
         private System.Windows.Forms.Button btnTransporte;
         private System.Windows.Forms.Panel pnlAtivo;
-        private System.Windows.Forms.Button btnErros;
+        private System.Windows.Forms.Button btnVeriAptos;
         private System.Windows.Forms.Button btnInteg;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlHeader;

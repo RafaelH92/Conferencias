@@ -56,7 +56,7 @@ namespace CONFERENCIAS.View
         private void btnErros_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
-            pnlAtivo.Top = btnErros.Top;
+            pnlAtivo.Top = btnVeriAptos.Top;
 
             frmMenuErros frm = new frmMenuErros(this);
             frm.TopLevel = false;
