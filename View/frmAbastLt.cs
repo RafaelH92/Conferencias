@@ -154,7 +154,7 @@ namespace CONFERENCIAS
 			frm.TopLevel = false;
 			frmMenu.pnlBody.Controls.Add(frm);
 
-			frmMenu.lbTitulo.Text = "ERROS DE APONTAMENTOS DE ABASTECIMENTO"; 
+			frmMenu.lbTitulo.Text = "VERIFICAÇÕES DE APONTAMENTOS DE ABASTECIMENTO"; 
 
 			frm.Show();
 		}

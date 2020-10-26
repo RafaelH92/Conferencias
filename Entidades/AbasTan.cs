@@ -15,6 +15,7 @@ namespace CONFERENCIAS.Entidades
         public string MATERIAL { get; set; }
         public double TANQUE { get; set; }
         public double QUANTIDADE { get; set; }
+        public double DIFERENÇA { get; set; }
 
     }
 }
