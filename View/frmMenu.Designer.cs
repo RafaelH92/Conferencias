@@ -68,7 +68,6 @@
             this.pnlSidebar.Controls.Add(this.btnFechamento);
             this.pnlSidebar.Controls.Add(this.btnSobre);
             this.pnlSidebar.Controls.Add(this.btnAgricola);
-            this.pnlSidebar.Controls.Add(this.lbVer);
             this.pnlSidebar.Controls.Add(this.btnTransporte);
             this.pnlSidebar.Controls.Add(this.pnlAtivo);
             this.pnlSidebar.Controls.Add(this.btnVeriAptos);
@@ -146,11 +145,11 @@
             this.lbVer.AutoSize = true;
             this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbVer.Location = new System.Drawing.Point(100, 693);
+            this.lbVer.Location = new System.Drawing.Point(66, 33);
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(50, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.11.1";
+            this.lbVer.Text = "Ver: 7.11.2";
             // 
             // btnTransporte
             // 
@@ -227,6 +226,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.lbVer);
             this.panel1.Controls.Add(this.btnLogoff);
             this.panel1.Controls.Add(this.lbNome);
             this.panel1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -310,7 +310,6 @@
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.Load += new System.EventHandler(this.frmMenu_Load);
             this.pnlSidebar.ResumeLayout(false);
-            this.pnlSidebar.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlHeader.ResumeLayout(false);

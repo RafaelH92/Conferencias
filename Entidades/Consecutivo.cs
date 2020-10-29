@@ -9,13 +9,12 @@ namespace CONFERENCIAS.Entidades
     public class Consecutivo
     {
         public Int64 LIBERACAO { get; set; }
-        public Int64 CONSECUTIVO { get; set; }
-        public Int64 SEQUENCIA { get; set; }
-        public Int64 COD_PARCERIA { get; set; }
+        public string CONSECUTIVO { get; set; }
+        public string SEQUENCIA { get; set; }
         public string PARCERIA { get; set; }
-        public DateTime DATA_DE_ENTRADA { get; set; }
-        public Int64 CAMINHAO { get; set; }
-        public string MODELO { get; set; }
+        public string DATA_MOVIMENTO { get; set; }
+        public string CAMINHAO { get; set; }
+        public string USUARIO { get; set; }
 
     }
 }

@@ -72,6 +72,23 @@ namespace CONFERENCIAS
 
 						}
 
+						//Laço que verifica se o campo esta nulo e o preenche para exportar para PDF
+
+						for (int contador = 1; contador <= dgvConsulta.Rows.Count; contador++)
+						{
+							if (dgvConsulta.Rows[contador - 1].Cells[1].Value == null)
+							{
+								dgvConsulta.Rows[contador - 1].Cells[1].Value = "Sem Consecutivo" ;
+
+							}
+							if (dgvConsulta.Rows[contador - 1].Cells[2].Value == null)
+							{
+								dgvConsulta.Rows[contador - 1].Cells[2].Value = "Sem Sequencia";
+
+							}
+							
+						}
+
 						dgvConsulta.ClearSelection();
 
 						lbDeveloped.Visible = true;
@@ -97,7 +114,7 @@ namespace CONFERENCIAS
 		public List<Consecutivo> consecutivo() // Método que retorna a conferência dos consecutivos
 		{
 
-			string qyConsec = " SELECT A.LIBERACAO,        A.CONSECUTIVO,        A.SEQUENCIA,        A.COD_PARCERIA,        A.PARCERIA,        A.DATA_DE_ENTRADA,        A.CAMINHAO,        A.MODELO          FROM (SELECT G.NO_LIBERACAO AS LIBERACAO,                 G.NO_PESAGEM   AS CONSECUTIVO,                 G.NO_SEQUENCIA AS SEQUENCIA,                 G.CD_UPNIVEL1  AS COD_PARCERIA,                 U.DE_UPNIVEL1  AS PARCERIA,                 G.DT_ENTRADA   AS DATA_DE_ENTRADA,                 R.CD_EQUIPTO   AS CAMINHAO,                 M.DE_MODELO    AS MODELO                     FROM PIMSCS.APT_CARGAS     G,                 PIMSCS.APT_CARGAS_REC R,                 PIMSCS.UPNIVEL1       U,                 PIMSCS.EQUIPTOS       E,                 PIMSCS.MODELOS        M                    WHERE                    G.NO_LIBERACAO = R.NO_LIBERACAO        AND G.CD_UPNIVEL1 = U.CD_UPNIVEL1        AND E.CD_MODELO = M.CD_MODELO        AND R.CD_EQUIPTO = E.CD_EQUIPTO        AND R.CD_TP_RECURSO = 'CM'        AND G.DT_MOVIMENTO BETWEEN :DataIni AND :DataFim                    ORDER BY G.NO_PESAGEM, G.NO_SEQUENCIA) A,               (SELECT G.NO_LIBERACAO AS LIBERACAO,                 G.NO_PESAGEM   AS CONSECUTIVO,                 G.NO_SEQUENCIA AS SEQUENCIA,                 G.CD_UPNIVEL1  AS COD_PARCERIA,                 U.DE_UPNIVEL1  AS PARCERIA,                 G.DT_ENTRADA   AS DATA_DE_ENTRADA,                 R.CD_EQUIPTO   AS CAMINHAO,                 M.DE_MODELO    AS MODELO                     FROM PIMSCS.APT_CARGAS     G,                 PIMSCS.APT_CARGAS_REC R,                 PIMSCS.UPNIVEL1       U,                 PIMSCS.EQUIPTOS       E,                 PIMSCS.MODELOS        M                    WHERE                    G.NO_LIBERACAO = R.NO_LIBERACAO        AND G.CD_UPNIVEL1 = U.CD_UPNIVEL1        AND E.CD_MODELO = M.CD_MODELO        AND R.CD_EQUIPTO = E.CD_EQUIPTO        AND R.CD_TP_RECURSO = 'CM'        AND G.DT_MOVIMENTO BETWEEN :DataIni AND :DataFim                    ORDER BY G.NO_PESAGEM, G.NO_SEQUENCIA) B   WHERE A.LIBERACAO != B.LIBERACAO    AND A.CONSECUTIVO = B.CONSECUTIVO    AND A.SEQUENCIA = B.SEQUENCIA    AND A.CAMINHAO != B.CAMINHAO   ORDER BY A.CONSECUTIVO, A.SEQUENCIA ";
+			string qyConsec = " SELECT DISTINCT A.LIBERACAO,                 TO_CHAR(A.CONSECUTIVO) AS CONSECUTIVO,                 TO_CHAR(A.SEQUENCIA) AS SEQUENCIA,                 TO_CHAR(A.COD_PARCERIA || ' - ' || A.PARCERIA) AS PARCERIA,                 TO_CHAR(A.DATA_MOVIMENTO) AS DATA_MOVIMENTO,                 TO_CHAR(A.CAMINHAO || ' - ' || A.MODELO) AS CAMINHAO,                 A.USUARIO    FROM (SELECT G.NO_LIBERACAO    AS LIBERACAO,                 G.NO_PESAGEM      AS CONSECUTIVO,                 G.NO_SEQUENCIA    AS SEQUENCIA,                 G.CD_UPNIVEL1     AS COD_PARCERIA,                 U.DE_UPNIVEL1     AS PARCERIA,                 G.DT_MOVIMENTO    AS DATA_MOVIMENTO,                 R.CD_EQUIPTO      AS CAMINHAO,                 M.DE_MODELO       AS MODELO,                 G.CD_USUARIO_ENTR AS USUARIO                     FROM PIMSCS.APT_CARGAS     G,                 PIMSCS.APT_CARGAS_REC R,                 PIMSCS.UPNIVEL1       U,                 PIMSCS.EQUIPTOS       E,                 PIMSCS.MODELOS        M                    WHERE                    G.NO_LIBERACAO = R.NO_LIBERACAO        AND G.CD_UPNIVEL1 = U.CD_UPNIVEL1        AND E.CD_MODELO = M.CD_MODELO        AND R.CD_EQUIPTO = E.CD_EQUIPTO        AND R.CD_TP_RECURSO = 'CM'        AND G.DT_MOVIMENTO BETWEEN :DataIni AND :DataFim                    ORDER BY G.NO_PESAGEM, G.NO_SEQUENCIA) A,               (SELECT G.NO_LIBERACAO    AS LIBERACAO,                 G.NO_PESAGEM      AS CONSECUTIVO,                 G.NO_SEQUENCIA    AS SEQUENCIA,                 G.CD_UPNIVEL1     AS COD_PARCERIA,                 U.DE_UPNIVEL1     AS PARCERIA,                 G.DT_MOVIMENTO    AS DATA_MOVIMENTO,                 R.CD_EQUIPTO      AS CAMINHAO,                 M.DE_MODELO       AS MODELO,                 G.CD_USUARIO_ENTR AS USUARIO                     FROM PIMSCS.APT_CARGAS     G,                 PIMSCS.APT_CARGAS_REC R,                 PIMSCS.UPNIVEL1       U,                 PIMSCS.EQUIPTOS       E,                 PIMSCS.MODELOS        M                    WHERE                    G.NO_LIBERACAO = R.NO_LIBERACAO        AND G.CD_UPNIVEL1 = U.CD_UPNIVEL1        AND E.CD_MODELO = M.CD_MODELO        AND R.CD_EQUIPTO = E.CD_EQUIPTO        AND R.CD_TP_RECURSO = 'CM'        AND G.DT_MOVIMENTO BETWEEN :DataIni AND :DataFim                    ORDER BY G.NO_PESAGEM, G.NO_SEQUENCIA) B   WHERE A.LIBERACAO != B.LIBERACAO    AND A.CONSECUTIVO = B.CONSECUTIVO    AND A.SEQUENCIA = B.SEQUENCIA    AND A.CAMINHAO != B.CAMINHAO     OR (A.SEQUENCIA IS NULL OR A.CONSECUTIVO IS NULL)   ORDER BY A.CONSECUTIVO, A.SEQUENCIA ";
 
 			// Atribui os parâmentros dinâmicos
 

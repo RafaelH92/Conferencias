@@ -69,7 +69,7 @@ namespace CONFERENCIAS.View
 
             frm.Show();
 
-            frmMenu.lbTitulo.Text = "CARGAS COM CONSECUTIVOS IGUAIS";
+            frmMenu.lbTitulo.Text = "CARGAS COM CONSECUTIVOS IGUAIS OU NULOS";
             frmMenu.lbTitulo.Visible = true;
         }
     }
