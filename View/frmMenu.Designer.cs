@@ -34,11 +34,11 @@
             this.btnFechamento = new System.Windows.Forms.Button();
             this.btnSobre = new System.Windows.Forms.Button();
             this.btnAgricola = new System.Windows.Forms.Button();
-            this.lbVer = new System.Windows.Forms.Label();
             this.btnTransporte = new System.Windows.Forms.Button();
             this.pnlAtivo = new System.Windows.Forms.Panel();
             this.btnVeriAptos = new System.Windows.Forms.Button();
             this.btnInteg = new System.Windows.Forms.Button();
+            this.lbVer = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLogoff = new System.Windows.Forms.Button();
             this.lbNome = new System.Windows.Forms.Label();
@@ -140,17 +140,6 @@
             this.btnAgricola.UseVisualStyleBackColor = false;
             this.btnAgricola.Click += new System.EventHandler(this.btnAgricola_Click);
             // 
-            // lbVer
-            // 
-            this.lbVer.AutoSize = true;
-            this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbVer.Location = new System.Drawing.Point(66, 33);
-            this.lbVer.Name = "lbVer";
-            this.lbVer.Size = new System.Drawing.Size(50, 12);
-            this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.11.2";
-            // 
             // btnTransporte
             // 
             this.btnTransporte.BackColor = System.Drawing.Color.Black;
@@ -222,6 +211,17 @@
             this.btnInteg.Text = "&Integração - PIMS/ADM";
             this.btnInteg.UseVisualStyleBackColor = false;
             this.btnInteg.Click += new System.EventHandler(this.btnInteg_Click);
+            // 
+            // lbVer
+            // 
+            this.lbVer.AutoSize = true;
+            this.lbVer.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbVer.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lbVer.Location = new System.Drawing.Point(66, 33);
+            this.lbVer.Name = "lbVer";
+            this.lbVer.Size = new System.Drawing.Size(50, 12);
+            this.lbVer.TabIndex = 13;
+            this.lbVer.Text = "Ver: 7.11.3";
             // 
             // panel1
             // 

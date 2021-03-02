@@ -24,28 +24,10 @@ namespace CONFERENCIAS.View
         {
             InitializeComponent();
 
-            //DateTime horaAtual = 
-
-            DateTime dtVencLicenca = DateTime.Parse("28/05/2021");
-
-            DateTime dataatual = DateTime.Today;
-
-            if(dtVencLicenca < dataatual)
-            {               
-                Environment.Exit(0);
-            }
-
             string userName = System.Environment.UserName;  // Atribui o usuário corrente a variável
 
             lbNome.Text = userName;
-
-            if (userName == "ferrarini")
-            {
-                
-                lbNome.ForeColor = Color.HotPink;
-                lbNome.Font = new Font(lbNome.Font, FontStyle.Bold);
-                lbNome.Text = userName;
-            }
+           
         }
 
         private void btnLogoff_Click(object sender, EventArgs e)
