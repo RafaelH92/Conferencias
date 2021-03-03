@@ -221,7 +221,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(50, 12);
             this.lbVer.TabIndex = 13;
-            this.lbVer.Text = "Ver: 7.11.3";
+            this.lbVer.Text = "Ver: 7.11.4";
             // 
             // panel1
             // 
